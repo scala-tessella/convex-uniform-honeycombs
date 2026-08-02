@@ -56,6 +56,15 @@ class SpeciesEnumeratorSpec extends AnyFlatSpec with Matchers:
     // h (hcp, orthobicupolar figure): 6 alternating + 6 paired tet·tet·oct·oct
     octet.map(_.figures.size).sorted shouldBe Vector(1, 2)
 
+  it should "be the ONLY species a tetrahedron-octahedron honeycomb can carry" in:
+    // what upgrades the dichotomy from a statement about one support to a statement about every
+    // face-to-face unit tet-oct honeycomb, with no symmetry hypothesis: a vertex of such a honeycomb has
+    // only tet and oct corners, and the octet support is the only one over that sub-alphabet
+    // (SpeciesSupportsSpec), so its star is one of exactly these two
+    val tetOct = all.filter(_.counts.keySet.subsetOf(Set(Tet, Oct)))
+    tetOct.map(_.counts).distinct shouldBe Vector(Map(Tet -> 8, Oct -> 6))
+    tetOct.size shouldBe 2
+
   "the known honeycombs" should "have their vertex species realized, uniquely where classical" in:
     countOn(Map(Cube -> 8)) shouldBe 1 // cubic
     countOn(Map(TruncOct -> 4)) shouldBe 1 // bitruncated cubic

@@ -38,6 +38,14 @@ class SpeciesSupportsSpec extends AnyFlatSpec with Matchers:
     supports.size shouldBe 97
     supports.filter(_.cells == 14).map(_.counts) shouldBe Vector(Map(Tet -> 8, Oct -> 6))
 
+  it should "admit exactly one support over the tet/oct sub-alphabet" in:
+    // the area equation alone forces it: with excesses (360, -6) and (-360, 8), a support {tet:a, oct:b}
+    // needs -6a + 8b = 0 and 360a - 360b = 720, i.e. 3a = 4b and a - b = 2, whose only solution is (8, 6).
+    // This is what makes the Barlow dichotomy a statement about EVERY face-to-face unit tet-oct
+    // honeycomb rather than about one support — no symmetry hypothesis enters.
+    supports.filter(_.counts.keySet.subsetOf(Set(Tet, Oct))).map(_.counts) shouldBe
+      Vector(Map(Tet -> 8, Oct -> 6))
+
   it should "satisfy the exact equations" in:
     supports.foreach { s =>
       val total = s.counts.toList.foldLeft(HoneycombAlphabet.CoreAngle(0, 0)) { case (acc, (c, m)) =>
