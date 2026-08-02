@@ -1,5 +1,8 @@
 # convex-uniform-honeycombs — verification artifact
 
+[![CI](https://github.com/scala-tessella/convex-uniform-honeycombs/actions/workflows/ci.yml/badge.svg)](https://github.com/scala-tessella/convex-uniform-honeycombs/actions/workflows/ci.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21762729.svg)](https://doi.org/10.5281/zenodo.21762729)
+
 Machine-checked companion to the paper
 
 > **The 28 convex uniform honeycombs: a completeness theorem.**
@@ -87,7 +90,22 @@ development driven by the symbol alone.
 
 ## Archival
 
-Each release is archived with its own version DOI, which is what a citation should name. The library it
-pins is archived separately.
+Deposited on Zenodo as a supplement to the paper record. **Cite the version DOI of the release you
+checked**, not the all-versions concept DOI — the latter always resolves to whatever is newest:
 
-<!-- TODO: add the release table once the first version is deposited (see research-core's README for the shape). -->
+| Version | DOI |
+|---|---|
+| 0.1.0 | [10.5281/zenodo.21762729](https://doi.org/10.5281/zenodo.21762729) |
+
+Zenodo assigns a release's version DOI at the moment that release is published, so it cannot be present in
+the tree that release archives: the `CITATION.cff` inside a deposit carries no version DOI. The version DOI
+is recorded in this table, and in `CITATION.cff` on the main branch, in the first commit after the tag; the
+concept DOI (all versions) is [10.5281/zenodo.21762728](https://doi.org/10.5281/zenodo.21762728).
+
+Pinned to `research-core 0.5.0` (an immutable Central release), archived as
+[10.5281/zenodo.21762821](https://doi.org/10.5281/zenodo.21762821). That archived snapshot — not the
+`research-core` repository's main branch, which may since have moved on — is the authoritative source for
+what this artifact depends on. The pin plus the snapshot make this a closed, reproducible artifact
+independent of any moving repository. The certificates under `certs/` are committed rather than archived
+separately: they total 92 KB, regenerate byte for byte by `sbt -Dcerts test`, and are outputs only, never
+read back by any spec.
