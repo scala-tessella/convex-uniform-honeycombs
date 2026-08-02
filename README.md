@@ -97,6 +97,9 @@ checked**, not the all-versions concept DOI — the latter always resolves to wh
 |---|---|
 | 0.1.0 | [10.5281/zenodo.21762729](https://doi.org/10.5281/zenodo.21762729) |
 
+Release-by-release changes are in [CHANGELOG.md](CHANGELOG.md), which states for each release whether the
+claims, the specs or only the packaging moved — what a referee who checked an earlier version needs.
+
 Zenodo assigns a release's version DOI at the moment that release is published, so it cannot be present in
 the tree that release archives: the `CITATION.cff` inside a deposit carries no version DOI. The version DOI
 is recorded in this table, and in `CITATION.cff` on the main branch, in the first commit after the tag; the
