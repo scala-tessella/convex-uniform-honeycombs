@@ -1,0 +1,115 @@
+Core alphabet, exact dihedrals, edge-figure catalogue
+alpha = arctan(sqrt 2) = 54.73561 deg; every angle = r + n*alpha
+
+== Dihedral table ==
+tet         3·3   r=180 n=-2    70.52878
+cube        4·4   r= 90 n= 0    90.00000
+oct         3·3   r=  0 n= 2   109.47122
+truncTet    6·6   r=180 n=-2    70.52878
+truncTet    3·6   r=  0 n= 2   109.47122
+co          3·4   r=180 n=-1   125.26439
+truncOct    4·6   r=180 n=-1   125.26439
+truncOct    6·6   r=  0 n= 2   109.47122
+truncCube   3·8   r=180 n=-1   125.26439
+truncCube   8·8   r= 90 n= 0    90.00000
+rco         3·4   r= 90 n= 1   144.73561
+rco         4·4   r=135 n= 0   135.00000
+tco         4·6   r= 90 n= 1   144.73561
+tco         4·8   r=135 n= 0   135.00000
+tco         6·8   r=180 n=-1   125.26439
+p3          4·4   r= 60 n= 0    60.00000
+p3          3·4   r= 90 n= 0    90.00000
+p6          4·4   r=120 n= 0   120.00000
+p6          4·6   r= 90 n= 0    90.00000
+p8          4·4   r=135 n= 0   135.00000
+p8          4·8   r= 90 n= 0    90.00000
+p12         4·4   r=150 n= 0   150.00000
+p12         4·12  r= 90 n= 0    90.00000
+
+== Face compatibility (a p-face glues only these cells) ==
+ 3-gon: tet, oct, truncTet, co, truncCube, rco, p3
+ 4-gon: cube, co, truncOct, rco, tco, p3, p6, p8, p12
+ 6-gon: truncTet, truncOct, tco, p6
+ 8-gon: truncCube, tco, p8
+12-gon: p12
+
+== Edge-figure catalogue: 69 figures ==
+
+-- 3 cells: 22 figures --
+[tet(3·3) rco(3·4) rco(4·3)]
+[cube(4·4) co(4·3) rco(3·4)]
+[cube(4·4) truncOct(4·6) tco(6·4)]
+[cube(4·4) rco(4·4) rco(4·4)]
+[cube(4·4) rco(4·4) p8(4·4)]
+[cube(4·4) tco(4·8) tco(8·4)]
+[cube(4·4) p6(4·4) p12(4·4)]
+[cube(4·4) p8(4·4) p8(4·4)]
+[oct(3·3) co(3·4) co(4·3)]
+[oct(3·3) truncCube(3·8) truncCube(8·3)]
+[truncTet(3·6) truncOct(6·4) co(4·3)]
+[truncTet(3·6) tco(6·8) truncCube(8·3)]
+[truncTet(6·6) tco(6·4) tco(4·6)]
+[truncOct(4·6) truncOct(6·6) truncOct(6·4)]
+[truncOct(6·6) tco(6·8) tco(8·6)]
+[truncCube(3·8) p8(8·4) rco(4·3)]
+[truncCube(8·8) tco(8·4) tco(4·8)]
+[rco(4·4) tco(4·8) p8(8·4)]
+[tco(4·6) tco(6·8) p8(8·4)]
+[tco(4·8) p8(8·4) p8(4·4)]
+[p3(4·4) p12(4·4) p12(4·4)]
+[p6(4·4) p6(4·4) p6(4·4)]
+
+-- 4 cells: 39 figures --
+[tet(3·3) tet(3·3) oct(3·3) oct(3·3)]
+[tet(3·3) tet(3·3) truncTet(3·6) truncTet(6·3)]
+[tet(3·3) oct(3·3) tet(3·3) oct(3·3)]
+[tet(3·3) oct(3·3) p3(3·4) p3(4·3)]
+[tet(3·3) truncTet(3·6) truncTet(6·6) truncTet(6·3)]
+[tet(3·3) truncTet(3·6) p6(6·4) p3(4·3)]
+[cube(4·4) cube(4·4) cube(4·4) cube(4·4)]
+[cube(4·4) cube(4·4) p3(4·3) p3(3·4)]
+[cube(4·4) cube(4·4) p3(4·4) p6(4·4)]
+[cube(4·4) cube(4·4) p6(4·6) p6(6·4)]
+[cube(4·4) cube(4·4) p8(4·8) p8(8·4)]
+[cube(4·4) cube(4·4) p12(4·12) p12(12·4)]
+[cube(4·4) p3(4·4) cube(4·4) p6(4·4)]
+[cube(4·4) p3(4·4) p3(4·4) p12(4·4)]
+[cube(4·4) p3(4·4) p12(4·4) p3(4·4)]
+[cube(4·4) p8(4·8) truncCube(8·8) p8(8·4)]
+[truncTet(6·6) truncTet(6·6) truncTet(6·3) truncTet(3·6)]
+[truncTet(6·6) truncTet(6·3) p3(3·4) p6(4·6)]
+[truncTet(6·6) truncTet(6·6) truncOct(6·6) truncOct(6·6)]
+[truncTet(6·6) truncOct(6·6) truncTet(6·6) truncOct(6·6)]
+[truncTet(6·6) truncOct(6·6) p6(6·4) p6(4·6)]
+[truncCube(8·8) truncCube(8·8) truncCube(8·8) truncCube(8·8)]
+[truncCube(8·8) truncCube(8·8) p8(8·4) p8(4·8)]
+[p3(3·4) p3(4·3) p3(3·4) p3(4·3)]
+[p3(4·4) p3(4·3) p3(3·4) p6(4·4)]
+[p3(3·4) p6(4·6) p6(6·4) p3(4·3)]
+[p3(3·4) p8(4·8) p8(8·4) p3(4·3)]
+[p3(3·4) p12(4·12) p12(12·4) p3(4·3)]
+[p3(4·4) p3(4·4) p6(4·4) p6(4·4)]
+[p3(4·4) p6(4·4) p3(4·4) p6(4·4)]
+[p3(4·4) p6(4·4) p6(4·6) p6(6·4)]
+[p3(4·4) p6(4·4) p8(4·8) p8(8·4)]
+[p3(4·4) p6(4·4) p12(4·12) p12(12·4)]
+[p6(4·6) p6(6·4) p6(4·6) p6(6·4)]
+[p6(4·6) p6(6·4) p8(4·8) p8(8·4)]
+[p6(4·6) p6(6·4) p12(4·12) p12(12·4)]
+[p8(4·8) p8(8·4) p8(4·8) p8(8·4)]
+[p8(4·8) p8(8·4) p12(4·12) p12(12·4)]
+[p12(4·12) p12(12·4) p12(4·12) p12(12·4)]
+
+-- 5 cells: 7 figures --
+[cube(4·4) cube(4·4) p3(4·4) p3(4·4) p3(4·4)]
+[cube(4·4) p3(4·4) cube(4·4) p3(4·4) p3(4·4)]
+[p3(4·4) p3(4·4) p3(4·4) p3(4·3) p3(3·4)]
+[p3(4·4) p3(4·4) p3(4·4) p3(4·4) p6(4·4)]
+[p3(4·4) p3(4·4) p3(4·4) p6(4·6) p6(6·4)]
+[p3(4·4) p3(4·4) p3(4·4) p8(4·8) p8(8·4)]
+[p3(4·4) p3(4·4) p3(4·4) p12(4·12) p12(12·4)]
+
+-- 6 cells: 1 figures --
+[p3(4·4) p3(4·4) p3(4·4) p3(4·4) p3(4·4) p3(4·4)]
+
+cell-multiset supports: 62

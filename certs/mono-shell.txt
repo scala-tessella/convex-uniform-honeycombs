@@ -1,0 +1,47 @@
+The mono-species shell filter over the 34 species
+gluings per tiling-vertex = verified rigid star-to-star identifications along the edge
+(descriptor-verified: a cell is determined by an edge, its two face germs and its type);
+shell SAT = all neighbors can carry same-species stars with mutual edges + agreeing rings
+
+== Verdicts: 26 of 34 species admit a mono-species shell ==
+{cube:1 truncOct:1 tco:2}#1        SAT    gluings/vertex: 2,2,2,2
+{tco:2 p8:2}#1                     SAT    gluings/vertex: 2,2,2,2
+{truncOct:4}#1                     SAT    gluings/vertex: 8,8,8,8
+{truncTet:1 truncCube:1 tco:2}#1   SAT    gluings/vertex: 2,2,2,2
+{cube:1 truncCube:1 rco:1 p8:2}#1  SAT    gluings/vertex: 2,2,2,2,2
+{cube:2 co:1 rco:2}#1              SAT    gluings/vertex: 4,4,4,4,4,4
+{oct:1 truncCube:4}#1              SAT    gluings/vertex: 8,8,8,8,8
+{tet:1 cube:1 rco:3}#1             SAT    gluings/vertex: 6,6,6,6,6,6
+{truncTet:2 co:1 truncOct:2}#1     SAT    gluings/vertex: 4,4,4,4,4
+{cube:2 p6:2 p12:2}#1              SAT    gluings/vertex: 2,2,2,2,2
+{cube:2 p8:4}#1                    SAT    gluings/vertex: 4,4,4,4,8
+{oct:2 co:4}#1                     SAT    gluings/vertex: 16,16,16,16,16,16,16,16
+{p3:2 p12:4}#1                     SAT    gluings/vertex: 4,4,4,4,8
+{p6:6}#1                           SAT    gluings/vertex: 24,24,12,24,12
+{cube:2 p3:4 p12:2}#1              UNSAT  gluings/vertex: 4,4,4,4,4,4
+{cube:2 p3:4 p12:2}#2              UNSAT  gluings/vertex: 2,2,2,2,8,2
+{cube:4 p3:2 p6:2}#1               UNSAT  gluings/vertex: 8,2,2,2,2,2
+{cube:4 p3:2 p6:2}#2               SAT    gluings/vertex: 4,4,4,4,4,4
+{cube:8}#1                         SAT    gluings/vertex: 48,48,48,48,48,48
+{p3:4 p6:4}#1                      UNSAT  gluings/vertex: 8,4,4,4,4,8
+{p3:4 p6:4}#2                      UNSAT  gluings/vertex: 2,4,2,2,4,2
+{p3:4 p6:4}#3                      SAT    gluings/vertex: 8,8,8,8,8,8
+{tet:1 truncTet:3 p3:2 p6:2}#1     UNSAT  gluings/vertex: 2,2,2,2,2,4
+{tet:2 truncTet:6}#1               UNSAT  gluings/vertex: 4,4,4,4,4,4
+{tet:2 truncTet:6}#2               SAT    gluings/vertex: 12,12,12,12,12,12
+{cube:4 p3:6}#1                    SAT    gluings/vertex: 8,4,4,4,4,16,16
+{cube:4 p3:6}#2                    SAT    gluings/vertex: 8,8,4,4,8,8,8
+{p3:8 p6:2}#1                      UNSAT  gluings/vertex: 16,16,2,2,2,2,2
+{p3:8 p6:2}#2                      SAT    gluings/vertex: 24,24,4,4,24,4,4
+{p3:12}#1                          SAT    gluings/vertex: 32,32,8,8,8,8,32,32
+{p3:12}#2                          SAT    gluings/vertex: 48,48,24,24,48,48,48,48
+{tet:4 oct:3 p3:6}#1               SAT    gluings/vertex: 12,12,12,6,6,6,6,6,6,12
+{tet:8 oct:6}#1                    SAT    gluings/vertex: 12,12,24,24,24,12,24,12,24,12,24,12
+{tet:8 oct:6}#2                    SAT    gluings/vertex: 48,48,48,48,48,48,48,48,48,48,48,48
+
+== The eight k=1 exclusions ==
+the four lifts of extendable-but-nonuniform 2D species (3.3.4.12, 3.4.3.12, 3.4.4.6, 3.3.6.6)
+die in the shell exactly as their shadows die in the plane; the four other exclusions are novel
+species of the species table — none of them can be the species of ANY mono-species honeycomb, uniform or not.
+
+== Ambiguity flags: 0 ==

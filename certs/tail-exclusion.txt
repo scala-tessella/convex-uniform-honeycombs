@@ -1,0 +1,56 @@
+Tail exclusion over the FULL pool (no caps left)
+
+== Antiprism closed forms ==
+cos a3q(q) = -tan(pi/2q)/sqrt3;  cos a33(q) = (1 - 4 cos(pi/q))/3
+A4: a3q [103.836160, 103.836160]  a33 [127.551603, 127.551603]
+A5: a3q [100.812317, 100.812317]  a33 [138.189685, 138.189685]
+A6: a3q [98.899429, 98.899429]  a33 [145.221891, 145.221891]
+A10: a3q [95.246644, 95.246644]  a33 [159.186507, 159.186507]
+A50: a3q [91.039630, 91.039630]  a33 [175.842850, 175.842850]
+A300: a3q [90.173207, 90.173207]  a33 [179.307179, 179.307179]
+tail corridors (q > 300): a3q [90.000000, 90.172631], a33 [179.309480, 180.000000]
+
+== Lemmas ==
+A (strict): a3q > 90 for all q >= 4 (tan > 0);  B (strict): a33 < 180 (cos(pi/q) < 1)
+E: 2 a3q(q) + a33(r) != 360 for ALL q, r >= 4 — reduces to tan(pi/2q) = 2 sin(pi/2r);
+   interleaving h(2q) < g(q) < h(2q-1) pins the real solution strictly between integers.
+   constant chain verified: true; grid q=4..400 + {1000, 5000, 20000}: true
+
+== Finite prism sweep, 5 <= p <= 500 non-core, full pool ==
+surviving p (lateral edge completable): 5, 7, 9, 10, 15, 18, 20, 24, 42
+(exactly the six exotic families of the prism grid; their completions:)
+P5:
+   cube(4·4) + P20(4·4)
+   P5(4·4) + P10(4·4)
+P7:
+   p3(4·4) + P42(4·4)
+P9:
+   p3(4·4) + P18(4·4)
+P10:
+   P5(4·4) + P5(4·4)
+   p3(4·4) + P15(4·4)
+P15:
+   p3(4·4) + P10(4·4)
+P18:
+   p3(4·4) + P9(4·4)
+P20:
+   cube(4·4) + P5(4·4)
+P24:
+   p3(4·4) + rco(4·4)
+   p3(4·4) + p8(4·4)
+P42:
+   p3(4·4) + P7(4·4)
+
+== Antiprism sweep (101..300) + tails ==
+verdicts: 202 targets, all excluded: true
+threats at the antiprism tail (all refuted):
+   P>500(4·big) + A>300(3·big)  [AboveLemmaA]
+   cube(4·4) + p3(3·4)  [StrictLemmaA(exact 180)]
+   tet(3·3) + oct(3·3)  [StrictLemmaA(exact 180)]
+   p3(3·4) + p3(3·4)  [StrictLemmaA(exact 180)]
+   A>300(3·big) + A>300(3·big)  [AboveLemmaA]
+   A>300(3·3)  [LemmaE]
+
+== Prism tail p > 500 ==
+threat census by refutation: (RationalMismatch,501), (StrictBelow180,1)
+unrefuted: 0

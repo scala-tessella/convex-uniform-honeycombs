@@ -1,0 +1,97 @@
+EXACT CERTIFICATES — the certificates of the completeness
+theorem upgraded to exact arithmetic in Q(sqrt2, sqrt3), the two-tier field of the programme.
+All data in the INTERNAL BASIS of three star directions (nothing is ever normalized):
+Gram matrices recognized as a + b*sqrt2 + c*sqrt3 + d*sqrt6 and certified inside the
+assembly's interval enclosures; coordinates, stabilizers, gluings, translations, balls
+derived and verified by exact field identities.
+
+== (a) the 34 exact star models ==
+species                              n exact  max iv width
+{cube:1 truncOct:1 tco:2}#1          4  true      1.62e-11
+{tco:2 p8:2}#1                       4  true      6.43e-10
+{truncOct:4}#1                       4  true      1.93e-11
+{truncTet:1 truncCube:1 tco:2}#1     4  true      1.28e-11
+{cube:1 truncCube:1 rco:1 p8:2}#1    5  true      7.14e-11
+{cube:2 co:1 rco:2}#1                6  true      2.81e-11
+{oct:1 truncCube:4}#1                5  true      1.02e-11
+{tet:1 cube:1 rco:3}#1               6  true      5.33e-11
+{truncTet:2 co:1 truncOct:2}#1       5  true      1.38e-11
+{cube:2 p6:2 p12:2}#1                5  true      2.16e-11
+{cube:2 p8:4}#1                      5  true      7.55e-10
+{oct:2 co:4}#1                       8  true      2.36e-10
+{p3:2 p12:4}#1                       5  true      1.60e-11
+{p6:6}#1                             5  true      3.14e-11
+{cube:2 p3:4 p12:2}#1                6  true      2.88e-11
+{cube:2 p3:4 p12:2}#2                6  true      2.16e-11
+{cube:4 p3:2 p6:2}#1                 6  true      2.88e-11
+{cube:4 p3:2 p6:2}#2                 6  true      3.54e-11
+{cube:8}#1                           6  true      3.16e-11
+{p3:4 p6:4}#1                        6  true      3.04e-11
+{p3:4 p6:4}#2                        6  true      3.04e-11
+{p3:4 p6:4}#3                        6  true      3.04e-11
+{tet:1 truncTet:3 p3:2 p6:2}#1       6  true      2.23e-11
+{tet:2 truncTet:6}#1                 6  true      1.85e-11
+{tet:2 truncTet:6}#2                 6  true      1.85e-11
+{cube:4 p3:6}#1                      7  true      8.13e-11
+{cube:4 p3:6}#2                      7  true      2.90e-10
+{p3:8 p6:2}#1                        7  true      2.12e-10
+{p3:8 p6:2}#2                        7  true      5.90e-11
+{p3:12}#1                            8  true      2.12e-10
+{p3:12}#2                            8  true      9.37e-10
+{tet:4 oct:3 p3:6}#1                10  true      1.14e-10
+{tet:8 oct:6}#1                     12  true      5.58e-09
+{tet:8 oct:6}#2                     12  true      7.91e-10
+
+exact stars: 34/34
+
+== (b) the 28 exact periodization certificates ==
+glu = every pattern gluing G3-orthogonal + back-vertex + exact ring agreement;
+R1/R2 = reverse pairs and face-cycle words exact stabilizer elements (faces: zero
+translation, exactly); trans = three words with rotational part exactly the identity;
+indep = det(tau1,tau2,tau3) != 0; ball = exact development, collision-free; per =
+Lambda-periodicity exact; lat = generator point parts fix Lambda (integer coords);
+cov = R_per >= ub(covBound) + ub(max|tau|) + 3/2 with exact rational upper bounds
+
+species                            cl   glu    R1    R2 trans indep  ball   per   lat   cov
+{cube:1 truncOct:1 tco:2}#1         0  true  true  true  true  true  1979  true  true  true
+{tco:2 p8:2}#1                      0  true  true  true  true  true  2637  true  true  true
+{truncOct:4}#1                      0  true  true  true  true  true  1701  true  true  true
+{truncTet:1 truncCube:1 tco:2}#1    0  true  true  true  true  true  3610  true  true  true
+{cube:1 truncCube:1 rco:1 p8:2}#1   0  true  true  true  true  true  2199  true  true  true
+{cube:2 co:1 rco:2}#1               0  true  true  true  true  true  1659  true  true  true
+{oct:1 truncCube:4}#1               0  true  true  true  true  true   833  true  true  true
+{tet:1 cube:1 rco:3}#1              0  true  true  true  true  true  1929  true  true  true
+{truncTet:2 co:1 truncOct:2}#1      0  true  true  true  true  true  2535  true  true  true
+{cube:2 p6:2 p12:2}#1               0  true  true  true  true  true  4521  true  true  true
+{cube:2 p8:4}#1                     0  true  true  true  true  true  1159  true  true  true
+{oct:2 co:4}#1                      0  true  true  true  true  true   905  true  true  true
+{p3:2 p12:4}#1                      0  true  true  true  true  true  2216  true  true  true
+{p6:6}#1                            0  true  true  true  true  true   877  true  true  true
+{cube:4 p3:2 p6:2}#2                0  true  true  true  true  true  2279  true  true  true
+{cube:8}#1                          0  true  true  true  true  true   515  true  true  true
+{p3:4 p6:4}#3                       0  true  true  true  true  true  1253  true  true  true
+{tet:2 truncTet:6}#2                0  true  true  true  true  true  1257  true  true  true
+{cube:4 p3:6}#1                     0  true  true  true  true  true  1198  true  true  true
+{cube:4 p3:6}#1                     1  true  true  true  true  true  3434  true  true  true
+{cube:4 p3:6}#2                     0  true  true  true  true  true  1276  true  true  true
+{p3:8 p6:2}#2                       0  true  true  true  true  true  2311  true  true  true
+{p3:12}#1                           0  true  true  true  true  true  1311  true  true  true
+{p3:12}#2                           0  true  true  true  true  true   659  true  true  true
+{tet:4 oct:3 p3:6}#1                0  true  true  true  true  true  1449  true  true  true
+{tet:4 oct:3 p3:6}#1                1  true  true  true  true  true  3694  true  true  true
+{tet:8 oct:6}#1                     0  true  true  true  true  true  1261  true  true  true
+{tet:8 oct:6}#2                     0  true  true  true  true  true   935  true  true  true
+
+exact certificates: 28/28
+
+== (c) exact class separation (the two doubled species) ==
+{cube:4 p3:6}#1: 2 classes, exact fingerprints distinct: true
+{tet:4 oct:3 p3:6}#1: 2 classes, exact fingerprints distinct: true
+
+flags: 0
+
+ALL EXACT: true
+
+==> every equality asserted by the periodization certificates of the 28 is an exact
+identity in Q(sqrt2, sqrt3); no floating-point tolerance decision remains on the
+completeness theorem's critical path.

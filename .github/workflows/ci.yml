@@ -1,0 +1,73 @@
+# Runs the artifact's whole verification surface on every push.
+#
+# `sbt test` needs no external tools and no fixtures: the alphabet, the species table, the shell filter,
+# the pattern enumeration, the completeness audit, the exact Q(sqrt2, sqrt3) certificates, the
+# identification and the symbol appendix all re-derive from scratch against the pinned research-core
+# release from Maven Central, in about a minute. A green badge therefore means: the paper's every
+# machine-checked claim re-derives from scratch on a clean machine.
+#
+# There is no long tier to opt out of. The one guarded run (-Dcerts) writes the sixteen cited certificate
+# files, and appears as CANCELED in the default log rather than failed.
+#
+# The JDK matrix is deliberate — the enumeration is exact and combinatorial, so the counts must not depend
+# on the runtime.
+
+name: CI
+
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [17, 21]
+    name: Claim specs (JDK ${{ matrix.java }})
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v5
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: temurin
+          cache: sbt
+
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: Verify claim specs
+        run: sbt test
+
+  # Regenerates the sixteen certificates and fails if the committed set does not come back byte for byte.
+  # Opt-in (Actions tab -> "Run workflow") rather than per-push: `certs/` is committed precisely so that a
+  # reader need not run anything, and this job is what keeps that committed copy honest.
+  certificates:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    name: Certificates reproduce byte for byte (opt-in)
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: sbt
+
+      - name: Setup sbt
+        uses: sbt/setup-sbt@v1
+
+      - name: Regenerate every certificate
+        run: sbt -Dcerts test
+
+      - name: Compare against the committed set
+        run: git diff --exit-code -- certs/

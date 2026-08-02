@@ -1,0 +1,56 @@
+THE 28 IDENTIFIED — our fingerprint classes against the classical list
+count 28: Gruenbaum (Geombinatorics 4, 1994, crediting Johnson); re-derived by
+Deza-Shtogrin (arXiv:math/9906034: '28 uniform partitions of 3-space'); names follow
+the standard (Johnson/Wikipedia) tables, against which the vertex compositions below
+were cross-checked. The two doubled species are resolved by EXACT lattice invariants
+on the certified translation bases (ExactCertificates): elongated triangular prismatic
+has a translation of squared norm 2 + sqrt3 (the oblique in-plane period of the
+elongated triangular tiling), unrepresentable in the gyroelongated lattice; elongated
+alternated cubic has a translation of squared norm 2 + (2/3)sqrt6 (one octet slab +
+one prism slab), unrepresentable in the gyroelongated lattice (its sqrt6-part 8k^2/3
+never equals 2/3 for integer k).
+
+== cubic family (9) ==
+honeycomb                            vertex star species      cl cells at a vertex
+cantitruncated cubic                 {cube:1 truncOct:1 tco:2}#1  0 {cube:1 truncOct:1 tco:2}
+omnitruncated cubic                  {tco:2 p8:2}#1            0 {tco:2 p8:2}
+bitruncated cubic                    {truncOct:4}#1            0 {truncOct:4}
+runcitruncated cubic                 {cube:1 truncCube:1 rco:1 p8:2}#1  0 {cube:1 truncCube:1 rco:1 p8:2}
+cantellated cubic                    {cube:2 co:1 rco:2}#1     0 {cube:2 co:1 rco:2}
+truncated cubic                      {oct:1 truncCube:4}#1     0 {oct:1 truncCube:4}
+rectified cubic                      {oct:2 co:4}#1            0 {oct:2 co:4}
+cubic                                {cube:8}#1                0 {cube:8}
+alternated cubic                     {tet:8 oct:6}#2           0 {tet:8 oct:6}
+
+== B family (3) ==
+honeycomb                            vertex star species      cl cells at a vertex
+runcicantic cubic                    {truncTet:1 truncCube:1 tco:2}#1  0 {truncTet:1 truncCube:1 tco:2}
+runcic cubic                         {tet:1 cube:1 rco:3}#1    0 {tet:1 cube:1 rco:3}
+cantic cubic                         {truncTet:2 co:1 truncOct:2}#1  0 {truncTet:2 co:1 truncOct:2}
+
+== quarter (1) ==
+honeycomb                            vertex star species      cl cells at a vertex
+quarter cubic                        {tet:2 truncTet:6}#2      0 {tet:2 truncTet:6}
+
+== prismatic lift (10) ==
+honeycomb                            vertex star species      cl cells at a vertex
+truncated trihexagonal prismatic     {cube:2 p6:2 p12:2}#1     0 {cube:2 p6:2 p12:2}
+truncated square prismatic           {cube:2 p8:4}#1           0 {cube:2 p8:4}
+truncated hexagonal prismatic        {p3:2 p12:4}#1            0 {p3:2 p12:4}
+hexagonal prismatic                  {p6:6}#1                  0 {p6:6}
+rhombitrihexagonal prismatic         {cube:4 p3:2 p6:2}#2      0 {cube:4 p3:2 p6:2}
+trihexagonal prismatic               {p3:4 p6:4}#3             0 {p3:4 p6:4}
+elongated triangular prismatic       {cube:4 p3:6}#1           0 {cube:4 p3:6}
+snub square prismatic                {cube:4 p3:6}#2           0 {cube:4 p3:6}
+snub trihexagonal prismatic          {p3:8 p6:2}#2             0 {p3:8 p6:2}
+triangular prismatic                 {p3:12}#2                 0 {p3:12}
+
+== gyro/elongated (5) ==
+honeycomb                            vertex star species      cl cells at a vertex
+gyroelongated triangular prismatic   {cube:4 p3:6}#1           1 {cube:4 p3:6}
+gyrated triangular prismatic         {p3:12}#1                 0 {p3:12}
+elongated alternated cubic           {tet:4 oct:3 p3:6}#1      0 {tet:4 oct:3 p3:6}
+gyroelongated alternated cubic       {tet:4 oct:3 p3:6}#1      1 {tet:4 oct:3 p3:6}
+gyrated alternated cubic             {tet:8 oct:6}#1           0 {tet:8 oct:6}
+
+total: 28;  names distinct: true;  flags: 0

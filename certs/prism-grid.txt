@@ -1,0 +1,14 @@
+The prism grid: exotic-prism vertical-edge equation, solved completely
+participants: rational lattice {60,90,120,135,150}, alpha-charged core values (charges must
+cancel), prism verticals 180-360/p; equation sum = 360, 3..6 terms, >= 1 exotic prism
+
+solutions: 6
+[P5:108.00 P5:108.00 P10:144.00]  = 2D species 5.5.10
+[P7:128.57 P42:171.43 60]  = 2D species 3.7.42
+[P9:140.00 P18:160.00 60]  = 2D species 3.9.18
+[P10:144.00 P15:156.00 60]  = 2D species 3.10.15
+[P24:165.00 60 135]  = 2D species 3.8.24
+[P5:108.00 P20:162.00 90]  = 2D species 4.5.20
+
+surviving exotic p: 5, 7, 9, 10, 15, 18, 20, 24, 42
+every solution is the lift of a non-extendable 2D vertex species; no charged participants

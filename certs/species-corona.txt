@@ -1,0 +1,175 @@
+Corona structure over the 34 vertex species
+pair level: provably vacuous (every species self-hosts its figures up to reflection);
+face level: the p-gon walk (marked-ring forms, exact p-1-step path), iterated to a fixpoint
+
+== Face-cycle fixpoint: 34 of 34 species survive ==
+no species dies: all 34 are corona-consistent
+
+== Live edge figures: 58 of 69 ==
+an edge figure not occurring in any species cannot occur in any honeycomb;
+the following catalogued figures are DEAD LETTERS:
+  [rco(4·4) tco(4·8) p8(8·4)]
+  [truncTet(6·6) truncTet(6·6) truncOct(6·6) truncOct(6·6)]
+  [truncTet(6·6) truncOct(6·6) p6(6·4) p6(4·6)]
+  [truncCube(8·8) truncCube(8·8) p8(8·4) p8(4·8)]
+  [p3(3·4) p8(4·8) p8(8·4) p3(4·3)]
+  [p3(4·4) p6(4·4) p8(4·8) p8(8·4)]
+  [p3(4·4) p6(4·4) p12(4·12) p12(12·4)]
+  [p6(4·6) p6(6·4) p8(4·8) p8(8·4)]
+  [p8(4·8) p8(8·4) p12(4·12) p12(12·4)]
+  [p3(4·4) p3(4·4) p3(4·4) p8(4·8) p8(8·4)]
+  [p3(4·4) p3(4·4) p3(4·4) p12(4·12) p12(12·4)]
+
+== Hosting table (figure -> species) ==
+[tet(3·3) rco(3·4) rco(4·3)]
+    {tet:1 cube:1 rco:3}#1
+[cube(4·4) co(4·3) rco(3·4)]
+    {cube:2 co:1 rco:2}#1
+[cube(4·4) truncOct(4·6) tco(6·4)]
+    {cube:1 truncOct:1 tco:2}#1
+[cube(4·4) rco(4·4) rco(4·4)]
+    {cube:2 co:1 rco:2}#1, {tet:1 cube:1 rco:3}#1
+[cube(4·4) rco(4·4) p8(4·4)]
+    {cube:1 truncCube:1 rco:1 p8:2}#1
+[cube(4·4) tco(4·8) tco(8·4)]
+    {cube:1 truncOct:1 tco:2}#1
+[cube(4·4) p6(4·4) p12(4·4)]
+    {cube:2 p6:2 p12:2}#1
+[cube(4·4) p8(4·4) p8(4·4)]
+    {cube:2 p8:4}#1
+[oct(3·3) co(3·4) co(4·3)]
+    {oct:2 co:4}#1
+[oct(3·3) truncCube(3·8) truncCube(8·3)]
+    {oct:1 truncCube:4}#1
+[truncTet(3·6) truncOct(6·4) co(4·3)]
+    {truncTet:2 co:1 truncOct:2}#1
+[truncTet(3·6) tco(6·8) truncCube(8·3)]
+    {truncTet:1 truncCube:1 tco:2}#1
+[truncTet(6·6) tco(6·4) tco(4·6)]
+    {truncTet:1 truncCube:1 tco:2}#1
+[truncOct(4·6) truncOct(6·6) truncOct(6·4)]
+    {truncOct:4}#1
+[truncOct(6·6) tco(6·8) tco(8·6)]
+    {cube:1 truncOct:1 tco:2}#1
+[truncCube(3·8) p8(8·4) rco(4·3)]
+    {cube:1 truncCube:1 rco:1 p8:2}#1
+[truncCube(8·8) tco(8·4) tco(4·8)]
+    {truncTet:1 truncCube:1 tco:2}#1
+[tco(4·6) tco(6·8) p8(8·4)]
+    {tco:2 p8:2}#1
+[tco(4·8) p8(8·4) p8(4·4)]
+    {tco:2 p8:2}#1
+[p3(4·4) p12(4·4) p12(4·4)]
+    {p3:2 p12:4}#1
+[p6(4·4) p6(4·4) p6(4·4)]
+    {p6:6}#1
+[tet(3·3) tet(3·3) oct(3·3) oct(3·3)]
+    {tet:8 oct:6}#1
+[tet(3·3) tet(3·3) truncTet(3·6) truncTet(6·3)]
+    {tet:2 truncTet:6}#1
+[tet(3·3) oct(3·3) tet(3·3) oct(3·3)]
+    {tet:4 oct:3 p3:6}#1, {tet:8 oct:6}#1, {tet:8 oct:6}#2
+[tet(3·3) oct(3·3) p3(3·4) p3(4·3)]
+    {tet:4 oct:3 p3:6}#1
+[tet(3·3) truncTet(3·6) truncTet(6·6) truncTet(6·3)]
+    {tet:1 truncTet:3 p3:2 p6:2}#1, {tet:2 truncTet:6}#1, {tet:2 truncTet:6}#2
+[tet(3·3) truncTet(3·6) p6(6·4) p3(4·3)]
+    {tet:1 truncTet:3 p3:2 p6:2}#1
+[cube(4·4) cube(4·4) cube(4·4) cube(4·4)]
+    {cube:4 p3:2 p6:2}#1, {cube:8}#1, {cube:4 p3:6}#1
+[cube(4·4) cube(4·4) p3(4·3) p3(3·4)]
+    {cube:2 p3:4 p12:2}#1, {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {cube:4 p3:2 p6:2}#2, {cube:4 p3:6}#1, {cube:4 p3:6}#2
+[cube(4·4) cube(4·4) p3(4·4) p6(4·4)]
+    {cube:4 p3:2 p6:2}#1
+[cube(4·4) cube(4·4) p6(4·6) p6(6·4)]
+    {cube:2 p6:2 p12:2}#1, {cube:4 p3:2 p6:2}#1, {cube:4 p3:2 p6:2}#2
+[cube(4·4) cube(4·4) p8(4·8) p8(8·4)]
+    {cube:2 p8:4}#1
+[cube(4·4) cube(4·4) p12(4·12) p12(12·4)]
+    {cube:2 p6:2 p12:2}#1, {cube:2 p3:4 p12:2}#2
+[cube(4·4) p3(4·4) cube(4·4) p6(4·4)]
+    {cube:4 p3:2 p6:2}#2
+[cube(4·4) p3(4·4) p3(4·4) p12(4·4)]
+    {cube:2 p3:4 p12:2}#2
+[cube(4·4) p3(4·4) p12(4·4) p3(4·4)]
+    {cube:2 p3:4 p12:2}#1
+[cube(4·4) p8(4·8) truncCube(8·8) p8(8·4)]
+    {cube:1 truncCube:1 rco:1 p8:2}#1
+[truncTet(6·6) truncTet(6·6) truncTet(6·3) truncTet(3·6)]
+    {tet:2 truncTet:6}#1
+[truncTet(6·6) truncTet(6·3) p3(3·4) p6(4·6)]
+    {tet:1 truncTet:3 p3:2 p6:2}#1
+[truncTet(6·6) truncOct(6·6) truncTet(6·6) truncOct(6·6)]
+    {truncTet:2 co:1 truncOct:2}#1
+[truncCube(8·8) truncCube(8·8) truncCube(8·8) truncCube(8·8)]
+    {oct:1 truncCube:4}#1
+[p3(3·4) p3(4·3) p3(3·4) p3(4·3)]
+    {cube:2 p3:4 p12:2}#2, {p3:4 p6:4}#1, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:8 p6:2}#2, {p3:12}#1, {p3:12}#2
+[p3(4·4) p3(4·3) p3(3·4) p6(4·4)]
+    {p3:4 p6:4}#2, {p3:8 p6:2}#1
+[p3(3·4) p6(4·6) p6(6·4) p3(4·3)]
+    {cube:4 p3:2 p6:2}#1, {p3:4 p6:4}#1, {p3:4 p6:4}#2, {p3:4 p6:4}#3, {p3:8 p6:2}#1, {p3:8 p6:2}#2
+[p3(3·4) p12(4·12) p12(12·4) p3(4·3)]
+    {p3:2 p12:4}#1, {cube:2 p3:4 p12:2}#1, {cube:2 p3:4 p12:2}#2
+[p3(4·4) p3(4·4) p6(4·4) p6(4·4)]
+    {p3:4 p6:4}#1
+[p3(4·4) p6(4·4) p3(4·4) p6(4·4)]
+    {p3:4 p6:4}#3, {tet:1 truncTet:3 p3:2 p6:2}#1
+[p3(4·4) p6(4·4) p6(4·6) p6(6·4)]
+    {p3:4 p6:4}#2
+[p6(4·6) p6(6·4) p6(4·6) p6(6·4)]
+    {p6:6}#1, {p3:4 p6:4}#1
+[p6(4·6) p6(6·4) p12(4·12) p12(12·4)]
+    {cube:2 p6:2 p12:2}#1
+[p8(4·8) p8(8·4) p8(4·8) p8(8·4)]
+    {cube:2 p8:4}#1
+[p12(4·12) p12(12·4) p12(4·12) p12(12·4)]
+    {p3:2 p12:4}#1
+[cube(4·4) cube(4·4) p3(4·4) p3(4·4) p3(4·4)]
+    {cube:4 p3:6}#1
+[cube(4·4) p3(4·4) cube(4·4) p3(4·4) p3(4·4)]
+    {cube:4 p3:6}#2
+[p3(4·4) p3(4·4) p3(4·4) p3(4·3) p3(3·4)]
+    {p3:8 p6:2}#1, {p3:12}#1
+[p3(4·4) p3(4·4) p3(4·4) p3(4·4) p6(4·4)]
+    {p3:8 p6:2}#2
+[p3(4·4) p3(4·4) p3(4·4) p6(4·6) p6(6·4)]
+    {p3:8 p6:2}#1
+[p3(4·4) p3(4·4) p3(4·4) p3(4·4) p3(4·4) p3(4·4)]
+    {p3:12}#2, {tet:4 oct:3 p3:6}#1
+
+== Species adjacency (shared-figure neighbors) ==
+{cube:1 truncOct:1 tco:2}#1  ~  
+{tco:2 p8:2}#1  ~  
+{truncOct:4}#1  ~  
+{truncTet:1 truncCube:1 tco:2}#1  ~  
+{cube:1 truncCube:1 rco:1 p8:2}#1  ~  
+{cube:2 co:1 rco:2}#1  ~  {tet:1 cube:1 rco:3}#1
+{oct:1 truncCube:4}#1  ~  
+{tet:1 cube:1 rco:3}#1  ~  {cube:2 co:1 rco:2}#1
+{truncTet:2 co:1 truncOct:2}#1  ~  
+{cube:2 p6:2 p12:2}#1  ~  {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {cube:4 p3:2 p6:2}#2
+{cube:2 p8:4}#1  ~  
+{oct:2 co:4}#1  ~  
+{p3:2 p12:4}#1  ~  {cube:2 p3:4 p12:2}#1, {cube:2 p3:4 p12:2}#2
+{p6:6}#1  ~  {p3:4 p6:4}#1
+{cube:2 p3:4 p12:2}#1  ~  {p3:2 p12:4}#1, {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {cube:4 p3:2 p6:2}#2, {cube:4 p3:6}#1, {cube:4 p3:6}#2
+{cube:2 p3:4 p12:2}#2  ~  {cube:2 p6:2 p12:2}#1, {p3:2 p12:4}#1, {cube:2 p3:4 p12:2}#1, {cube:4 p3:2 p6:2}#1, {cube:4 p3:2 p6:2}#2, {p3:4 p6:4}#1, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:8 p6:2}#2, {p3:12}#1, {p3:12}#2
+{cube:4 p3:2 p6:2}#1  ~  {cube:2 p6:2 p12:2}#1, {cube:2 p3:4 p12:2}#1, {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#2, {cube:8}#1, {p3:4 p6:4}#1, {p3:4 p6:4}#2, {p3:4 p6:4}#3, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:8 p6:2}#2
+{cube:4 p3:2 p6:2}#2  ~  {cube:2 p6:2 p12:2}#1, {cube:2 p3:4 p12:2}#1, {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {cube:4 p3:6}#1, {cube:4 p3:6}#2
+{cube:8}#1  ~  {cube:4 p3:2 p6:2}#1, {cube:4 p3:6}#1
+{p3:4 p6:4}#1  ~  {p6:6}#1, {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {p3:4 p6:4}#2, {p3:4 p6:4}#3, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:8 p6:2}#2, {p3:12}#1, {p3:12}#2
+{p3:4 p6:4}#2  ~  {cube:4 p3:2 p6:2}#1, {p3:4 p6:4}#1, {p3:4 p6:4}#3, {p3:8 p6:2}#1, {p3:8 p6:2}#2
+{p3:4 p6:4}#3  ~  {cube:4 p3:2 p6:2}#1, {p3:4 p6:4}#1, {p3:4 p6:4}#2, {tet:1 truncTet:3 p3:2 p6:2}#1, {p3:8 p6:2}#1, {p3:8 p6:2}#2
+{tet:1 truncTet:3 p3:2 p6:2}#1  ~  {p3:4 p6:4}#3, {tet:2 truncTet:6}#1, {tet:2 truncTet:6}#2
+{tet:2 truncTet:6}#1  ~  {tet:1 truncTet:3 p3:2 p6:2}#1, {tet:2 truncTet:6}#2
+{tet:2 truncTet:6}#2  ~  {tet:1 truncTet:3 p3:2 p6:2}#1, {tet:2 truncTet:6}#1
+{cube:4 p3:6}#1  ~  {cube:2 p3:4 p12:2}#1, {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {cube:4 p3:2 p6:2}#2, {cube:8}#1, {p3:4 p6:4}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:8 p6:2}#2, {p3:12}#1, {p3:12}#2
+{cube:4 p3:6}#2  ~  {cube:2 p3:4 p12:2}#1, {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {cube:4 p3:2 p6:2}#2, {p3:4 p6:4}#1, {cube:4 p3:6}#1, {p3:8 p6:2}#1, {p3:8 p6:2}#2, {p3:12}#1, {p3:12}#2
+{p3:8 p6:2}#1  ~  {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {p3:4 p6:4}#1, {p3:4 p6:4}#2, {p3:4 p6:4}#3, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#2, {p3:12}#1, {p3:12}#2
+{p3:8 p6:2}#2  ~  {cube:2 p3:4 p12:2}#2, {cube:4 p3:2 p6:2}#1, {p3:4 p6:4}#1, {p3:4 p6:4}#2, {p3:4 p6:4}#3, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:12}#1, {p3:12}#2
+{p3:12}#1  ~  {cube:2 p3:4 p12:2}#2, {p3:4 p6:4}#1, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:8 p6:2}#2, {p3:12}#2
+{p3:12}#2  ~  {cube:2 p3:4 p12:2}#2, {p3:4 p6:4}#1, {cube:4 p3:6}#1, {cube:4 p3:6}#2, {p3:8 p6:2}#1, {p3:8 p6:2}#2, {p3:12}#1, {tet:4 oct:3 p3:6}#1
+{tet:4 oct:3 p3:6}#1  ~  {p3:12}#2, {tet:8 oct:6}#1, {tet:8 oct:6}#2
+{tet:8 oct:6}#1  ~  {tet:4 oct:3 p3:6}#1, {tet:8 oct:6}#2
+{tet:8 oct:6}#2  ~  {tet:4 oct:3 p3:6}#1, {tet:8 oct:6}#1

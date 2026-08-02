@@ -1,0 +1,35 @@
+The six planar-species lifts: all nine exotic prism families excluded
+pool per round: 13 core cells + alive exotic laterals and horizontals (all else excluded by
+the corona fixpoint and the tails); rings enumerated exactly; walks use LEMMA OPP (prisms structural, cube trivial,
+rco machine-verified over Q(sqrt2): true)
+
+== Round-1 ring realizations (the six prism-grid shadows, cell-resolved) ==
+P5 lateral: cube(4·4) + P20(4·4)  |  P5(4·4) + P10(4·4)
+P7 lateral: p3(4·4) + P42(4·4)
+P9 lateral: p3(4·4) + P18(4·4)
+P10 lateral: P5(4·4) + P5(4·4)  |  p3(4·4) + P15(4·4)
+P15 lateral: p3(4·4) + P10(4·4)
+P18 lateral: p3(4·4) + P9(4·4)
+P20 lateral: cube(4·4) + P5(4·4)
+P24 lateral: p3(4·4) + rco(4·4)  |  p3(4·4) + p8(4·4)
+P42 lateral: p3(4·4) + P7(4·4)
+
+== The campaign ==
+round 1: P5 EXCLUDED [self-walk: no closed 5-walk]
+round 1: P7 EXCLUDED [self-walk: no closed 7-walk]
+round 1: P9 EXCLUDED [self-walk: no closed 9-walk]
+round 1: P15 EXCLUDED [self-walk: no closed 15-walk]
+round 1: P18 EXCLUDED [P3-walk: no closed 3-walk through the anchor]
+round 1: P24 EXCLUDED [P3-walk: no closed 3-walk through the anchor]
+round 1: P42 EXCLUDED [P3-walk: no closed 3-walk through the anchor]
+round 2: P10 EXCLUDED [corona: no completion]
+round 2: P20 EXCLUDED [corona: no completion]
+
+ALL NINE EXOTIC FAMILIES DEAD: true
+
+== THE ALPHABET THEOREM ==
+chain: the corona fixpoint (pentagon/decagon family, snubs, antiprisms q <= 100 — interval corona fixpoint)
+  + the tails (all antiprisms q >= 101 via closed forms + Lemma E; all prisms p > 500;
+    non-exotic prisms p <= 500 over the full pool)
+  + the exotic lifts (this campaign: the nine exotic families via lifted odd-face walks)
+==> every face-to-face unit-edge honeycomb by convex uniform cells uses only the 13 core cells.
