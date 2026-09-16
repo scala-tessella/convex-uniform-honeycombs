@@ -14,7 +14,10 @@ object CompletenessAuditCertificate:
     sb ++= "The completeness audit for the 28\n"
     sb ++= "per class: PERIODIZATION CERTIFICATE (three independent translation words; ball periodicity;\n"
     sb ++= "lattice invariance under all generator point-parts; coverage radius over a fundamental domain);\n"
-    sb ++= "per pattern: CLASS COHERENCE at the determination radius; per skeleton: GERM FORCING or\n"
+    sb ++= "per pattern: CLASS COHERENCE (the pattern's own periodization certificate, reaching the\n"
+    sb ++= "representative's basis; alignment of the representative's ball onto the pattern's by an element\n"
+    sb ++= "of Stab(S) at the determination radius; the aligned representative basis acting by symmetries on\n"
+    sb ++= "the pattern's certified ball); per skeleton: GERM FORCING or\n"
     sb ++=
       "EXHAUSTION (all R1+R2-passing patterns developed; accepted ones fingerprint into known classes)\n\n"
     sb ++= f"${"species"}%-34s ${"classes"}%7s ${"certified"}%9s ${"coherent"}%8s ${"skeletons closed"}%16s\n"
