@@ -26,9 +26,9 @@ import CertifiedDihedrals.Iv
   *     solution of h(r) = g(q) strictly inside (2q−1, 2q) — never an integer. Left inequality: with v = π/4q,
   *     2 sin v < 2 tan v ≤ tan 2v (v < 45°). Right inequality, all q ≥ 4, with x = π/2q ≤ π/8 and y =
   *     π/(4q−2): (i) 2y − x = π/(2q(2q−1)) ≥ x²/π since (2q)(2q−1) ≤ 4q²; (ii) y ≤ 4x/7 ⟺ q ≥ 4; (iii) sin y
-  *     ≥ y − y³/6 (alternating series); (iv) tan x ≤ x + x³/(3(1−x²)) (the tangent-series coefficients beyond
-  *     x are ≤ 1/3: a₃ = 1/3 and a_{2k+1} = 2(1−4^{−k−1})ζ(2k+2)(2/π)^{2k+2} decreases). Then 2 sin y − tan x
-  *     ≥ (2y − x) − y³/3 − x³/(3(1−x²)) ≥ x²/π − ((4/7)³/3 + 0.3942)·x³ = x²(1/π − 0.4564·x) > 0 for x ≤ π/8.
+  *     ≥ y − y³/6 (alternating series); (iv) tan x ≤ x/(1 − x²/2) = x + x³/(2 − x²) for 0 < x < √2 (sin x ≤ x
+  *     and cos x ≥ 1 − x²/2 > 0). Then 2 sin y − tan x ≥ (2y − x) − y³/3 − x³/(2 − x²) ≥ x²/π − ((4/7)³/3 +
+  *     0.5418)·x³ ≥ x²(1/π − 0.6041·x) > 0 for x ≤ π/8, as 0.6041·π/8 < 0.2373 < 1/π.
   *     The constant chain is re-verified by interval arithmetic in [[lemmaEConstants]], and the interleaving
   *     itself on a q-grid in the spec.
   *
@@ -73,15 +73,17 @@ object TailExclusion:
     val c = Iv(Iv.cosGen(uOf(qMin.toDouble)).lo, 1.0)
     Iv.toDeg(Iv.acosDec((Iv.point(1.0) - Iv.point(4.0) * c) / Iv.point(3.0)))
 
-  /** The explicit-constant chain of Lemma E's right inequality, re-verified with intervals: (4/7)³/3 +
-    * 1/(3(1−(π/8)²)) < 0.4565 and 1/π − 0.4565·(π/8) > 0.
+  /** The explicit-constant chain of Lemma E's right inequality, re-verified with intervals: (4/7)³/3 <
+    * 0.0623, 1/(2 − (π/8)²) < 0.5418, their sum < 0.6041, and 1/π − 0.6041·(π/8) > 0 (with 0.6041·π/8 <
+    * 0.2373).
     */
   lazy val lemmaEConstants: Boolean =
     val x0 = Iv.pi / Iv.point(8.0)
     val c1 = Iv.point(4.0 / 7.0) * Iv.point(4.0 / 7.0) * Iv.point(4.0 / 7.0) / Iv.point(3.0)
-    val c2 = Iv.point(1.0) / (Iv.point(3.0) * (Iv.point(1.0) - x0 * x0))
+    val c2 = Iv.point(1.0) / (Iv.point(2.0) - x0 * x0)
     val cc = c1 + c2
-    cc.hi < 0.4565 && (Iv.point(1.0) / Iv.pi - Iv.point(0.4565) * x0).lo > 0
+    c1.hi < 0.0623 && c2.hi < 0.5418 && cc.hi < 0.6041 && (Iv.point(0.6041) * x0).hi < 0.2373 &&
+    (Iv.point(1.0) / Iv.pi - Iv.point(0.6041) * x0).lo > 0
 
   /** Interleaving h(2q) < g(q) < h(2q−1) of Lemma E, certified for one q. */
   def interleaves(q: Int): Boolean =
