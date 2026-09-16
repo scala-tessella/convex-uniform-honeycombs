@@ -6,11 +6,12 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import ExactCertificates.*
 
-/** The exactness escalation: the finitely many certified objects of the completeness
-  * theorem — 34 star models, 28 class-representative periodization certificates, the two doubled-species
-  * separations — hold as exact identities in ℚ(√2,√3). No floating-point tolerance decision remains on the
-  * theorem's critical path: every equality the certificates assert is verified in the field, every inequality
-  * is an exact sign or an interval certificate.
+/** The exactness escalation: the finitely many certified objects of the completeness theorem — 34 star
+  * models, 28 class-representative periodization certificates, the coherence of every accepted pattern with
+  * its class (opt-in, `-DexactCoherence`, always under `-Dcerts`), germ forcing on every skeleton, the two
+  * doubled-species separations — hold as exact identities in ℚ(√2,√3). Every positive certificate on the
+  * theorem's critical path is exact; what stays numeric is the enumerations' negative decisions and the
+  * coherence of the exhaustion patterns.
   */
 class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
 
@@ -78,5 +79,34 @@ class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
       Set("{cube:4 p3:6}#1", "{tet:4 oct:3 p3:6}#1")
     r.separations.foreach(_.distinct shouldBe true)
 
-  "the escalation" should "conclude: 28/28 exact, zero tolerance decisions on the critical path" in:
+  "exact coherence" should "certify and align every accepted pattern with its class representative" in:
+    // an exact ball per accepted pattern, about half an hour: opt-in, and always part of the certs run
+    assume(sys.props.contains("exactCoherence") || sys.props.contains("certs"))
+    val c = coherenceResults
+    c.flags shouldBe empty
+    c.coherences.size should be > r.classes.size // members, not only representatives
+    c.coherences.filterNot(_.ok) shouldBe empty
+    // every class is represented among the cohered patterns
+    c.coherences.map(c => (c.idx, c.classIdx)).distinct.size shouldBe 28
+    c.allOk shouldBe true
+
+  "exact germ forcing" should "force every skeleton the numeric audit forces, leaving its ten exhausted ones" in:
+    r.germs should not be empty
+    r.germs.count(_.forced) should be > 0
+    // the audit closes these ten by exhaustion (only the last holds patterns beyond the cap: 128)
+    val open = r.germs.filterNot(_.forced)
+    open.map(g => (SpeciesCorona.label(g.idx), g.skeleton)) shouldBe Vector(
+      ("{p6:6}#1", 0),
+      ("{p6:6}#1", 1),
+      ("{p6:6}#1", 3),
+      ("{p6:6}#1", 4),
+      ("{p6:6}#1", 6),
+      ("{p6:6}#1", 7),
+      ("{cube:4 p3:6}#2", 0),
+      ("{p3:8 p6:2}#2", 0),
+      ("{p3:8 p6:2}#2", 1),
+      ("{p3:8 p6:2}#2", 2)
+    )
+
+  "the escalation" should "conclude: 28/28 exact, every positive certificate on the critical path exact" in:
     r.allOk shouldBe true

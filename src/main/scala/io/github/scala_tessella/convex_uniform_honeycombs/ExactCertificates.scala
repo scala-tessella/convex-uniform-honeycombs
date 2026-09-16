@@ -4,7 +4,7 @@ import io.github.scala_tessella.research_core.*
 
 import MonoShell.{Glu, StarGeom, Vec}
 import SpeciesEnumerator.species
-import TransitivePatterns.{acceptedOf, developBall, fingerprintOf, Iso, Mat, Pattern}
+import TransitivePatterns.{acceptedOf, developBall, fingerprintOf, Accepted, Iso, Mat, Pattern}
 
 /** Exactness escalation of the pipeline geometry, from the species assembly to the audit: the certified
   * objects of the completeness theorem — the 34 vertex stars, the 28 class-representative patterns and their
@@ -45,9 +45,22 @@ import TransitivePatterns.{acceptedOf, developBall, fingerprintOf, Iso, Mat, Pat
   * no rounding. Stabilizers themselves are exact: each is determined by the permutation of star directions it
   * induces, its matrix is read off the internal coordinates, and closure under products is verified.
   *
-  * Together: every equality asserted by the periodization certificates of the 28 is an exact identity in
-  * ℚ(√2,√3); no floating-point tolerance decision remains on the theorem's critical path (inequalities are
-  * interval-certified or exact-sign decisions, and the numeric pipeline's identifications are re-proven).
+  * BEYOND THE REPRESENTATIVES. (viii) CLASS COHERENCE, for every accepted pattern within the caps
+  * (`coherenceResults`, opt-in — an exact ball per pattern): the pattern's own certificate (i)–(vi) with its
+  * ball reaching the representative's basis and determination ball, an exact element of Stab±(S) carrying
+  * the representative's ball onto the pattern's at the determination radius, and the aligned representative
+  * basis acting by exact symmetries on the pattern's ball — the three hypotheses of the coherence lemma.
+  * (ix) GERM FORCING on every skeleton, the audit's test replayed on exact placements and positions; it
+  * forces exactly the skeletons the numeric audit forces, and the ten it leaves are the ten the audit closes
+  * by exhaustion.
+  *
+  * Together: every equality asserted by the periodization certificates of the 28, by the coherence of every
+  * accepted pattern and by the germ forcing of every forced skeleton is an exact identity in ℚ(√2,√3) —
+  * every POSITIVE certificate on the theorem's critical path is exact (inequalities are interval-certified
+  * or exact-sign decisions, and the numeric pipeline's identifications are re-proven). What stays numeric:
+  * the enumerations' negative decisions (interval misses in the species assembly; tolerance equality tests
+  * in the shell filter, the gluing atlas and the R1/R2 search) and the coherence of the exhaustion
+  * patterns, whose exact replay needs the pattern search of a later research-core.
   */
 object ExactCertificates:
 
@@ -663,7 +676,42 @@ object ExactCertificates:
     def ok: Boolean =
       gluOk && r1Ok && r2Ok && transOk && indepOk && collisionFree && periodic && latInv && coverage
 
-  private def certifyClass(
+  /** A certified pattern with the exact ball its certificate was verified on, the radius R_per within which
+    * the developed field is the honeycomb, and the rational bound ub(covBound) of its lattice.
+    */
+  final private case class Certified(
+      report: ClassReport,
+      ball: collection.mutable.HashMap[VQ, BallEntry],
+      rPer2: Q23,
+      covUB: Rat
+  )
+
+  /** Does the translation `t` act as a symmetry of the certified ball: every entry whose `t`-translate stays
+    * within R_per finds there a Stab-conjugate star, exactly. With ±τ for a lattice basis this is
+    * Λ-periodicity; with a transported basis it is the lattice-transport check of coherence.
+    */
+  private def translationSymmetryExact(
+      star: ExactStar,
+      stabE: Vector[MQ],
+      ball: collection.mutable.HashMap[VQ, BallEntry],
+      rPer2: Q23,
+      t: VQ
+  ): Boolean =
+    ball.values.forall { e =>
+      val q = vqAdd(e.iso.t, t)
+      if (rPer2 - star.norm2(q)).signum < 0 then true
+      else
+        ball.get(q) match
+          case None     => false
+          case Some(e2) => inStabE(mMul(e2.inv, e.iso.m), stabE)
+    }
+
+  /** The exact periodization certificate of one pattern. `reach` is a floor on the translation lengths the
+    * certified ball must accommodate beyond the pattern's own basis and `floor` a floor on R_per itself
+    * (both zero for a class representative; the representative's ub(max|τ|) and ub(covBound) for a member
+    * under coherence): R_per = max(ub(covBound) + max(ub(max|τ|), reach), floor) + 8/5.
+    */
+  private def certifyPattern(
       star: ExactStar,
       g: StarGeom,
       bridge: Bridge,
@@ -671,12 +719,15 @@ object ExactCertificates:
       pat: Pattern,
       idx: Int,
       classIdx: Int,
+      reach: Rat,
+      floor: Rat,
+      what: String,
       flags: collection.mutable.ListBuffer[String]
-  ): ClassReport =
-    def fail(what: String): ClassReport =
-      flags += s"class $idx#$classIdx: $what"
-      ClassReport(idx, classIdx, false, false, false, false, false, 0, false, false, false, false)
-    val glusE                           = pat.glus.indices.toVector.map(x => exactGlu(star, g, bridge, x, pat.glus(x), flags))
+  ): (ClassReport, Option[Certified]) =
+    def fail(msg: String): (ClassReport, Option[Certified]) =
+      flags += s"$what: $msg"
+      (ClassReport(idx, classIdx, false, false, false, false, false, 0, false, false, false, false), None)
+    val glusE                                           = pat.glus.indices.toVector.map(x => exactGlu(star, g, bridge, x, pat.glus(x), flags))
     glusE.find(_.isLeft).flatMap(_.left.toOption) match
       case Some(e) => fail(e)
       case None    =>
@@ -692,8 +743,8 @@ object ExactCertificates:
             val tv      = taus.map(_.t)
             val indep   = transOk && !detCols(tv(0), tv(1), tv(2)).isZero
             if !transOk || !indep then
-              flags += s"class $idx#$classIdx: translation words not exact translations"
-              ClassReport(idx, classIdx, true, r1, r2, transOk, indep, 0, false, false, false, false)
+              flags += s"$what: translation words not exact translations"
+              (ClassReport(idx, classIdx, true, r1, r2, transOk, indep, 0, false, false, false, false), None)
             else
               // coverage radii: exact rational upper bounds for the irrational norms
               val diagUB   = (for
@@ -706,7 +757,7 @@ object ExactCertificates:
               ).max
               val covUB    = diagUB / Rat.frac(2, 1)
               val maxTUB   = tv.map(t => sqrtUB(star.norm2(t))).max
-              val rPer     = covUB + maxTUB + Rat.frac(8, 5)
+              val rPer     = Vector(covUB + Vector(maxTUB, reach).max, floor).max + Rat.frac(8, 5)
               val coverage = (rPer - (covUB + maxTUB + Rat.frac(3, 2))).signum >= 0
               val slack    = rPer + Rat.frac(8, 5)
               val slack2   = Q23.ofRat(slack * slack)
@@ -714,19 +765,11 @@ object ExactCertificates:
               val maxDepth = math.max(14, (3.0 * slack.toDouble).toInt)
               developExact(star, isos, stabE, slack2, maxDepth) match
                 case Left(e)     =>
-                  flags += s"class $idx#$classIdx: $e"
-                  ClassReport(idx, classIdx, true, r1, r2, true, true, 0, false, false, false, coverage)
+                  flags += s"$what: $e"
+                  (ClassReport(idx, classIdx, true, r1, r2, true, true, 0, false, false, false, coverage), None)
                 case Right(ball) =>
-                  val tausPM   = tv.flatMap(t => Vector(t, vqNeg(t)))
-                  val periodic = ball.values.forall { e =>
-                    tausPM.forall { tau =>
-                      val q = vqAdd(e.iso.t, tau)
-                      if (rPer2 - star.norm2(q)).signum < 0 then true
-                      else
-                        ball.get(q) match
-                          case None     => false
-                          case Some(e2) => inStabE(mMul(e2.inv, e.iso.m), stabE)
-                    }
+                  val periodic = tv.flatMap(t => Vector(t, vqNeg(t))).forall { tau =>
+                    translationSymmetryExact(star, stabE, ball, rPer2, tau)
                   }
                   val tmat     = mCols(tv(0), tv(1), tv(2))
                   val latInv   = glus.forall { gl =>
@@ -734,9 +777,9 @@ object ExactCertificates:
                       solve3(tmat, mVec(gl.m, tau)).forall(c => c.isRat && c.a.isInt)
                     }
                   }
-                  if !periodic then flags += s"class $idx#$classIdx: ball not periodic (exact)"
-                  if !latInv then flags += s"class $idx#$classIdx: lattice not generator-invariant (exact)"
-                  ClassReport(
+                  if !periodic then flags += s"$what: ball not periodic (exact)"
+                  if !latInv then flags += s"$what: lattice not generator-invariant (exact)"
+                  val report   = ClassReport(
                     idx,
                     classIdx,
                     true,
@@ -751,6 +794,122 @@ object ExactCertificates:
                     coverage,
                     tv
                   )
+                  (report, Option.when(report.ok)(Certified(report, ball, rPer2, covUB)))
+
+  // ---------- exact class coherence (every accepted pattern) ----------
+
+  /** Coherence of one accepted pattern with its class representative, exact — the three checks of the
+    * coherence lemma: `certified`, the pattern's own periodization certificate with its ball reaching the
+    * representative's basis and its determination ball; `aligned`, an element of Stab±(S) carrying the
+    * representative's exact ball onto the pattern's at the determination radius ub(covBound*) + 3/2; and
+    * `transported`, the aligned representative basis acting by symmetries on the pattern's certified ball.
+    */
+  final case class CoherenceReport(
+      idx: Int,
+      classIdx: Int,
+      skeleton: Int,
+      certified: Boolean,
+      aligned: Boolean,
+      transported: Boolean
+  ):
+    def ok: Boolean = certified && aligned && transported
+
+  private def encodeExact(
+      star: ExactStar,
+      stabE: Vector[MQ],
+      ball: collection.mutable.HashMap[VQ, BallEntry],
+      r2: Q23,
+      s: MQ
+  ): Vector[Vector[Q23]] =
+    def canonStar(m: MQ): Vector[Q23] = stabE.map(s2 => mMul(m, s2).flatten).min
+    ball.values.toVector
+      .filter(e => (r2 - star.norm2(e.iso.t)).signum >= 0)
+      .map(e => mVec(s, e.iso.t) ++ canonStar(mMul(s, e.iso.m)))
+      .sorted
+
+  private def cohereExact(
+      star: ExactStar,
+      g: StarGeom,
+      bridge: Bridge,
+      stabE: Vector[MQ],
+      pat: Pattern,
+      rep: Certified,
+      idx: Int,
+      classIdx: Int,
+      skeleton: Int,
+      flags: collection.mutable.ListBuffer[String]
+  ): CoherenceReport =
+    val what          = s"species $idx class $classIdx skeleton $skeleton coherence"
+    val taus          = rep.report.taus
+    val maxTUB        = taus.map(t => sqrtUB(star.norm2(t))).max
+    val rDet          = rep.covUB + Rat.frac(3, 2)
+    val rDet2         = Q23.ofRat(rDet * rDet)
+    val (_, certOpt)  = certifyPattern(star, g, bridge, stabE, pat, idx, classIdx, maxTUB, rep.covUB, what, flags)
+    certOpt match
+      case None      => CoherenceReport(idx, classIdx, skeleton, false, false, false)
+      case Some(own) =>
+        val target = encodeExact(star, stabE, own.ball, rDet2, idMQ)
+        stabE.find(s => encodeExact(star, stabE, rep.ball, rDet2, s) == target) match
+          case None    =>
+            flags += s"$what: no exact alignment with the class representative"
+            CoherenceReport(idx, classIdx, skeleton, true, false, false)
+          case Some(s) =>
+            val transported = taus.forall { tau =>
+              val t = mVec(s, tau)
+              translationSymmetryExact(star, stabE, own.ball, own.rPer2, t) &&
+              translationSymmetryExact(star, stabE, own.ball, own.rPer2, vqNeg(t))
+            }
+            if !transported then
+              flags += s"$what: the aligned representative lattice is not a symmetry of the pattern's ball"
+            CoherenceReport(idx, classIdx, skeleton, true, true, transported)
+
+  // ---------- exact germ forcing (every skeleton) ----------
+
+  final case class GermReport(idx: Int, skeleton: Int, forced: Boolean)
+
+  /** The germ-forcing test of the audit, exact: the 1-shell germ (the star and the coset-representative
+    * placements at every tiling-vertex) forces the germ of every neighbor — for each tiling-vertex w, every
+    * candidate isometry q_w·s (s over Stab±(S)) whose placements agree with the known stars at the known
+    * positions places identical stars, modulo Stab±(S), at the unknown positions. None when a placement's
+    * rotation is not recognized in the field.
+    */
+  private def germForcesExact(
+      star: ExactStar,
+      g: StarGeom,
+      bridge: Bridge,
+      stabE: Vector[MQ],
+      skeleton: Vector[Vector[Glu]],
+      idx: Int,
+      si: Int,
+      flags: collection.mutable.ListBuffer[String]
+  ): Option[Boolean] =
+    val n      = star.n
+    val placed = skeleton.indices.toVector.map { x =>
+      exactGlu(star, g, bridge, x, skeleton(x).head, flags).toOption.map(_.m)
+    }
+    if placed.exists(_.isEmpty) then
+      flags += s"species $idx skeleton $si germ: a placement rotation is not exact"
+      None
+    else
+      val starAt = placed.map(_.get)
+      def knownAt(pos: VQ): Option[MQ] =
+        if pos == vqZero then Some(idMQ)
+        else (0 until n).find(x => star.coords(x) == pos).map(starAt)
+      def conj(a: MQ, b: MQ): Boolean  = inStabE(mMul(mInv(a), b), stabE)
+      Some((0 until n).forall { w =>
+        val candidates = stabE.map(s => mMul(starAt(w), s))
+        val placedByC  = candidates.map { m =>
+          (0 until n).toVector.map(z => (vqAdd(star.coords(w), mVec(m, star.coords(z))), mMul(m, starAt(z))))
+        }
+        val admissible = placedByC.filter(_.forall((pos, rot) => knownAt(pos).forall(k => conj(k, rot))))
+        admissible.nonEmpty && {
+          val unknowns = admissible.map(_.filter((pos, _) => knownAt(pos).isEmpty).sortBy(_._1))
+          unknowns.forall { u =>
+            u.size == unknowns.head.size &&
+            u.zip(unknowns.head).forall { case ((p1, r1), (p2, r2)) => p1 == p2 && conj(r1, r2) }
+          }
+        }
+      })
 
   // ---------- exact fingerprints and class separation ----------
 
@@ -764,19 +923,78 @@ object ExactCertificates:
       ball: collection.mutable.HashMap[VQ, BallEntry],
       r2: Q23
   ): Vector[Vector[Q23]] =
-    val entries                            = ball.values.toVector.filter(e => (r2 - star.norm2(e.iso.t)).signum >= 0)
-    def canonStar(m: MQ): Vector[Q23]      = stabE.map(s2 => mMul(m, s2).flatten).min
-    def encode(s: MQ): Vector[Vector[Q23]] =
-      entries.map(e => mVec(s, e.iso.t) ++ canonStar(mMul(s, e.iso.m))).sorted
-    stabE.map(encode).min
+    stabE.map(s => encodeExact(star, stabE, ball, r2, s)).min
 
   final case class SeparationReport(idx: Int, classes: Int, distinct: Boolean)
 
   // ---------- the driver ----------
 
+  /** Progress through a flushing sink: the exact replays are long and ScalaTest buffers a suite's output. */
+  private def progress(msg: String): Unit =
+    System.err.println(s"[exact] $msg")
+    System.err.flush()
+
+  /** The exact setting of one surviving species: its star model, the accepted patterns grouped into
+    * fingerprint classes exactly as the audit groups them (numeric keys, stable order), and the exact
+    * stabilizer.
+    */
+  final private case class Setting(
+      idx: Int,
+      star: ExactStar,
+      acc: Accepted,
+      bridge: Bridge,
+      stabE: Vector[MQ],
+      classes: Vector[Vector[(Int, Pattern)]]
+  )
+
+  private def settingOf(
+      idx: Int,
+      star: ExactStar,
+      nflags: MonoShell.Flags,
+      flags: collection.mutable.ListBuffer[String]
+  ): Option[Setting] =
+    val acc    = acceptedOf(idx, nflags)
+    val g      = acc.g
+    val bridge = Bridge(star, g)
+    exactStab(star, g, acc.stab, flags) match
+      case Left(e)      =>
+        flags += s"species $idx: $e"
+        None
+      case Right(stabE) =>
+        val byClass = collection.mutable.LinkedHashMap
+          .empty[Vector[(Long, Long, Long)], Vector[(Int, Pattern)]]
+        for (si, pat) <- acc.patterns do
+          val ball = developBall(g, pat, acc.stab, 3.05).get
+          val f2   = fingerprintOf(acc.corners, acc.stab, ball, 2.05)
+          byClass(f2) = byClass.getOrElse(f2, Vector.empty) :+ (si, pat)
+        Some(Setting(idx, star, acc, bridge, stabE, byClass.values.toVector))
+
+  /** The exact star models of the 34 species, and the surviving species' settings. */
+  private lazy val settings: (Vector[StarReport], Map[Int, ExactStar], Vector[Setting], Vector[String]) =
+    val flags       = collection.mutable.ListBuffer.empty[String]
+    val nflags      = MonoShell.Flags()
+    val built       = species.indices.toVector.map(i => i -> buildStar(i, flags))
+    val starReports = built.map { (i, e) =>
+      e match
+        case Left(msg)   => StarReport(i, species(i).state.positions.size, false, Double.NaN, msg)
+        case Right(star) => StarReport(i, star.n, true, star.maxIvWidth, "")
+    }
+    val starOf      = built.collect { case (i, Right(s)) => i -> s }.toMap
+    val sat         = MonoShell.results._1.filter(_._2.sat).map(_._1)
+    val ss          = sat.flatMap { idx =>
+      starOf.get(idx) match
+        case None       =>
+          flags += s"species $idx: no exact star model — certificates skipped"
+          None
+        case Some(star) => settingOf(idx, star, nflags, flags)
+    }
+    flags ++= nflags.items.distinct
+    (starReports, starOf, ss, flags.distinct.toVector)
+
   final case class Results(
       stars: Vector[StarReport],
       classes: Vector[ClassReport],
+      germs: Vector[GermReport], // every skeleton of every surviving species
       separations: Vector[SeparationReport],
       flags: Vector[String],
       starModels: Map[Int, ExactStar]
@@ -785,59 +1003,67 @@ object ExactCertificates:
       stars.forall(_.ok) && classes.forall(_.ok) && classes.size == 28 &&
         separations.forall(_.distinct) && flags.isEmpty
 
+  /** (a) the 34 exact star models, (b) the 28 exact class-representative certificates, (d) exact germ
+    * forcing on every skeleton, (e) the exact separation of the doubled species. About a minute.
+    */
   lazy val results: Results =
-    val flags       = collection.mutable.ListBuffer.empty[String]
-    val nflags      = MonoShell.Flags()
-    // (a) exact star models for all 34 species
-    val built       = species.indices.toVector.map(i => i -> buildStar(i, flags))
-    val starReports = built.map { (i, e) =>
-      e match
-        case Left(msg)   => StarReport(i, species(i).state.positions.size, false, Double.NaN, msg)
-        case Right(star) => StarReport(i, star.n, true, star.maxIvWidth, "")
-    }
-    val starOf      = built.collect { case (i, Right(s)) => i -> s }.toMap
-    // (b) exact certificates for the 28 class representatives
-    val sat         = MonoShell.results._1.filter(_._2.sat).map(_._1)
-    val classReps   = collection.mutable.ArrayBuffer.empty[ClassReport]
-    val seps        = collection.mutable.ArrayBuffer.empty[SeparationReport]
-    for idx <- sat do
-      starOf.get(idx) match
-        case None       => flags += s"species $idx: no exact star model — certificates skipped"
-        case Some(star) =>
-          val acc    = acceptedOf(idx, nflags)
-          val g      = acc.g
-          val bridge = Bridge(star, g)
-          exactStab(star, g, acc.stab, flags) match
-            case Left(e)      => flags += s"species $idx: $e"
-            case Right(stabE) =>
-              // fingerprint classes exactly as the audit does (numeric keys, stable order)
-              val byClass = collection.mutable.LinkedHashMap
-                .empty[Vector[(Long, Long, Long)], Pattern]
-              for (_, pat) <- acc.patterns do
-                val ball = developBall(g, pat, acc.stab, 3.05).get
-                val f2   = fingerprintOf(acc.corners, acc.stab, ball, 2.05)
-                if !byClass.contains(f2) then byClass(f2) = pat
-              val reps    = byClass.values.toVector
-              val fps     = collection.mutable.ArrayBuffer.empty[Vector[Vector[Q23]]]
-              for (rep, ci) <- reps.zipWithIndex do
-                classReps += certifyClass(star, g, bridge, stabE, rep, idx, ci, flags)
-                if reps.size > 1 then
-                  val rSep   = Rat.frac(41, 20) // 2.05
-                  val sSep   = rSep + Rat.frac(8, 5)
-                  val slack2 = Q23.ofRat(sSep * sSep)
-                  val isosE  = rep.glus.indices.toVector.map { x =>
-                    exactGlu(star, g, bridge, x, rep.glus(x), flags).toOption.map(gl =>
-                      EIso(gl.m, star.coords(gl.x))
-                    )
-                  }
-                  if isosE.forall(_.isDefined) then
-                    developExact(star, isosE.map(_.get), stabE, slack2, 14) match
-                      case Right(ball) =>
-                        fps += fingerprintExact(star, stabE, ball, Q23.ofRat(rSep * rSep))
-                      case Left(e)     => flags += s"species $idx class $ci: separation ball — $e"
-              if reps.size > 1 then
-                val distinct = fps.size == reps.size && fps.distinct.size == fps.size
-                seps += SeparationReport(idx, reps.size, distinct)
-                if !distinct then flags += s"species $idx: exact fingerprints not distinct"
-    flags ++= nflags.items.distinct
-    Results(starReports, classReps.toVector, seps.toVector, flags.distinct.toVector, starOf)
+    val (starReports, starOf, ss, sflags) = settings
+    val flags                             = collection.mutable.ListBuffer.from(sflags)
+    val classReps                         = collection.mutable.ArrayBuffer.empty[ClassReport]
+    val germs                             = collection.mutable.ArrayBuffer.empty[GermReport]
+    val seps                              = collection.mutable.ArrayBuffer.empty[SeparationReport]
+    for Setting(idx, star, acc, bridge, stabE, classes) <- ss do
+      val g    = acc.g
+      val reps = classes.map(_.head._2)
+      val fps  = collection.mutable.ArrayBuffer.empty[Vector[Vector[Q23]]]
+      for si <- acc.skeletons.indices do
+        germForcesExact(star, g, bridge, stabE, acc.skeletons(si), idx, si, flags).foreach { forced =>
+          germs += GermReport(idx, si, forced)
+        }
+      for (rep, ci) <- reps.zipWithIndex do
+        classReps += certifyPattern(star, g, bridge, stabE, rep, idx, ci, Rat.zero, Rat.zero, s"class $idx#$ci", flags)._1
+        if reps.size > 1 then
+          val rSep   = Rat.frac(41, 20) // 2.05
+          val sSep   = rSep + Rat.frac(8, 5)
+          val slack2 = Q23.ofRat(sSep * sSep)
+          val isosE  = rep.glus.indices.toVector.map { x =>
+            exactGlu(star, g, bridge, x, rep.glus(x), flags).toOption.map(gl => EIso(gl.m, star.coords(gl.x)))
+          }
+          if isosE.forall(_.isDefined) then
+            developExact(star, isosE.map(_.get), stabE, slack2, 14) match
+              case Right(ball) =>
+                fps += fingerprintExact(star, stabE, ball, Q23.ofRat(rSep * rSep))
+              case Left(e)     => flags += s"species $idx class $ci: separation ball — $e"
+      if reps.size > 1 then
+        val distinct = fps.size == reps.size && fps.distinct.size == fps.size
+        seps += SeparationReport(idx, reps.size, distinct)
+        if !distinct then flags += s"species $idx: exact fingerprints not distinct"
+    Results(starReports, classReps.toVector, germs.toVector, seps.toVector, flags.distinct.toVector, starOf)
+
+  final case class CoherenceResults(coherences: Vector[CoherenceReport], flags: Vector[String]):
+    def allOk: Boolean = coherences.nonEmpty && coherences.forall(_.ok) && flags.isEmpty
+
+  /** (c) exact coherence of every accepted pattern within the caps with its class representative — the
+    * representative's certificate rebuilt, then every member's own. Long (an exact ball per pattern):
+    * opt-in, with progress on stderr.
+    */
+  lazy val coherenceResults: CoherenceResults =
+    val (_, _, ss, sflags) = settings
+    val flags              = collection.mutable.ListBuffer.from(sflags)
+    val cohs               = collection.mutable.ArrayBuffer.empty[CoherenceReport]
+    val t0                 = System.nanoTime()
+    for Setting(idx, star, acc, bridge, stabE, classes) <- ss do
+      val g = acc.g
+      progress(s"species $idx: ${classes.size} classes, ${classes.map(_.size).sum} accepted patterns")
+      for (members, ci) <- classes.zipWithIndex do
+        val rep = members.head._2
+        certifyPattern(star, g, bridge, stabE, rep, idx, ci, Rat.zero, Rat.zero, s"class $idx#$ci", flags)._2 match
+          case None       =>
+            members.foreach((si, _) => cohs += CoherenceReport(idx, ci, si, false, false, false))
+          case Some(cert) =>
+            for (si, pat) <- members do
+              val t1 = System.nanoTime()
+              val c  = cohereExact(star, g, bridge, stabE, pat, cert, idx, ci, si, flags)
+              cohs += c
+              progress(f"  class $ci skeleton $si: ${if c.ok then "ok" else "FAIL"} (${(System.nanoTime() - t1) / 1e9}%.1f s, ${(System.nanoTime() - t0) / 1e9}%.0f s total)")
+    CoherenceResults(cohs.toVector, flags.distinct.toVector)

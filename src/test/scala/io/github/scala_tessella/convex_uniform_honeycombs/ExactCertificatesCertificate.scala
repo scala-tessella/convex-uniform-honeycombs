@@ -11,6 +11,7 @@ import ExactCertificates.*
 object ExactCertificatesCertificate:
   def write(dir: java.nio.file.Path): Unit =
     val r   = results
+    val coh = coherenceResults
     val sb  = new StringBuilder
     sb ++= "EXACT CERTIFICATES — the certificates of the completeness\n"
     sb ++= "theorem upgraded to exact arithmetic in Q(sqrt2, sqrt3), the two-tier field of the programme.\n"
@@ -41,18 +42,39 @@ object ExactCertificatesCertificate:
         f"${c.latInv}%5s ${c.coverage}%5s\n"
     }
     sb ++= f"\nexact certificates: ${r.classes.count(_.ok)}/${r.classes.size}\n\n"
-    sb ++= "== (c) exact class separation (the two doubled species) ==\n"
+    sb ++= "== (c) exact class coherence (every accepted pattern within the caps) ==\n"
+    sb ++= "cert = the pattern's own exact periodization certificate, its ball reaching the\n"
+    sb ++= "representative's basis and determination ball; align = an element of Stab(S) carrying the\n"
+    sb ++= "representative's exact ball onto the pattern's at the determination radius; transport = the\n"
+    sb ++= "aligned representative basis acts by symmetries on the pattern's certified ball\n\n"
+    sb ++= f"${"species"}%-34s ${"patterns"}%8s ${"cert"}%5s ${"align"}%5s ${"transport"}%9s\n"
+    coh.coherences.groupBy(_.idx).toVector.sortBy(_._1).foreach { (idx, cs) =>
+      sb ++= f"${SpeciesCorona.label(idx)}%-34s ${cs.size}%8d ${cs.count(_.certified)}%5d " +
+        f"${cs.count(_.aligned)}%5d ${cs.count(_.transported)}%9d\n"
+    }
+    sb ++= f"\nexact coherence: ${coh.coherences.count(_.ok)}/${coh.coherences.size} accepted patterns\n\n"
+    sb ++= "== (d) exact germ forcing (every skeleton) ==\n"
+    val open = r.germs.filterNot(_.forced)
+    sb ++= s"skeletons forced exactly: ${r.germs.count(_.forced)}/${r.germs.size}; open (closed by the\n"
+    sb ++= "audit's exhaustion, exact replay pending): " +
+      (if open.isEmpty then "none"
+       else open.map(g => s"${SpeciesCorona.label(g.idx)} skeleton ${g.skeleton}").mkString(", ")) + "\n\n"
+    sb ++= "== (e) exact class separation (the two doubled species) ==\n"
     r.separations.foreach { s =>
       sb ++= s"${SpeciesCorona.label(s.idx)}: ${s.classes} classes, exact fingerprints distinct: " +
         s"${s.distinct}\n"
     }
-    sb ++= s"\nflags: ${r.flags.size}\n"
-    r.flags.foreach(f => sb ++= s"  $f\n")
-    sb ++= s"\nALL EXACT: ${r.allOk}\n\n"
-    sb ++= "==> every equality asserted by the periodization certificates of the 28 is an exact\n"
-    sb ++= "identity in Q(sqrt2, sqrt3); no floating-point tolerance decision remains on the\n"
-    sb ++= "completeness theorem's critical path.\n"
+    val allFlags = (r.flags ++ coh.flags).distinct
+    sb ++= s"\nflags: ${allFlags.size}\n"
+    allFlags.foreach(f => sb ++= s"  $f\n")
+    sb ++= s"\nALL EXACT: ${r.allOk && coh.allOk}\n\n"
+    sb ++= "==> every equality asserted by the periodization certificates of the 28, by the coherence of\n"
+    sb ++= "every accepted pattern with its class and by the germ forcing of every closed skeleton is an\n"
+    sb ++= "exact identity in Q(sqrt2, sqrt3): every positive certificate on the completeness theorem's\n"
+    sb ++= "critical path is exact. What stays numeric: the enumerations' negative decisions (interval\n"
+    sb ++= "misses in the species assembly, tolerance equality tests in the shell filter, the gluing atlas\n"
+    sb ++= "and the R1/R2 search) and the exhaustion patterns' coherence.\n"
     java.nio.file.Files.writeString(dir.resolve("exact-certificates.txt"), sb.toString)
     println(s"stars ${r.stars.count(_.ok)}/${r.stars.size}, classes ${r.classes.count(_.ok)}/" +
       s"${r.classes.size}, separations ${r.separations.count(_.distinct)}/${r.separations.size}, " +
-      s"flags ${r.flags.size}, ALL EXACT: ${r.allOk} -> $dir/exact-certificates.txt")
+      s"flags ${allFlags.size}, ALL EXACT: ${r.allOk && coh.allOk} -> $dir/exact-certificates.txt")

@@ -9,7 +9,29 @@ an earlier version should be able to tell from here whether the claims, the spec
 
 ## [Unreleased]
 
-**Packaging only — no claim, spec or certificate changed.**
+**The exactness claim made precise, and the exact layer extended to meet it.** The 0.1.0 wording "no
+floating-point tolerance decision on the critical path" was too strong: class coherence and germ forcing
+were numeric decisions, and only the 28 representatives' certificates had an exact replay. Two things
+changed. The exact layer now replays class coherence for every accepted pattern within the caps — the
+pattern's own exact periodization certificate, an exact element of Stab±(S) aligning the representative's
+ball onto it at the determination radius, the representative's lattice transported and checked on its ball,
+the three hypotheses of the paper's coherence lemma — and germ forcing on every skeleton, which forces
+exactly the skeletons the numeric audit forces and leaves the ten it closes by exhaustion. And the claim is
+now: every *positive* certificate on the critical path is exact; what stays numeric is the enumerations'
+negative decisions and the coherence of the exhaustion patterns (their exact replay needs the pattern
+search of the next `research-core`, which also records the exhausted skeletons in its audit).
+
+### Changed
+
+- `ExactCertificatesSpec`: exact coherence of every accepted pattern (`coherenceResults`; an exact ball per
+  pattern, about half an hour — opt-in with `-DexactCoherence`, always part of the `-Dcerts` run) and exact
+  germ forcing on every skeleton (in the default suite; the ten unforced skeletons pinned). The default
+  suite grows to about two minutes.
+- `exact-certificates.txt` gains sections (c) exact class coherence and (d) exact germ forcing; its closing
+  statement is the precise claim above. Re-emitted at the next certificate run.
+- Certificate text of `completeness-audit.txt`: class coherence described as the strengthened check of the
+  next `research-core` (per-pattern certificate, alignment, lattice transport); the check itself arrives
+  with the pin bump.
 
 ### Added
 
