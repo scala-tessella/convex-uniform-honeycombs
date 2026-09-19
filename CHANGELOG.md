@@ -9,29 +9,36 @@ an earlier version should be able to tell from here whether the claims, the spec
 
 ## [Unreleased]
 
-**The exactness claim made precise, and the exact layer extended to meet it.** The 0.1.0 wording "no
-floating-point tolerance decision on the critical path" was too strong: class coherence and germ forcing
-were numeric decisions, and only the 28 representatives' certificates had an exact replay. Two things
-changed. The exact layer now replays class coherence for every accepted pattern within the caps — the
-pattern's own exact periodization certificate, an exact element of Stab±(S) aligning the representative's
-ball onto it at the determination radius, the representative's lattice transported and checked on its ball,
-the three hypotheses of the paper's coherence lemma — and germ forcing on every skeleton, which forces
-exactly the skeletons the numeric audit forces and leaves the ten it closes by exhaustion. And the claim is
-now: every *positive* certificate on the critical path is exact; what stays numeric is the enumerations'
-negative decisions and the coherence of the exhaustion patterns (their exact replay needs the pattern
-search of the next `research-core`, which also records the exhausted skeletons in its audit).
+**Class coherence proved, and the exactness claim made precise.** Two claims of 0.1.0 were stronger than
+what was checked. The audit's step (B) — same fingerprint, same honeycomb — compared two developed balls
+at the determination radius, which does not make a honeycomb periodic under the representative's lattice;
+and "no floating-point tolerance decision on the critical path" overlooked that class coherence and germ
+forcing were numeric decisions with only the 28 representatives' certificates replayed exactly. A referee
+who re-checks will find both closed: the pinned `research-core` 0.9.0 certifies every accepted pattern on
+its own, aligns the class representative's ball onto it by an explicit element of Stab±(S) and checks the
+transported lattice on its ball (the three hypotheses of the paper's coherence lemma); the exact layer
+replays that coherence for every accepted pattern — within the caps and, on the ten skeletons germ
+forcing leaves open, beyond them, every exhaustion re-enumerated uncapped — and germ forcing on every
+skeleton. The claim is now: every *positive* certificate on the critical path is exact in ℚ(√2,√3); what
+stays numeric is the enumerations' negative decisions. The species table, the pattern classes and the 28
+are unchanged.
 
 ### Changed
 
-- `ExactCertificatesSpec`: exact coherence of every accepted pattern (`coherenceResults`; an exact ball per
-  pattern, about half an hour — opt-in with `-DexactCoherence`, always part of the `-Dcerts` run) and exact
-  germ forcing on every skeleton (in the default suite; the ten unforced skeletons pinned). The default
-  suite grows to about two minutes.
-- `exact-certificates.txt` gains sections (c) exact class coherence and (d) exact germ forcing; its closing
-  statement is the precise claim above. Re-emitted at the next certificate run.
-- Certificate text of `completeness-audit.txt`: class coherence described as the strengthened check of the
-  next `research-core` (per-pattern certificate, alignment, lattice transport); the check itself arrives
-  with the pin bump.
+- `research-core` pinned to **0.9.0** (from 0.5.0 at release, 0.6.0 on main): `CompletenessAudit`'s
+  coherence step is the strengthened check, and `Audit` carries the accepted-pattern count (496 over the
+  26 species) and the exhausted skeletons — ten, of three species: six of the hexagonal prismatic star,
+  one of the snub square lift, three of the snub-trihexagonal lift. `CompletenessAuditSpec` pins both.
+- `ExactCertificatesSpec`: exact coherence of every accepted pattern and the exact replay of every
+  exhaustion (`coherenceResults`; an exact ball per pattern — opt-in with `-DexactCoherence`, always part
+  of the `-Dcerts` run), and exact germ forcing on every skeleton in the default suite, cross-checked
+  against the audit's exhausted skeletons. The default suite grows to about two minutes.
+- `TailExclusion`: Lemma E's tangent bound is the elementary `tan x ≤ x/(1 - x²/2)`; the certified
+  constant chain is `(4/7)³/3 < 0.0623`, `1/(2 - (π/8)²) < 0.5418`, sum `< 0.6041`,
+  `0.6041·π/8 < 0.2373 < 1/π`, each interval-checked separately.
+- `exact-certificates.txt` gains sections (c) exact class coherence, (d) exact germ forcing and (f) the
+  exhaustions replayed; `completeness-audit.txt` gains the pattern count and the exhausted skeletons per
+  species; both re-emitted.
 
 ### Added
 

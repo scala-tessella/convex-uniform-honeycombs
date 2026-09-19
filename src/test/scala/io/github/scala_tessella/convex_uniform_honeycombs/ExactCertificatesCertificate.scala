@@ -55,10 +55,19 @@ object ExactCertificatesCertificate:
     sb ++= f"\nexact coherence: ${coh.coherences.count(_.ok)}/${coh.coherences.size} accepted patterns\n\n"
     sb ++= "== (d) exact germ forcing (every skeleton) ==\n"
     val open = r.germs.filterNot(_.forced)
-    sb ++= s"skeletons forced exactly: ${r.germs.count(_.forced)}/${r.germs.size}; open (closed by the\n"
-    sb ++= "audit's exhaustion, exact replay pending): " +
+    sb ++= s"skeletons forced exactly: ${r.germs.count(_.forced)}/${r.germs.size}; open (closed by\n"
+    sb ++= "exhaustion, replayed exactly in (f)): " +
       (if open.isEmpty then "none"
        else open.map(g => s"${SpeciesCorona.label(g.idx)} skeleton ${g.skeleton}").mkString(", ")) + "\n\n"
+    sb ++= "== (f) the exhaustions replayed exactly ==\n"
+    sb ++= "every (R1)+(R2)-consistent pattern of an open skeleton enumerated uncapped; accepted =\n"
+    sb ++= "collision-free to radius 3.05; cohered = exactly cohered with its class representative\n\n"
+    sb ++= f"${"species"}%-34s ${"skeleton"}%8s ${"patterns"}%8s ${"accepted"}%8s ${"cohered"}%7s ${"capped"}%6s\n"
+    coh.exhaustions.foreach { e =>
+      sb ++= f"${SpeciesCorona.label(e.idx)}%-34s ${e.skeleton}%8d ${e.patterns}%8d ${e.accepted}%8d " +
+        f"${e.cohered}%7d ${e.capped}%6s\n"
+    }
+    sb ++= f"\nexhaustions closed exactly: ${coh.exhaustions.count(_.ok)}/${coh.exhaustions.size}\n\n"
     sb ++= "== (e) exact class separation (the two doubled species) ==\n"
     r.separations.foreach { s =>
       sb ++= s"${SpeciesCorona.label(s.idx)}: ${s.classes} classes, exact fingerprints distinct: " +
@@ -69,11 +78,11 @@ object ExactCertificatesCertificate:
     allFlags.foreach(f => sb ++= s"  $f\n")
     sb ++= s"\nALL EXACT: ${r.allOk && coh.allOk}\n\n"
     sb ++= "==> every equality asserted by the periodization certificates of the 28, by the coherence of\n"
-    sb ++= "every accepted pattern with its class and by the germ forcing of every closed skeleton is an\n"
-    sb ++= "exact identity in Q(sqrt2, sqrt3): every positive certificate on the completeness theorem's\n"
-    sb ++= "critical path is exact. What stays numeric: the enumerations' negative decisions (interval\n"
-    sb ++= "misses in the species assembly, tolerance equality tests in the shell filter, the gluing atlas\n"
-    sb ++= "and the R1/R2 search) and the exhaustion patterns' coherence.\n"
+    sb ++= "every accepted pattern with its class (within the caps and beyond them) and by the germ\n"
+    sb ++= "forcing of every closed skeleton is an exact identity in Q(sqrt2, sqrt3): every positive\n"
+    sb ++= "certificate on the completeness theorem's critical path is exact. What stays numeric: the\n"
+    sb ++= "enumerations' negative decisions (interval misses in the species assembly, tolerance equality\n"
+    sb ++= "tests in the shell filter, the gluing atlas and the R1/R2 search).\n"
     java.nio.file.Files.writeString(dir.resolve("exact-certificates.txt"), sb.toString)
     println(s"stars ${r.stars.count(_.ok)}/${r.stars.size}, classes ${r.classes.count(_.ok)}/" +
       s"${r.classes.size}, separations ${r.separations.count(_.distinct)}/${r.separations.size}, " +

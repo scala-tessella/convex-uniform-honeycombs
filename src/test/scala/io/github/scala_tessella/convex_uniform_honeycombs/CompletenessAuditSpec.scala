@@ -30,6 +30,24 @@ class CompletenessAuditSpec extends AnyFlatSpec with Matchers:
   it should "close every skeleton by germ forcing or exhaustion" in:
     audits.foreach(a => withClue(label(a.idx))(a.forcingSkeletons shouldBe a.skeletonsWithPatterns))
 
+  it should "cohere every accepted pattern, members and not only representatives" in:
+    audits.map(_.patterns).sum shouldBe 496
+    audits.map(_.patterns).sum should be > audits.map(_.classes).sum
+
+  it should "leave exactly ten skeletons of three species to exhaustion" in:
+    audits.flatMap(a => a.exhaustedSkeletons.map(si => (label(a.idx), si))) shouldBe Vector(
+      ("{p6:6}#1", 0),
+      ("{p6:6}#1", 1),
+      ("{p6:6}#1", 3),
+      ("{p6:6}#1", 4),
+      ("{p6:6}#1", 6),
+      ("{p6:6}#1", 7),
+      ("{cube:4 p3:6}#2", 0),
+      ("{p3:8 p6:2}#2", 0),
+      ("{p3:8 p6:2}#2", 1),
+      ("{p3:8 p6:2}#2", 2)
+    )
+
   it should "conclude: every species audit passes — the completeness theorem holds" in:
     audits.forall(_.ok) shouldBe true
 

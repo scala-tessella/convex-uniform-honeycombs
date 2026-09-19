@@ -20,11 +20,14 @@ object CompletenessAuditCertificate:
     sb ++= "the pattern's certified ball); per skeleton: GERM FORCING or\n"
     sb ++=
       "EXHAUSTION (all R1+R2-passing patterns developed; accepted ones fingerprint into known classes)\n\n"
-    sb ++= f"${"species"}%-34s ${"classes"}%7s ${"certified"}%9s ${"coherent"}%8s ${"skeletons closed"}%16s\n"
+    sb ++= f"${"species"}%-34s ${"classes"}%7s ${"certified"}%9s ${"patterns"}%8s ${"coherent"}%8s " +
+      f"${"skeletons closed"}%16s  exhausted\n"
     audits.foreach { a =>
-      sb ++= f"${SpeciesCorona.label(a.idx)}%-34s ${a.classes}%7d ${a.certified}%9d ${a.coherent}%8s " +
-        f"${s"${a.forcingSkeletons}/${a.skeletonsWithPatterns}"}%16s\n"
+      sb ++= f"${SpeciesCorona.label(a.idx)}%-34s ${a.classes}%7d ${a.certified}%9d ${a.patterns}%8d " +
+        f"${a.coherent}%8s ${s"${a.forcingSkeletons}/${a.skeletonsWithPatterns}"}%16s  " +
+        (if a.exhaustedSkeletons.isEmpty then "-" else a.exhaustedSkeletons.mkString(",")) + "\n"
     }
+    sb ++= f"\naccepted patterns within the caps, each certified and aligned: ${audits.map(_.patterns).sum}\n"
     sb ++= f"\nALL AUDITS PASS: ${audits.forall(_.ok)};  TOTAL CLASSES: ${audits.map(_.classes).sum};  " +
       s"flags: ${flags.size}\n\n"
     sb ++= "== THE COMPLETENESS THEOREM ==\n"

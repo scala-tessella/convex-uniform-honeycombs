@@ -38,6 +38,9 @@ class CertificatesSpec extends AnyFlatSpec with Matchers:
 
   "the certificate set" should "regenerate in full, every file non-empty" in:
     assume(OptIn.enabled("certs"))
+    // the f-interpolators of the writers format through the default locale: pin it, so a certificate
+    // reproduces byte for byte on every machine (a decimal comma is not a different certificate)
+    java.util.Locale.setDefault(java.util.Locale.ROOT)
     Files.createDirectories(dir)
     for (name, emit) <- emitters do
       val target = dir.resolve(name)

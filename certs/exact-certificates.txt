@@ -84,7 +84,65 @@ species                            cl   glu    R1    R2 trans indep  ball   per 
 
 exact certificates: 28/28
 
-== (c) exact class separation (the two doubled species) ==
+== (c) exact class coherence (every accepted pattern within the caps) ==
+cert = the pattern's own exact periodization certificate, its ball reaching the
+representative's basis and determination ball; align = an element of Stab(S) carrying the
+representative's exact ball onto the pattern's at the determination radius; transport = the
+aligned representative basis acts by symmetries on the pattern's certified ball
+
+species                            patterns  cert align transport
+{cube:1 truncOct:1 tco:2}#1               1     1     1         1
+{tco:2 p8:2}#1                            1     1     1         1
+{truncOct:4}#1                            1     1     1         1
+{truncTet:1 truncCube:1 tco:2}#1          1     1     1         1
+{cube:1 truncCube:1 rco:1 p8:2}#1         1     1     1         1
+{cube:2 co:1 rco:2}#1                     1     1     1         1
+{oct:1 truncCube:4}#1                     1     1     1         1
+{tet:1 cube:1 rco:3}#1                    1     1     1         1
+{truncTet:2 co:1 truncOct:2}#1            1     1     1         1
+{cube:2 p6:2 p12:2}#1                     1     1     1         1
+{cube:2 p8:4}#1                          40    40    40        40
+{oct:2 co:4}#1                            1     1     1         1
+{p3:2 p12:4}#1                           40    40    40        40
+{p6:6}#1                                 40    40    40        40
+{cube:4 p3:2 p6:2}#2                      1     1     1         1
+{cube:8}#1                                1     1     1         1
+{p3:4 p6:4}#3                             1     1     1         1
+{tet:2 truncTet:6}#2                      1     1     1         1
+{cube:4 p3:6}#1                          80    80    80        80
+{cube:4 p3:6}#2                          40    40    40        40
+{p3:8 p6:2}#2                            40    40    40        40
+{p3:12}#1                                40    40    40        40
+{p3:12}#2                                40    40    40        40
+{tet:4 oct:3 p3:6}#1                     80    80    80        80
+{tet:8 oct:6}#1                          40    40    40        40
+{tet:8 oct:6}#2                           1     1     1         1
+
+exact coherence: 496/496 accepted patterns
+
+== (d) exact germ forcing (every skeleton) ==
+skeletons forced exactly: 31/41; open (closed by
+exhaustion, replayed exactly in (f)): {p6:6}#1 skeleton 0, {p6:6}#1 skeleton 1, {p6:6}#1 skeleton 3, {p6:6}#1 skeleton 4, {p6:6}#1 skeleton 6, {p6:6}#1 skeleton 7, {cube:4 p3:6}#2 skeleton 0, {p3:8 p6:2}#2 skeleton 0, {p3:8 p6:2}#2 skeleton 1, {p3:8 p6:2}#2 skeleton 2
+
+== (f) the exhaustions replayed exactly ==
+every (R1)+(R2)-consistent pattern of an open skeleton enumerated uncapped; accepted =
+collision-free to radius 3.05; cohered = exactly cohered with its class representative
+
+species                            skeleton patterns accepted cohered capped
+{p6:6}#1                                  0        0        0       0  false
+{p6:6}#1                                  1        0        0       0  false
+{p6:6}#1                                  3        0        0       0  false
+{p6:6}#1                                  4        0        0       0  false
+{p6:6}#1                                  6        0        0       0  false
+{p6:6}#1                                  7        0        0       0  false
+{cube:4 p3:6}#2                           0        0        0       0  false
+{p3:8 p6:2}#2                             0        0        0       0  false
+{p3:8 p6:2}#2                             1      256      128     128  false
+{p3:8 p6:2}#2                             2      256      128     128  false
+
+exhaustions closed exactly: 10/10
+
+== (e) exact class separation (the two doubled species) ==
 {cube:4 p3:6}#1: 2 classes, exact fingerprints distinct: true
 {tet:4 oct:3 p3:6}#1: 2 classes, exact fingerprints distinct: true
 
@@ -92,6 +150,9 @@ flags: 0
 
 ALL EXACT: true
 
-==> every equality asserted by the periodization certificates of the 28 is an exact
-identity in Q(sqrt2, sqrt3); no floating-point tolerance decision remains on the
-completeness theorem's critical path.
+==> every equality asserted by the periodization certificates of the 28, by the coherence of
+every accepted pattern with its class (within the caps and beyond them) and by the germ
+forcing of every closed skeleton is an exact identity in Q(sqrt2, sqrt3): every positive
+certificate on the completeness theorem's critical path is exact. What stays numeric: the
+enumerations' negative decisions (interval misses in the species assembly, tolerance equality
+tests in the shell filter, the gluing atlas and the R1/R2 search).

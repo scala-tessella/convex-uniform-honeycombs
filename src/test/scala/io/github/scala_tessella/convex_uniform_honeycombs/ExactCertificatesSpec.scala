@@ -88,13 +88,22 @@ class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
     c.coherences.filterNot(_.ok) shouldBe empty
     // every class is represented among the cohered patterns
     c.coherences.map(c => (c.idx, c.classIdx)).distinct.size shouldBe 28
+    // the exhaustions: every accepted pattern beyond the caps cohered exactly, none capped; eight of the
+    // ten skeletons carry no consistent pattern at all, the snub lift's second and third carry 256 each,
+    // 128 of them accepted (the third is "dead" within the cap of 40: all 128 lie beyond it)
+    c.exhaustions.size shouldBe 10
+    c.exhaustions.filterNot(_.ok) shouldBe empty
+    c.exhaustions.map(e => (SpeciesCorona.label(e.idx), e.skeleton, e.patterns, e.accepted)).filter(_._3 > 0) shouldBe
+      Vector(("{p3:8 p6:2}#2", 1, 256, 128), ("{p3:8 p6:2}#2", 2, 256, 128))
     c.allOk shouldBe true
 
   "exact germ forcing" should "force every skeleton the numeric audit forces, leaving its ten exhausted ones" in:
     r.germs should not be empty
     r.germs.count(_.forced) should be > 0
-    // the audit closes these ten by exhaustion (only the last holds patterns beyond the cap: 128)
+    // the audit closes these ten by exhaustion (only the snub lift's second and third hold patterns)
     val open = r.germs.filterNot(_.forced)
+    open.map(g => (g.idx, g.skeleton)) shouldBe
+      CompletenessAudit.results._1.flatMap(a => a.exhaustedSkeletons.map(si => (a.idx, si)))
     open.map(g => (SpeciesCorona.label(g.idx), g.skeleton)) shouldBe Vector(
       ("{p6:6}#1", 0),
       ("{p6:6}#1", 1),

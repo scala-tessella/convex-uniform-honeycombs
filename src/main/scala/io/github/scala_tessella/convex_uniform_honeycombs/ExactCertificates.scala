@@ -52,15 +52,16 @@ import TransitivePatterns.{acceptedOf, developBall, fingerprintOf, Accepted, Iso
   * basis acting by exact symmetries on the pattern's ball — the three hypotheses of the coherence lemma.
   * (ix) GERM FORCING on every skeleton, the audit's test replayed on exact placements and positions; it
   * forces exactly the skeletons the numeric audit forces, and the ten it leaves are the ten the audit closes
-  * by exhaustion.
+  * by exhaustion. (x) THE EXHAUSTIONS replayed: on each of those ten skeletons every (R1)+(R2)-consistent
+  * pattern is re-enumerated uncapped and every accepted one is cohered exactly with its class — so no
+  * honeycomb hides beyond a cap, exactly.
   *
   * Together: every equality asserted by the periodization certificates of the 28, by the coherence of every
-  * accepted pattern and by the germ forcing of every forced skeleton is an exact identity in ℚ(√2,√3) —
-  * every POSITIVE certificate on the theorem's critical path is exact (inequalities are interval-certified
-  * or exact-sign decisions, and the numeric pipeline's identifications are re-proven). What stays numeric:
-  * the enumerations' negative decisions (interval misses in the species assembly; tolerance equality tests
-  * in the shell filter, the gluing atlas and the R1/R2 search) and the coherence of the exhaustion
-  * patterns, whose exact replay needs the pattern search of a later research-core.
+  * accepted pattern (within the caps and beyond them) and by the germ forcing of every forced skeleton is an
+  * exact identity in ℚ(√2,√3) — every POSITIVE certificate on the theorem's critical path is exact
+  * (inequalities are interval-certified or exact-sign decisions, and the numeric pipeline's identifications
+  * are re-proven). What stays numeric: the enumerations' negative decisions (interval misses in the species
+  * assembly; tolerance equality tests in the shell filter, the gluing atlas and the R1/R2 search).
   */
 object ExactCertificates:
 
@@ -1040,24 +1041,49 @@ object ExactCertificates:
         if !distinct then flags += s"species $idx: exact fingerprints not distinct"
     Results(starReports, classReps.toVector, germs.toVector, seps.toVector, flags.distinct.toVector, starOf)
 
-  final case class CoherenceResults(coherences: Vector[CoherenceReport], flags: Vector[String]):
-    def allOk: Boolean = coherences.nonEmpty && coherences.forall(_.ok) && flags.isEmpty
+  /** The exact replay of one exhaustion (Section 6.4, cap closure): every (R1)+(R2)-consistent pattern of
+    * a skeleton germ forcing does not close, enumerated uncapped; the accepted ones (collision-free
+    * development) must fingerprint into a known class and cohere with its representative exactly.
+    */
+  final case class ExhaustionReport(
+      idx: Int,
+      skeleton: Int,
+      patterns: Int, // (R1)+(R2)-consistent patterns enumerated
+      accepted: Int, // of which collision-free to radius 3.05
+      cohered: Int,  // of which exactly cohered with their class representative
+      capped: Boolean
+  ):
+    def ok: Boolean = !capped && cohered == accepted
+
+  final case class CoherenceResults(
+      coherences: Vector[CoherenceReport],
+      exhaustions: Vector[ExhaustionReport],
+      flags: Vector[String]
+  ):
+    def allOk: Boolean =
+      coherences.nonEmpty && coherences.forall(_.ok) && exhaustions.forall(_.ok) && flags.isEmpty
 
   /** (c) exact coherence of every accepted pattern within the caps with its class representative — the
-    * representative's certificate rebuilt, then every member's own. Long (an exact ball per pattern):
+    * representative's certificate rebuilt, then every member's own — and (f) the exact replay of every
+    * exhaustion: on each skeleton the exact germ test leaves open, all consistent patterns re-enumerated
+    * uncapped and every accepted one cohered exactly with its class. Long (an exact ball per pattern):
     * opt-in, with progress on stderr.
     */
   lazy val coherenceResults: CoherenceResults =
     val (_, _, ss, sflags) = settings
     val flags              = collection.mutable.ListBuffer.from(sflags)
     val cohs               = collection.mutable.ArrayBuffer.empty[CoherenceReport]
+    val exhs               = collection.mutable.ArrayBuffer.empty[ExhaustionReport]
+    val open               = results.germs.filterNot(_.forced)
     val t0                 = System.nanoTime()
     for Setting(idx, star, acc, bridge, stabE, classes) <- ss do
-      val g = acc.g
+      val g        = acc.g
       progress(s"species $idx: ${classes.size} classes, ${classes.map(_.size).sum} accepted patterns")
-      for (members, ci) <- classes.zipWithIndex do
-        val rep = members.head._2
-        certifyPattern(star, g, bridge, stabE, rep, idx, ci, Rat.zero, Rat.zero, s"class $idx#$ci", flags)._2 match
+      val certs    = classes.zipWithIndex.map { (members, ci) =>
+        val rep     = members.head._2
+        val certOpt =
+          certifyPattern(star, g, bridge, stabE, rep, idx, ci, Rat.zero, Rat.zero, s"class $idx#$ci", flags)._2
+        certOpt match
           case None       =>
             members.foreach((si, _) => cohs += CoherenceReport(idx, ci, si, false, false, false))
           case Some(cert) =>
@@ -1065,5 +1091,44 @@ object ExactCertificates:
               val t1 = System.nanoTime()
               val c  = cohereExact(star, g, bridge, stabE, pat, cert, idx, ci, si, flags)
               cohs += c
-              progress(f"  class $ci skeleton $si: ${if c.ok then "ok" else "FAIL"} (${(System.nanoTime() - t1) / 1e9}%.1f s, ${(System.nanoTime() - t0) / 1e9}%.0f s total)")
-    CoherenceResults(cohs.toVector, flags.distinct.toVector)
+              progress(f"  class $ci skeleton $si: ${if c.ok then "ok" else "FAIL"} " +
+                f"(${(System.nanoTime() - t1) / 1e9}%.1f s, ${(System.nanoTime() - t0) / 1e9}%.0f s total)")
+        (rep, ci, certOpt)
+      }
+      // the class of an accepted pattern, keyed exactly as the audit keys it
+      val byKey    = certs.flatMap { (rep, ci, certOpt) =>
+        certOpt.map { cert =>
+          val key = fingerprintOf(acc.corners, acc.stab, developBall(g, rep, acc.stab, 3.05).get, 2.05)
+          key -> (ci, cert)
+        }
+      }.toMap
+      for GermReport(_, si, _) <- open.filter(_.idx == idx) do
+        var total    = 0
+        var accepted = 0
+        var cohered  = 0
+        val (_, capped) = TransitivePatterns.searchPatterns(
+          g,
+          acc.skeletons(si),
+          acc.stab,
+          500000,
+          glus => {
+            val pat = Pattern(g, glus)
+            total += 1
+            developBall(g, pat, acc.stab, 3.05).foreach { ball =>
+              accepted += 1
+              byKey.get(fingerprintOf(acc.corners, acc.stab, ball, 2.05)) match
+                case Some((ci, cert)) =>
+                  val t1 = System.nanoTime()
+                  val c  = cohereExact(star, g, bridge, stabE, pat, cert, idx, ci, si, flags)
+                  if c.ok then cohered += 1
+                  progress(f"  exhaustion skeleton $si pattern $total: ${if c.ok then "ok" else "FAIL"} " +
+                    f"(${(System.nanoTime() - t1) / 1e9}%.1f s, ${(System.nanoTime() - t0) / 1e9}%.0f s total)")
+                case None             =>
+                  flags += s"species $idx skeleton $si exhaustion: an accepted pattern of no known class"
+            }
+          }
+        )
+        if capped then flags += s"species $idx skeleton $si exhaustion: capped"
+        exhs += ExhaustionReport(idx, si, total, accepted, cohered, capped)
+        progress(s"  exhaustion skeleton $si: $total patterns, $accepted accepted, $cohered cohered exactly")
+    CoherenceResults(cohs.toVector, exhs.toVector, flags.distinct.toVector)
