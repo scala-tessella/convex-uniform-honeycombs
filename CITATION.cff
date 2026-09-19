@@ -40,7 +40,7 @@ date-released: '2026-09-19'
 # Version DOI of this release — the one to cite. Zenodo mints it when the release is published, so
 # it cannot be present in the tree that release archives; the copy in a deposit carries the concept
 # DOI, and the version DOI is recorded here in the first commit after the tag.
-doi: 10.5281/zenodo.21762728
+doi: 10.5281/zenodo.22849635
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21762728
@@ -48,6 +48,9 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.21762729
     description: Version DOI of release 0.1.0
+  - type: doi
+    value: 10.5281/zenodo.22849635
+    description: Version DOI of release 0.2.0
 keywords:
   - honeycombs
   - uniform honeycombs

@@ -9,6 +9,8 @@ an earlier version should be able to tell from here whether the claims, the spec
 
 ## [0.2.0] — 2026-09-19
 
+Archived as [doi:10.5281/zenodo.22849635](https://doi.org/10.5281/zenodo.22849635) — the version DOI to cite.
+
 **Class coherence proved, and the exactness claim made precise.** Two claims of 0.1.0 were stronger than
 what was checked. The audit's step (B) — same fingerprint, same honeycomb — compared two developed balls
 at the determination radius, which does not make a honeycomb periodic under the representative's lattice;

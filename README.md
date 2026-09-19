@@ -1,7 +1,7 @@
 # convex-uniform-honeycombs — verification artifact
 
 [![CI](https://github.com/scala-tessella/convex-uniform-honeycombs/actions/workflows/ci.yml/badge.svg)](https://github.com/scala-tessella/convex-uniform-honeycombs/actions/workflows/ci.yml)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21762729.svg)](https://doi.org/10.5281/zenodo.21762729)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22849635.svg)](https://doi.org/10.5281/zenodo.22849635)
 
 Machine-checked companion to the paper
 
@@ -98,6 +98,7 @@ checked**, not the all-versions concept DOI — the latter always resolves to wh
 
 | Version | DOI |
 |---|---|
+| 0.2.0 | [10.5281/zenodo.22849635](https://doi.org/10.5281/zenodo.22849635) |
 | 0.1.0 | [10.5281/zenodo.21762729](https://doi.org/10.5281/zenodo.21762729) |
 
 Release-by-release changes are in [CHANGELOG.md](CHANGELOG.md), which states for each release whether the
