@@ -7,7 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 a paper, entries state what a re-check would find different from the previous release — a referee who checked
 an earlier version should be able to tell from here whether the claims, the specs, or only the packaging moved.
 
-## [Unreleased]
+## [0.2.0] — 2026-09-19
 
 **Class coherence proved, and the exactness claim made precise.** Two claims of 0.1.0 were stronger than
 what was checked. The audit's step (B) — same fingerprint, same honeycomb — compared two developed balls
@@ -39,6 +39,9 @@ are unchanged.
 - `exact-certificates.txt` gains sections (c) exact class coherence, (d) exact germ forcing and (f) the
   exhaustions replayed; `completeness-audit.txt` gains the pattern count and the exhausted skeletons per
   species; both re-emitted.
+- `CertificatesSpec` pins the run's locale to ROOT before writing: the writers' f-interpolators formatted
+  through the default locale, so a certificate regenerated on a machine with a decimal comma did not
+  reproduce byte for byte.
 
 ### Added
 
@@ -114,5 +117,6 @@ the critical path. There is no long tier to opt into; the single opt-in run writ
   symbols is certified by matching against the 28 already classified. `SymbolGateSpec` consumes the
   certified patterns and balls, and the README says so in the same words as the paper.
 
-[Unreleased]: https://github.com/scala-tessella/convex-uniform-honeycombs/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/scala-tessella/convex-uniform-honeycombs/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.2.0
 [0.1.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.1.0

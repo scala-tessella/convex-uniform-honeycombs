@@ -16,12 +16,15 @@ abstract: >-
   Barlow fcc/hcp dichotomy as a corollary; the mono-species shell filter cutting 34 to 26;
   the transitive pattern enumeration landing on exactly 28 fingerprint classes, including
   the collision that shows local consistency does not imply developability; the completeness
-  audit (periodization, coherence, separation, cap closure); the re-verification of all 34
-  star models and 28 periodization certificates in exact arithmetic over Q(sqrt 2, sqrt 3);
+  audit (periodization, coherence, separation, cap closure); the re-verification in exact arithmetic over Q(sqrt 2, sqrt 3) of
+  all 34 star models, all 28 periodization certificates, the coherence of every accepted pattern
+  with its class (within the caps and, on the ten skeletons germ forcing leaves open, beyond
+  them) and germ forcing on every skeleton — every positive certificate on the critical path;
   the identification against the classical list of Grunbaum and Deza-Shtogrin; and the
   appendix's independent Delaney-Dress symbol census, which reproduces the count 28 sharing
-  only the species table with the proof. The whole artifact re-derives from scratch in about
-  a minute; all shared machinery is the pinned research-core library.
+  only the species table with the proof. The whole artifact re-derives from scratch in a few
+  minutes, the exact replay pattern by pattern opt-in; all shared machinery is the pinned
+  research-core library.
 type: software
 authors:
   - given-names: Mario
@@ -32,12 +35,12 @@ authors:
 license: Apache-2.0
 repository-code: https://github.com/scala-tessella/convex-uniform-honeycombs
 url: https://github.com/scala-tessella/convex-uniform-honeycombs
-version: 0.1.0
-date-released: '2026-08-02'
+version: 0.2.0
+date-released: '2026-09-19'
 # Version DOI of this release — the one to cite. Zenodo mints it when the release is published, so
 # it cannot be present in the tree that release archives; the copy in a deposit carries the concept
 # DOI, and the version DOI is recorded here in the first commit after the tag.
-doi: 10.5281/zenodo.21762729
+doi: 10.5281/zenodo.21762728
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21762728
@@ -65,12 +68,11 @@ references:
     title: research-core
     abstract: >-
       The pinned library providing every shared engine this artifact depends on
-      (research-core 0.5.0).
+      (research-core 0.9.0).
     authors:
       - given-names: Mario
         family-names: Càllisto
         orcid: https://orcid.org/0009-0009-1215-3278
-    version: 0.5.0
-    doi: 10.5281/zenodo.21762821
+    version: 0.9.0
     repository-code: https://github.com/scala-tessella/research-core
     license: Apache-2.0
