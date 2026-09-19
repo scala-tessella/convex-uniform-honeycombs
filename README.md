@@ -109,8 +109,8 @@ the tree that release archives: the `CITATION.cff` inside a deposit carries no v
 is recorded in this table, and in `CITATION.cff` on the main branch, in the first commit after the tag; the
 concept DOI (all versions) is [10.5281/zenodo.21762728](https://doi.org/10.5281/zenodo.21762728).
 
-Pinned to `research-core 0.9.0` (an immutable Central release; its Zenodo archive is recorded in the
-library's own README). That archived snapshot — not the
+Pinned to `research-core 0.9.0` (an immutable Central release), archived as
+[10.5281/zenodo.22849707](https://doi.org/10.5281/zenodo.22849707). That archived snapshot — not the
 `research-core` repository's main branch, which may since have moved on — is the authoritative source for
 what this artifact depends on. The pin plus the snapshot make this a closed, reproducible artifact
 independent of any moving repository. The certificates under `certs/` are committed rather than archived
