@@ -40,7 +40,7 @@ date-released: '2026-09-20'
 # Version DOI of this release — the one to cite. Zenodo mints it when the release is published, so
 # it cannot be present in the tree that release archives; the copy in a deposit carries the concept
 # DOI, and the version DOI is recorded here in the first commit after the tag.
-doi: 10.5281/zenodo.21762728
+doi: 10.5281/zenodo.22862835
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21762728
@@ -57,6 +57,9 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.22859902
     description: Version DOI of release 0.4.0
+  - type: doi
+    value: 10.5281/zenodo.22862835
+    description: Version DOI of release 0.5.0
 keywords:
   - honeycombs
   - uniform honeycombs
@@ -83,6 +86,6 @@ references:
         family-names: Càllisto
         orcid: https://orcid.org/0009-0009-1215-3278
     version: 0.12.0
-    # the version DOI of the 0.12.0 archive is recorded in the library's own CITATION.cff
+    doi: 10.5281/zenodo.22862797
     repository-code: https://github.com/scala-tessella/research-core
     license: Apache-2.0

@@ -9,6 +9,8 @@ an earlier version should be able to tell from here whether the claims, the spec
 
 ## [0.5.0] — 2026-09-20
 
+Archived as [doi:10.5281/zenodo.22862835](https://doi.org/10.5281/zenodo.22862835) — the version DOI to cite.
+
 **Box periodicity in both directions.** Condition (v) of 0.4.0 checked that every ball entry within R_per is
 the Λ-translate of the entry at its box representative — one direction of the identification of the
 periodized honeycomb with the developed field. A lattice translate of a box representative that is not an
