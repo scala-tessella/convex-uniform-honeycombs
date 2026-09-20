@@ -71,12 +71,12 @@ references:
     title: research-core
     abstract: >-
       The pinned library providing every shared engine this artifact depends on
-      (research-core 0.9.0).
+      (research-core 0.10.0).
     authors:
       - given-names: Mario
         family-names: Càllisto
         orcid: https://orcid.org/0009-0009-1215-3278
-    version: 0.9.0
-    doi: 10.5281/zenodo.22849707
+    version: 0.10.0
+    # the version DOI of the 0.10.0 archive is recorded in the library's own CITATION.cff
     repository-code: https://github.com/scala-tessella/research-core
     license: Apache-2.0

@@ -59,13 +59,15 @@ class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
       }
     }
 
-  it should "develop collision-free periodic balls with invariant lattices and covered domains" in:
+  it should "develop collision-free periodic, generator-equivariant balls with covered domains" in:
     r.classes.foreach { c =>
       withClue(s"${SpeciesCorona.label(c.idx)}#${c.classIdx}") {
         c.collisionFree shouldBe true
         c.periodic shouldBe true
         c.latInv shouldBe true
         c.coverage shouldBe true
+        c.genEquiv shouldBe true
+        c.ok shouldBe true
         c.ballVerts should be > 0
       }
     }
@@ -93,29 +95,31 @@ class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
     // 128 of them accepted (the third is "dead" within the cap of 40: all 128 lie beyond it)
     c.exhaustions.size shouldBe 10
     c.exhaustions.filterNot(_.ok) shouldBe empty
-    c.exhaustions.map(e => (SpeciesCorona.label(e.idx), e.skeleton, e.patterns, e.accepted)).filter(_._3 > 0) shouldBe
+    c.exhaustions.map(e => (SpeciesCorona.label(e.idx), e.skeleton, e.patterns, e.accepted)).filter(_._3 >
+      0) shouldBe
       Vector(("{p3:8 p6:2}#2", 1, 256, 128), ("{p3:8 p6:2}#2", 2, 256, 128))
     c.allOk shouldBe true
 
-  "exact germ forcing" should "force every skeleton the numeric audit forces, leaving its ten exhausted ones" in:
-    r.germs should not be empty
-    r.germs.count(_.forced) should be > 0
-    // the audit closes these ten by exhaustion (only the snub lift's second and third hold patterns)
-    val open = r.germs.filterNot(_.forced)
-    open.map(g => (g.idx, g.skeleton)) shouldBe
-      CompletenessAudit.results._1.flatMap(a => a.exhaustedSkeletons.map(si => (a.idx, si)))
-    open.map(g => (SpeciesCorona.label(g.idx), g.skeleton)) shouldBe Vector(
-      ("{p6:6}#1", 0),
-      ("{p6:6}#1", 1),
-      ("{p6:6}#1", 3),
-      ("{p6:6}#1", 4),
-      ("{p6:6}#1", 6),
-      ("{p6:6}#1", 7),
-      ("{cube:4 p3:6}#2", 0),
-      ("{p3:8 p6:2}#2", 0),
-      ("{p3:8 p6:2}#2", 1),
-      ("{p3:8 p6:2}#2", 2)
-    )
+  "exact germ forcing" should
+    "force every skeleton the numeric audit forces, leaving its ten exhausted ones" in:
+      r.germs should not be empty
+      r.germs.count(_.forced) should be > 0
+      // the audit closes these ten by exhaustion (only the snub lift's second and third hold patterns)
+      val open = r.germs.filterNot(_.forced)
+      open.map(g => (g.idx, g.skeleton)) shouldBe
+        CompletenessAudit.results._1.flatMap(a => a.exhaustedSkeletons.map(si => (a.idx, si)))
+      open.map(g => (SpeciesCorona.label(g.idx), g.skeleton)) shouldBe Vector(
+        ("{p6:6}#1", 0),
+        ("{p6:6}#1", 1),
+        ("{p6:6}#1", 3),
+        ("{p6:6}#1", 4),
+        ("{p6:6}#1", 6),
+        ("{p6:6}#1", 7),
+        ("{cube:4 p3:6}#2", 0),
+        ("{p3:8 p6:2}#2", 0),
+        ("{p3:8 p6:2}#2", 1),
+        ("{p3:8 p6:2}#2", 2)
+      )
 
   "the escalation" should "conclude: 28/28 exact, every positive certificate on the critical path exact" in:
     r.allOk shouldBe true

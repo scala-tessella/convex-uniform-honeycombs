@@ -3,16 +3,16 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import ExactCertificates.*
 
-/** Certificate `exact-certificates.txt`. The exact Q(sqrt 2, sqrt 3) re-verification: exact star models, exact periodization certificates, and the
-  * exact separation of the two doubled species.
+/** Certificate `exact-certificates.txt`. The exact Q(sqrt 2, sqrt 3) re-verification: exact star models,
+  * exact periodization certificates, and the exact separation of the two doubled species.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */
 object ExactCertificatesCertificate:
   def write(dir: java.nio.file.Path): Unit =
-    val r   = results
-    val coh = coherenceResults
-    val sb  = new StringBuilder
+    val r        = results
+    val coh      = coherenceResults
+    val sb       = new StringBuilder
     sb ++= "EXACT CERTIFICATES — the certificates of the completeness\n"
     sb ++= "theorem upgraded to exact arithmetic in Q(sqrt2, sqrt3), the two-tier field of the programme.\n"
     sb ++= "All data in the INTERNAL BASIS of three star directions (nothing is ever normalized):\n"
@@ -33,13 +33,16 @@ object ExactCertificatesCertificate:
     sb ++= "translation, exactly); trans = three words with rotational part exactly the identity;\n"
     sb ++= "indep = det(tau1,tau2,tau3) != 0; ball = exact development, collision-free; per =\n"
     sb ++= "Lambda-periodicity exact; lat = generator point parts fix Lambda (integer coords);\n"
-    sb ++= "cov = R_per >= ub(covBound) + ub(max|tau|) + 3/2 with exact rational upper bounds\n\n"
+    sb ++= "cov = R_per >= ub(covBound) + ub(max|tau|) + 3/2 with exact rational upper bounds;\n"
+    sb ++= "gen = every generator is an exact symmetry of the ball within R_per (the entry at the\n"
+    sb ++= "image position carries the image star up to Stab(S)) — checked, not derived from the\n"
+    sb ++= "collision-free development, which expands only the first word reaching a position\n\n"
     sb ++= f"${"species"}%-34s ${"cl"}%2s ${"glu"}%5s ${"R1"}%5s ${"R2"}%5s ${"trans"}%5s " +
-      f"${"indep"}%5s ${"ball"}%5s ${"per"}%5s ${"lat"}%5s ${"cov"}%5s\n"
+      f"${"indep"}%5s ${"ball"}%5s ${"per"}%5s ${"lat"}%5s ${"cov"}%5s ${"gen"}%5s\n"
     r.classes.foreach { c =>
       sb ++= f"${SpeciesCorona.label(c.idx)}%-34s ${c.classIdx}%2d ${c.gluOk}%5s ${c.r1Ok}%5s " +
         f"${c.r2Ok}%5s ${c.transOk}%5s ${c.indepOk}%5s ${c.ballVerts}%5d ${c.periodic}%5s " +
-        f"${c.latInv}%5s ${c.coverage}%5s\n"
+        f"${c.latInv}%5s ${c.coverage}%5s ${c.genEquiv}%5s\n"
     }
     sb ++= f"\nexact certificates: ${r.classes.count(_.ok)}/${r.classes.size}\n\n"
     sb ++= "== (c) exact class coherence (every accepted pattern within the caps) ==\n"
@@ -54,7 +57,7 @@ object ExactCertificatesCertificate:
     }
     sb ++= f"\nexact coherence: ${coh.coherences.count(_.ok)}/${coh.coherences.size} accepted patterns\n\n"
     sb ++= "== (d) exact germ forcing (every skeleton) ==\n"
-    val open = r.germs.filterNot(_.forced)
+    val open     = r.germs.filterNot(_.forced)
     sb ++= s"skeletons forced exactly: ${r.germs.count(_.forced)}/${r.germs.size}; open (closed by\n"
     sb ++= "exhaustion, replayed exactly in (f)): " +
       (if open.isEmpty then "none"
@@ -62,7 +65,8 @@ object ExactCertificatesCertificate:
     sb ++= "== (f) the exhaustions replayed exactly ==\n"
     sb ++= "every (R1)+(R2)-consistent pattern of an open skeleton enumerated uncapped; accepted =\n"
     sb ++= "collision-free to radius 3.05; cohered = exactly cohered with its class representative\n\n"
-    sb ++= f"${"species"}%-34s ${"skeleton"}%8s ${"patterns"}%8s ${"accepted"}%8s ${"cohered"}%7s ${"capped"}%6s\n"
+    sb ++=
+      f"${"species"}%-34s ${"skeleton"}%8s ${"patterns"}%8s ${"accepted"}%8s ${"cohered"}%7s ${"capped"}%6s\n"
     coh.exhaustions.foreach { e =>
       sb ++= f"${SpeciesCorona.label(e.idx)}%-34s ${e.skeleton}%8d ${e.patterns}%8d ${e.accepted}%8d " +
         f"${e.cohered}%7d ${e.capped}%6s\n"

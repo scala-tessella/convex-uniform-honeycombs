@@ -13,7 +13,7 @@
 // re-derived from scratch in about a minute, exact and in-JVM, with no external tools and no fixtures.
 // Certificate emission is the one opt-in (-Dcerts), because it writes files.
 
-ThisBuild / scalaVersion  := "3.8.4"
+ThisBuild / scalaVersion  := "3.9.0"
 ThisBuild / organization  := "io.github.scala-tessella"
 ThisBuild / versionScheme := Some("early-semver")
 
@@ -23,9 +23,9 @@ lazy val root = project
     name           := "convex-uniform-honeycombs",
     publish / skip := true,
     libraryDependencies ++= Seq(
-      "io.github.scala-tessella" %% "research-core"   % "0.9.0",
+      "io.github.scala-tessella" %% "research-core"   % "0.10.0",
       "org.scalatest"            %% "scalatest"       % "3.2.20"   % Test,
-      "org.scalacheck"           %% "scalacheck"      % "1.19.0"   % Test,
+      "org.scalacheck"           %% "scalacheck"      % "1.20.0"   % Test,
       "org.scalatestplus"        %% "scalacheck-1-19" % "3.2.20.0" % Test
     )
     // Deliberately NOT forked: the opt-in run is selected by a system property (-Dcerts), which a forked

@@ -172,6 +172,10 @@ and its vertex-figure census over the 69-figure catalogue of the alphabet
   #2  vertices=12 faces=24
        12 x [tet(3·3) oct(3·3) tet(3·3) oct(3·3)]
 
+== Separation constant (soundness of the identify-or-separate decisions) ==
+distinct tiling-vertices of any genuine tiling are at least 54.7356 degrees apart (attained by the tet corner); the search identifies below 1e-6 and
+separates above 1e-3
+
 == Unrealized supports: 72 ==
 {truncCube:2 rco:2}
 {cube:1 truncTet:1 truncCube:2 rco:1}

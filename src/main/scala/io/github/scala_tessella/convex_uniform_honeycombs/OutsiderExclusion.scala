@@ -4,16 +4,26 @@ import io.github.scala_tessella.research_core.*
 
 import CertifiedDihedrals.*
 
-/** The value-level edge-completion FIXPOINT. For each outsider cell and each of its
-  * edge types, search for multisets of participant dihedrals summing to 360° (3..6 cells around an edge). A
-  * cell in a honeycomb realizes a figure at EVERY edge type, so an edge type with no completion excludes the
-  * cell — a genuine proof, since interval misses certify non-equality. Excluded cells then leave the
-  * participant pool (corona closure) and the search repeats until stable: a completion that only uses
-  * excluded participants is no completion.
+/** The value-level edge-completion FIXPOINT. For each outsider cell and each of its edge types, search for
+  * multisets of participant dihedrals summing to 360° (3..6 cells around an edge). A cell in a honeycomb
+  * realizes a figure at EVERY edge type, so an edge type with no completion excludes the cell — a genuine
+  * proof, since interval misses certify non-equality. Excluded cells then leave the participant pool (corona
+  * closure) and the search repeats until stable: a completion that only uses excluded participants is no
+  * completion.
   *
-  * Participant scope (stated hypotheses): core cells, prism verticals p ≤ 500, the pentagon/decagon family,
-  * both snubs, antiprisms A_q for q ≤ 300 (targets: named outsiders and A_q for q ≤ 100). Interval widths and
-  * superset pools only weaken exclusions, never falsify them.
+  * Participant scope: the FULL pool, with no cap — core cells; every prism (verticals p ≤ 500 one by one, and
+  * p > 500 as two tail classes: the lateral corridor [180 − 360/501, 180) and the base value 90); the
+  * pentagon/decagon family; both snubs; every antiprism (q ≤ 300 one by one, q > 300 as the two tail
+  * corridors of [[TailExclusion]], a3q ∈ (90, a3q(301)] and a33 ∈ [a33(301), 180)). Targets: the nine named
+  * outsiders and A_q for q ≤ 100. A tail class is a value that every tail cell's dihedral lies in, so a
+  * completion using a tail cell is a completion over the corridor — the pool is a superset of every
+  * honeycomb's participants, and superset pools and interval widths only weaken exclusions, never falsify
+  * them. Nothing outside the pool can therefore serve as a partner in a ring at an outsider's edge: the
+  * exclusion is unconditional, not relative to the tail campaign.
+  *
+  * Every killed edge also records its NEAREST MISSES — the multisets whose sum comes within 0.1° of 360° —
+  * and the margin of the closest one, so the reader can see how far the certified intervals (widths ~1e-10)
+  * sit from the decisions they make.
   */
 object OutsiderExclusion:
 
@@ -47,6 +57,17 @@ object OutsiderExclusion:
       Value(s"A$q(${pair._1}·${pair._2})", iv)
     )
   }.toMap
+
+  /** The four tail classes: corridors enclosing the dihedrals of every prism p > 500 and every antiprism q >
+    * 300, so that the pool has no cap. Never targets — the tails are excluded by [[TailExclusion]] — but
+    * always participants.
+    */
+  lazy val tailValues: Vector[Value] = Vector(
+    Value(s"P>$maxPoolPrism(4·4)", Iv(180.0 - 360.0 / (maxPoolPrism + 1), 180.0)),
+    Value(s"P>$maxPoolPrism(4·big)", Iv.point(90.0)),
+    Value(s"A>$maxPoolAntiprism(3·big)", TailExclusion.a3qTail(maxPoolAntiprism + 1)),
+    Value(s"A>$maxPoolAntiprism(3·3)", TailExclusion.a33Tail(maxPoolAntiprism + 1))
+  )
 
   /** Completions of a target dihedral over the given pool (sorted by lo): multisets of 2..5 values whose sum
     * with the target intersects 360. Capped per target.
@@ -87,22 +108,56 @@ object OutsiderExclusion:
              if found.size > 4 then " …" else ""
            ))
 
+  /** The multisets whose sum with `target` comes within `delta` degrees of 360 — the near misses of a dead
+    * edge — each with its miss |sum − 360| at the interval midpoints, closest first.
+    */
+  def nearMisses(
+      target: Iv,
+      pool: Vector[Value],
+      delta: Double = 0.1,
+      cap: Int = Int.MaxValue // uncapped: the margin must be the true closest miss
+  ): Vector[(List[Value], Double)] =
+    completions(Iv(target.lo - delta, target.hi + delta), pool, cap)
+      .map(c => (c, math.abs(c.foldLeft(target)((s, v) => s + v.iv).mid - 360.0)))
+      .sortBy(_._2)
+
+  /** A dead edge: the round it died in, its cell and edge type, and its nearest misses. */
+  final case class Kill(
+      round: Int,
+      cell: String,
+      edgeType: (Int, Int),
+      angle: Iv,
+      near: Vector[(List[Value], Double)]
+  ):
+    def margin: Double = near.headOption.map(_._2).getOrElse(Double.PositiveInfinity)
+    def show: String   =
+      val a = String.format(java.util.Locale.ROOT, "%.5f", angle.mid)
+      val m = if near.isEmpty then "no sum within 0.1°"
+      else String.format(java.util.Locale.ROOT, "margin %.3e°", margin)
+      s"round $round  $cell(${edgeType._1}·${edgeType._2}) @ $a: $m" +
+        near.take(2).map((c, d) =>
+          s"  ${c.map(_.label).mkString("+")} misses by " + String.format(java.util.Locale.ROOT, "%.3e", d)
+        ).mkString
+
   final case class FixpointResult(
-      rounds: Vector[Vector[String]],              // cells newly excluded per round
-      survivors: Vector[(String, Vector[Verdict])] // final verdicts of surviving targets
+      rounds: Vector[Vector[String]],               // cells newly excluded per round
+      survivors: Vector[(String, Vector[Verdict])], // final verdicts of surviving targets
+      kills: Vector[Kill]                           // every dead edge with its nearest misses
   ):
     def excluded: Vector[String] = rounds.flatten
+    def minMargin: Double        = kills.map(_.margin).min
 
   /** The corona fixpoint: iterate exclusion with excluded cells removed from the pool. */
   lazy val fixpoint: FixpointResult =
     var aliveNamed = outsiderConfigs.keySet
     var aliveAnti  = (4 to maxPoolAntiprism).toSet
     val rounds     = Vector.newBuilder[Vector[String]]
+    val kills      = Vector.newBuilder[Kill]
     var stable     = false
     var lastVs     = Vector.empty[(String, Vector[Verdict])]
     while !stable do
       val pool     =
-        (coreValues ++
+        (coreValues ++ tailValues ++
           aliveNamed.toVector.flatMap(namedValues) ++
           aliveAnti.toVector.flatMap(antiValues)).sortBy(_.iv.lo)
       val targets  =
@@ -118,7 +173,10 @@ object OutsiderExclusion:
       val newlyOut = lastVs.collect { case (n, ts) if ts.exists(_.excludedHere) => n }
       if newlyOut.isEmpty then stable = true
       else
+        val round = rounds.result().size + 1
+        for (n, ts) <- lastVs; v <- ts if v.excludedHere do
+          kills += Kill(round, n, v.edgeType, v.angle, nearMisses(v.angle, pool))
         rounds += newlyOut
         aliveNamed = aliveNamed -- newlyOut
         aliveAnti = aliveAnti -- newlyOut.filter(_.startsWith("A")).map(_.drop(1).toInt)
-    FixpointResult(rounds.result(), lastVs)
+    FixpointResult(rounds.result(), lastVs, kills.result())

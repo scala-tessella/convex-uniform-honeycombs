@@ -7,6 +7,58 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 a paper, entries state what a re-check would find different from the previous release — a referee who checked
 an earlier version should be able to tell from here whether the claims, the specs, or only the packaging moved.
 
+## [Unreleased]
+
+**Generator equivariance checked, and the corona fixpoint uncapped.** Two steps of 0.2.0 were asserted
+rather than checked. The periodization certificate took every gluing to be a symmetry of the periodized
+honeycomb on the strength of the collision-free development; but the development expands only the first
+word reaching a position, so the word g_x·w is never compared against the field, and without
+Stab-equivariance of the pattern — which the developability gap shows can fail — generator symmetry did
+not follow from what was checked. And the corona fixpoint ran over a capped participant pool (prisms
+p ≤ 500, antiprisms q ≤ 300), so its exclusions were relative to the tail campaign, which in turn drew on
+them. A referee who re-checks will find both closed: every periodization certificate, numeric (the pinned
+`research-core` 0.10.0) and exact, now checks that each generator acts as a symmetry of the developed ball
+within R_per; and the fixpoint's pool carries the four tail classes — corridors enclosing every prism
+p > 500 and every antiprism q > 300 — so nothing outside the pool can partner an outsider's edge. The
+species table, the pattern classes and the 28 are unchanged; the fixpoint's round structure is not.
+
+### Changed
+
+- `research-core` pinned to **0.10.0** (from 0.9.0): `CompletenessAudit.Certificate` gains generator
+  equivariance, condition (iv) of the periodization certificate, and `ok` requires it. The library moved
+  to Scala 3.9.0, and so does this artifact (a 3.8 compiler cannot read its TASTy); scalacheck 1.20.0.
+- `ExactCertificates`: the exact periodization certificate replays condition (iv) — `ClassReport` gains
+  `genEquiv`, `ok` requires it, and the symmetry test that served the lattice transport of coherence is now
+  the general `isometrySymmetryExact`, applied to the generators, to ±τᵢ and to the transported basis
+  alike. `ExactCertificatesSpec` asserts it on all 28; `exact-certificates.txt` gains the `gen` column.
+- `OutsiderExclusion`: the participant pool is uncapped — the four tail classes of `TailExclusion` (the
+  P>500 lateral corridor and base value, the A>300 base and lateral corridors) join it permanently. All 106
+  targets still die, now in **three rounds, 47 + 44 + 15** (from two, 103 + 3): the icosahedron, A5 and
+  both snubs in round one, the pentagon-family trio in round two, the last antiprisms q ≤ 100 in round
+  three. Every dead edge now records its **nearest misses** (multisets summing within 0.1° of 360°) and
+  the margin of the closest; `OutsiderExclusionSpec` pins the round structure, that the icosahedron and A5
+  both die at the 3·3 edge by a value-level miss with margin above 0.01° (nearest: p3 + tet + A41), and
+  the margin of every dead edge. The tightest decision of the whole campaign is A56's lateral 3·3 edge
+  against A115(3·115) + A16(3·16), a genuine near-coincidence 1.7·10⁻⁷° short of 360° (the closed forms
+  agree in double precision), still three orders of magnitude above the interval widths. The next ones —
+  A98 against A57 + A43 at 1.3·10⁻⁶°, A49 against A234 + A13 at 3.4·10⁻⁵° — are of the same kind: an
+  antiprism lateral edge closed by two antiprism bases, the three-parameter near-coincidence family
+  a33(q) + a3q(r) + a3q(s) beside Lemma E's two-parameter one, every member decided by a certified miss.
+  `OutsiderExclusionSpec` pins the minimum; `outsider-exclusion.txt` gains the tail classes, the dead-edge
+  section and the minimum margin.
+- `SeparationConstant` (new): the soundness of the species search's identify-or-separate decisions.
+  Distinct tiling-vertices of any genuine edge-to-edge tiling by the corner figures are at least the
+  minimum vertex-to-non-incident-side distance apart, certified with intervals over the 13 corner figures:
+  **54.7356°**, the altitude of the tetrahedral corner (α = arctan √2); every other corner bounds at 60° or
+  90°. An identification below 10⁻⁶ or a separation above 10⁻³ is therefore correct on every branch that
+  is a subcomplex of a genuine tiling. `SpeciesEnumeratorSpec` pins it; `species-table.txt` states it.
+
+### Fixed
+
+- README: the exotic-lift campaign closes in **two** rounds, as `exotic-lifts.txt` has always recorded (P5, P7,
+  P9, P15 by their self-walks and P18, P24, P42 by the P3-walk in round one; P10 and P20 by corona in round
+  two), not three.
+
 ## [0.2.0] — 2026-09-19
 
 Archived as [doi:10.5281/zenodo.22849635](https://doi.org/10.5281/zenodo.22849635) — the version DOI to cite.

@@ -7,9 +7,9 @@ import org.scalatest.matchers.should.Matchers
 import HoneycombAlphabet.CellType.*
 import SpeciesEnumerator.*
 
-/** The species table — completeness of the spherical assembly against the known
-  * honeycombs' vertex stars, the Barlow dichotomy on the octet support, structural invariants (Euler,
-  * catalogue closure, exact area), and the pinned catalogue counts.
+/** The species table — completeness of the spherical assembly against the known honeycombs' vertex stars, the
+  * Barlow dichotomy on the octet support, structural invariants (Euler, catalogue closure, exact area), and
+  * the pinned catalogue counts.
   */
 class SpeciesEnumeratorSpec extends AnyFlatSpec with Matchers:
 
@@ -90,3 +90,17 @@ class SpeciesEnumeratorSpec extends AnyFlatSpec with Matchers:
     countOn(Map(P3 -> 2, P12 -> 4)) shouldBe 1 // 3.12.12
     countOn(Map(Cube -> 2, P6 -> 2, P12 -> 2)) shouldBe 1 // 4.6.12
     countOn(Map(Cube -> 2, P8 -> 4)) shouldBe 1 // 4.8.8
+
+  "the separation constant" should "keep distinct tiling-vertices far apart in any genuine tiling" in:
+    // soundness of the identify-or-separate decisions (1e-6 / 1e-3): see SeparationConstant
+    val (cell, minLB) = SeparationConstant.constant
+    SeparationConstant.bounds.groupBy(_._1).toVector.sortBy(_._1.ordinal).foreach { (c, bs) =>
+      info(f"$c: ${bs.map(_._4).min}%.4f°")
+    }
+    // attained by the tetrahedral corner: the altitude of the equilateral spherical triangle of side 60°,
+    // which is alpha = arctan(sqrt 2) = 54.7356°; every other corner bounds at 60° or 90° (an endpoint)
+    cell shouldBe Tet
+    minLB should be > 54.73
+    minLB should be < 54.74
+    SeparationConstant.bounds.foreach((c, j, i, d) => withClue(s"$c vertex $j side $i")(d should be > 54.0))
+    info(f"separation constant: distinct tiling-vertices are at least $minLB%.4f° apart ($cell corner)")
