@@ -9,6 +9,8 @@ an earlier version should be able to tell from here whether the claims, the spec
 
 ## [0.3.0] — 2026-09-20
 
+Archived as [doi:10.5281/zenodo.22857000](https://doi.org/10.5281/zenodo.22857000) — the version DOI to cite.
+
 **Generator equivariance checked, and the corona fixpoint uncapped.** Two steps of 0.2.0 were asserted
 rather than checked. The periodization certificate took every gluing to be a symmetry of the periodized
 honeycomb on the strength of the collision-free development; but the development expands only the first
