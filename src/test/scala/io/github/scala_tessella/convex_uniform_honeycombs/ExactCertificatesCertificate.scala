@@ -38,7 +38,11 @@ object ExactCertificatesCertificate:
     sb ++= "image position carries the image star up to Stab(S)) — checked, not derived from the\n"
     sb ++= "collision-free development, which expands only the first word reaching a position;\n"
     sb ++= "box = every entry within R_per is the exact Lambda-translate of the entry at its box\n"
-    sb ++= "representative (rounded lattice coordinates, verified in the field); closed = every\n"
+    sb ++=
+      "representative (rounded lattice coordinates, remainders in [-1/2, 1/2) verified in the field) and,\n"
+    sb ++= "conversely, every lattice translate within R_per of a box representative is an entry with\n"
+    sb ++= "the translated star (lattice vectors enumerated through a coefficient bound, each decided\n"
+    sb ++= "exactly); closed = every\n"
     sb ++= "generator image of an entry within the slack radius is an entry (the development\n"
     sb ++= "terminated before its depth cap)\n\n"
     sb ++= f"${"species"}%-34s ${"cl"}%2s ${"glu"}%5s ${"R1"}%5s ${"R2"}%5s ${"trans"}%5s " +

@@ -7,6 +7,27 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 a paper, entries state what a re-check would find different from the previous release — a referee who checked
 an earlier version should be able to tell from here whether the claims, the specs, or only the packaging moved.
 
+## [Unreleased]
+
+**Box periodicity in both directions.** Condition (v) of 0.4.0 checked that every ball entry within R_per is
+the Λ-translate of the entry at its box representative — one direction of the identification of the
+periodized honeycomb with the developed field. A lattice translate of a box representative that is not an
+entry was not excluded, and the coherence step reads its lattice-transport check at such points. A referee
+who re-checks will find the converse closed: the pinned `research-core` 0.12.0 enumerates, for every box
+representative among the entries, the lattice vectors of norm ≤ R_per + covBound through a coefficient
+bound from the dual basis and requires every translate within R_per to be an entry with the translated
+star; the exact layer replays it. Nothing else moves.
+
+### Changed
+
+- `research-core` pinned to **0.12.0** (from 0.11.0): `Certificate.boxPeriodic` means both directions.
+- `ExactCertificates`: `ClassReport.boxPeriodic` replays the converse too — the coefficient bound from the
+  inverse Gram of the basis in doubles, rounded up and padded (a superset), each candidate translate
+  prefiltered in doubles with margin and then decided exactly; the remainders of the rounding are checked
+  to lie in the half-open box [−1/2, 1/2), as rounding half up produces them, which is what makes the
+  representative unique. `exact-certificates.txt` re-emitted (its `box` column now certifies both
+  directions); `completeness-audit.txt`'s legend says so.
+
 ## [0.4.0] — 2026-09-20
 
 Archived as [doi:10.5281/zenodo.22859902](https://doi.org/10.5281/zenodo.22859902) — the version DOI to cite.

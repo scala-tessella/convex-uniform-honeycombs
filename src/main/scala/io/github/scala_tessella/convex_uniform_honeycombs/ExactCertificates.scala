@@ -789,40 +789,82 @@ object ExactCertificates:
                     None
                   )
                 case Right(ball) =>
-                  val periodic = tv.flatMap(t => Vector(t, vqNeg(t))).forall { tau =>
+                  val periodic                       = tv.flatMap(t => Vector(t, vqNeg(t))).forall { tau =>
                     translationSymmetryExact(star, stabE, ball, rPer2, tau)
                   }
-                  val tmat     = mCols(tv(0), tv(1), tv(2))
-                  val latInv   = glus.forall { gl =>
+                  val tmat                           = mCols(tv(0), tv(1), tv(2))
+                  val latInv                         = glus.forall { gl =>
                     tv.forall { tau =>
                       solve3(tmat, mVec(gl.m, tau)).forall(c => c.isRat && c.a.isInt)
                     }
                   }
-                  val genEquiv = isos.forall(iso => isometrySymmetryExact(star, stabE, ball, rPer2, iso))
+                  val genEquiv                       = isos.forall(iso => isometrySymmetryExact(star, stabE, ball, rPer2, iso))
                   // (v) box periodicity, exact: every entry within R_per is the Λ-translate of the entry at
                   // its box representative p − λ, λ the lattice vector with the rounded coordinates of p —
                   // the rounding is guided by doubles and verified exactly (|cᵢ − nᵢ| ≤ 1/2 in the field)
-                  val half     = Q23.ofRat(Rat.frac(1, 2))
-                  val boxPer   = ball.values.forall { e =>
+                  val half                           = Q23.ofRat(Rat.frac(1, 2))
+                  // the half-open box: remainders in [-1/2, 1/2), as rounding half up produces them
+                  def inHalfOpenBox(d: Q23): Boolean = (d + half).signum >= 0 && (d - half).signum < 0
+                  def lambdaOf(ns: Seq[Long]): VQ    = vqAdd(
+                    vqAdd(vqScale(tv(0), Q23.ofInt(ns(0))), vqScale(tv(1), Q23.ofInt(ns(1)))),
+                    vqScale(tv(2), Q23.ofInt(ns(2)))
+                  )
+                  val boxDown                        = ball.values.forall { e =>
                     if (rPer2 - star.norm2(e.iso.t)).signum < 0 then true
                     else
                       val coords = solve3(tmat, e.iso.t)
                       val ns     = coords.map(c => math.round(c.toDouble))
-                      val inBox  = coords.zip(ns).forall { (c, n) =>
-                        val d = c - Q23.ofInt(n)
-                        (d - half).signum <= 0 && (d + half).signum >= 0
-                      }
-                      val lambda = vqAdd(
-                        vqAdd(vqScale(tv(0), Q23.ofInt(ns(0))), vqScale(tv(1), Q23.ofInt(ns(1)))),
-                        vqScale(tv(2), Q23.ofInt(ns(2)))
-                      )
-                      inBox && (ball.get(vqSub(e.iso.t, lambda)) match
+                      val inBox  = coords.zip(ns).forall((c, n) => inHalfOpenBox(c - Q23.ofInt(n)))
+                      inBox && (ball.get(vqSub(e.iso.t, lambdaOf(ns))) match
                         case None     => false
                         case Some(e0) => inStabE(mMul(e0.inv, e.iso.m), stabE))
                   }
+                  // the converse: every lattice translate within R_per of a box representative is an entry
+                  // with the translated star. The lattice vectors of norm ≤ R_per + covBound are enumerated
+                  // through a coefficient bound from the inverse Gram of the basis (doubles, rounded up and
+                  // padded — a superset); each candidate's membership in the ball is decided exactly, after
+                  // a double prefilter with margin discards the far ones
+                  val gT                             = Vector.tabulate(3, 3)((i, j) => star.inner(tv(i), tv(j)).toDouble)
+                  val gDet                           = gT(0)(0) * (gT(1)(1) * gT(2)(2) - gT(1)(2) * gT(2)(1)) -
+                    gT(0)(1) * (gT(1)(0) * gT(2)(2) - gT(1)(2) * gT(2)(0)) +
+                    gT(0)(2) * (gT(1)(0) * gT(2)(1) - gT(1)(1) * gT(2)(0))
+                  def cof(i: Int, j: Int): Double    =
+                    val r = (0 to 2).filter(_ != i)
+                    val c = (0 to 2).filter(_ != j)
+                    val m = gT(r(0))(c(0)) * gT(r(1))(c(1)) - gT(r(0))(c(1)) * gT(r(1))(c(0))
+                    if (i + j) % 2 == 0 then m else -m
+                  val gInv                           = Vector.tabulate(3, 3)((i, j) => cof(j, i) / gDet)
+                  val tNorm                          = tv.map(t => math.sqrt(star.norm2(t).toDouble))
+                  val radius                         = (rPer + covUB).toDouble
+                  val bounds                         = (0 to 2).map { i =>
+                    ((0 to 2).map(j => math.abs(gInv(i)(j)) * tNorm(j)).sum * radius).ceil.toInt + 1
+                  }
+                  val rPer2d                         = rPer2.toDouble + 1e-6
+                  def norm2d(v: VQ): Double          =
+                    val x = v.map(_.toDouble)
+                    (0 to 2).map(i => (0 to 2).map(j => x(i) * gT(i)(j) * x(j)).sum).sum
+                  val boxUp                          = ball.values.forall { r =>
+                    if (rPer2 - star.norm2(r.iso.t)).signum < 0 then true
+                    else
+                      val coords = solve3(tmat, r.iso.t)
+                      if !coords.forall(inHalfOpenBox) then true // not a box representative
+                      else
+                        (-bounds(0) to bounds(0)).forall { c1 =>
+                          (-bounds(1) to bounds(1)).forall { c2 =>
+                            (-bounds(2) to bounds(2)).forall { c3 =>
+                              val q = vqAdd(r.iso.t, lambdaOf(Seq(c1.toLong, c2.toLong, c3.toLong)))
+                              norm2d(q) > rPer2d || (rPer2 - star.norm2(q)).signum < 0 ||
+                              (ball.get(q) match
+                                case None    => false
+                                case Some(e) => inStabE(mMul(e.inv, r.iso.m), stabE))
+                            }
+                          }
+                        }
+                  }
+                  val boxPer                         = boxDown && boxUp
                   // closure: every generator image of an entry within the slack radius is an entry — the
                   // breadth-first development terminated before its depth cap
-                  val closed   = ball.values.forall { e =>
+                  val closed                         = ball.values.forall { e =>
                     isos.forall { iso =>
                       val img = e.iso.compose(iso)
                       (slack2 - star.norm2(img.t)).signum < 0 || ball.contains(img.t)
@@ -833,7 +875,7 @@ object ExactCertificates:
                   if !genEquiv then flags += s"$what: a generator is not a symmetry of the ball (exact)"
                   if !boxPer then flags += s"$what: ball not box-periodic (exact)"
                   if !closed then flags += s"$what: ball not closed under the generators (exact)"
-                  val report   = ClassReport(
+                  val report                         = ClassReport(
                     idx,
                     classIdx,
                     true,

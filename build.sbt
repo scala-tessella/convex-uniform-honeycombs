@@ -23,7 +23,7 @@ lazy val root = project
     name           := "convex-uniform-honeycombs",
     publish / skip := true,
     libraryDependencies ++= Seq(
-      "io.github.scala-tessella" %% "research-core"   % "0.11.0",
+      "io.github.scala-tessella" %% "research-core"   % "0.12.0",
       "org.scalatest"            %% "scalatest"       % "3.2.20"   % Test,
       "org.scalacheck"           %% "scalacheck"      % "1.20.0"   % Test,
       "org.scalatestplus"        %% "scalacheck-1-19" % "3.2.20.0" % Test

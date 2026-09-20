@@ -55,7 +55,10 @@ gen = every generator is an exact symmetry of the ball within R_per (the entry a
 image position carries the image star up to Stab(S)) — checked, not derived from the
 collision-free development, which expands only the first word reaching a position;
 box = every entry within R_per is the exact Lambda-translate of the entry at its box
-representative (rounded lattice coordinates, verified in the field); closed = every
+representative (rounded lattice coordinates, remainders in [-1/2, 1/2) verified in the field) and,
+conversely, every lattice translate within R_per of a box representative is an entry with
+the translated star (lattice vectors enumerated through a coefficient bound, each decided
+exactly); closed = every
 generator image of an entry within the slack radius is an entry (the development
 terminated before its depth cap)
 
