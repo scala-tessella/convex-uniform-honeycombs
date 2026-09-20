@@ -1,0 +1,27 @@
+The developability gap on {p3:8 p6:2}#2 (Example 6.4 of the paper)
+A pattern satisfying (R1) and (R2) whose breadth-first development (to radius 3.05 + 1.6) collides:
+two words in the gluings — each step the gluing at the named tiling-vertex, applied on the right —
+reach the same position with point parts that are not equal modulo Stab(S).
+
+skeleton 1; pattern: gluing at tiling-vertex x -> back-vertex y(x)
+  x = 0 -> y = 1
+  x = 1 -> y = 0
+  x = 2 -> y = 2
+  x = 3 -> y = 2
+  x = 4 -> y = 4
+  x = 5 -> y = 6
+  x = 6 -> y = 6
+
+word 1 (2 steps): 4 1
+word 2 (2 steps): 6 0
+common position: (0.566947, -1.500000, -0.654654)
+point part of word 1:
+  [ 0.66071 -0.42521 -0.61859]
+  [ 0.70868  0.62500  0.32733]
+  [ 0.24744 -0.65465  0.71429]
+point part of word 2:
+  [-0.14286 -0.00000 -0.98974]
+  [ 0.00000  1.00000 -0.00000]
+  [-0.98974  0.00000  0.14286]
+
+distance between the point parts: 3.359864; not stabilizer-equivalent: true

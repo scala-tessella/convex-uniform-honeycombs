@@ -33,7 +33,9 @@ class CertificatesSpec extends AnyFlatSpec with Matchers:
     "exact-certificates.txt"     -> ExactCertificatesCertificate.write,
     "the-28-identified.txt"      -> The28IdentifiedCertificate.write,
     "symbols-k1.txt"             -> SymbolCensusCertificate.write,
-    "symbol-gate.txt"            -> SymbolGateCertificate.write
+    "symbol-gate.txt"            -> SymbolGateCertificate.write,
+    "core-cells.txt"             -> CoreCellsCertificate.write,
+    "snub-collision.txt"         -> SnubCollisionCertificate.write
   )
 
   "the certificate set" should "regenerate in full, every file non-empty" in:

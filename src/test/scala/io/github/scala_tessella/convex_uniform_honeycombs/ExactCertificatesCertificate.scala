@@ -28,7 +28,9 @@ object ExactCertificatesCertificate:
     }
     sb ++= f"\nexact stars: ${r.stars.count(_.ok)}/${r.stars.size}\n\n"
     sb ++= "== (b) the 28 exact periodization certificates ==\n"
-    sb ++= "glu = every pattern gluing G3-orthogonal + back-vertex + exact ring agreement;\n"
+    sb ++= "glu = every pattern gluing G3-orthogonal + back-vertex + exact ring agreement (per ring cell:\n"
+    sb ++= "type, the two face germs at the edge and their roles — face size, axial/belt for rco squares —\n"
+    sb ++= "which is equality of placed cells by the cell rigidity lemma, certified in core-cells.txt);\n"
     sb ++= "R1/R2 = reverse pairs and face-cycle words exact stabilizer elements (faces: zero\n"
     sb ++= "translation, exactly); trans = three words with rotational part exactly the identity;\n"
     sb ++= "indep = det(tau1,tau2,tau3) != 0; ball = exact development, collision-free; per =\n"
@@ -65,11 +67,38 @@ object ExactCertificatesCertificate:
     }
     sb ++= f"\nexact coherence: ${coh.coherences.count(_.ok)}/${coh.coherences.size} accepted patterns\n\n"
     sb ++= "== (d) exact germ forcing (every skeleton) ==\n"
-    val open     = r.germs.filterNot(_.forced)
-    sb ++= s"skeletons forced exactly: ${r.germs.count(_.forced)}/${r.germs.size}; open (closed by\n"
-    sb ++= "exhaustion, replayed exactly in (f)): " +
+    val open     = r.germs.filter(_.open)
+    val excluded = r.germs.filter(_.excluded)
+    sb ++= "forced = the exact 1-shell germ determines every neighbour germ; excluded = the coset placement\n"
+    sb ++= "at the named tiling-vertex fails the exact ring agreement with roles, so the skeleton holds no\n"
+    sb ++= "gluing of any honeycomb (the numeric atlas admitted it: its descriptors carry no face sizes and\n"
+    sb ++= "no roles); open = neither, closed by the exact exhaustion of (f)\n\n"
+    sb ++= s"skeletons: ${r.germs.size}; forced exactly: ${r.germs.count(_.forced)}; excluded exactly: " +
+      s"${excluded.size}; open: ${open.size}\n"
+    sb ++= "excluded: " +
+      (if excluded.isEmpty then "none"
+       else
+         excluded.map(g =>
+           s"${SpeciesCorona.label(g.idx)} skeleton ${g.skeleton} (at tiling-vertex ${g.excludedAt.get})"
+         ).mkString(", ")) + "\n"
+    sb ++= "open: " +
       (if open.isEmpty then "none"
-       else open.map(g => s"${SpeciesCorona.label(g.idx)} skeleton ${g.skeleton}").mkString(", ")) + "\n\n"
+       else open.map(g => s"${SpeciesCorona.label(g.idx)} skeleton ${g.skeleton}").mkString(", ")) +
+      "\n\n"
+    sb ++= "== (g) the atlas, exactly: genuine gluings per tiling-vertex ==\n"
+    sb ++=
+      "atlas = gluings the numeric descriptor test admits (mono-shell.txt); genuine = those passing the\n"
+    sb ++=
+      "exact ring agreement with roles — placed-cell equality by the cell rigidity lemma; the difference\n"
+    sb ++= "is the copies turned by 90 degrees about a 4-fold base edge of a prism, which swap the prism's\n"
+    sb ++= "squares and bases in the four 90-degree wedges; unrecognized = images not in the field (none)\n\n"
+    sb ++= f"${"species"}%-34s ${"atlas per tiling-vertex"}%-28s ${"genuine"}%-28s unrecognized\n"
+    r.atlas.foreach { a =>
+      sb ++=
+        f"${SpeciesCorona.label(a.idx)}%-34s ${a.atlas.mkString(",")}%-28s ${a.genuine.mkString(",")}%-28s " +
+          s"${a.unrecognized.sum}\n"
+    }
+    sb ++= "\n"
     sb ++= "== (f) the exhaustions replayed exactly ==\n"
     sb ++= "every (R1)+(R2)-consistent pattern of an open skeleton enumerated uncapped; accepted =\n"
     sb ++= "collision-free to radius 3.05; cohered = exactly cohered with its class representative\n\n"

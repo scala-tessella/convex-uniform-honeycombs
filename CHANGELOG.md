@@ -7,6 +7,62 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 a paper, entries state what a re-check would find different from the previous release — a referee who checked
 an earlier version should be able to tell from here whether the claims, the specs, or only the packaging moved.
 
+## [Unreleased]
+
+**Three finite facts the paper had asserted, now certified — one of them corrected.** The rigidity lemma of
+the appendix rests on every combinatorial automorphism of a core cell being an isometry; the developability
+gap of the pattern section on a collision the text described but did not display; and the descriptor lemma
+("a core cell is determined by an edge, its two face germs there and its type"), which the exact ring
+agreement of every gluing and the cell-consistency step of the periodization theorem rest on, is FALSE as
+stated: at a 4·4 edge of the rhombicuboctahedron the reflection in the plane bisecting the dihedral angle
+swaps the axial square and the belt square, preserves both face planes and both interior sides, and is not a
+symmetry — two distinct placed rhombicuboctahedra share the edge and both germs. The lemma holds once each
+germ carries the ROLE of its face (its orbit under the cell's symmetry group: the face size, plus axial/belt
+for the squares of the rhombicuboctahedron), and the exact replay now checks ring agreement with roles. The
+numeric pipeline's descriptor test is unchanged: without roles it is a necessary condition for ring equality,
+which is all the search and the exclusions need (a superset atlas), and every positive certificate goes
+through the exact replay. All 28 classes and all 496 accepted patterns pass the stronger test; no count moves.
+
+### Added
+
+- `CoreCells` / `CoreCellsSpec` / `core-cells.txt`: the 13 core cells built from classical coordinates, their
+  faces, edges and flags recovered, and two group orders computed per cell — the combinatorial automorphism
+  group of the face lattice (flag images whose flag-graph walk closes into a bijection) and the geometric
+  symmetry group (isometries carrying the vertex set onto itself, counted as flag images with parity). They
+  coincide on every cell (24, 48, 48, 24, 48, 48, 48, 48, 48, 12, 24, 32, 48), which is the finite assertion
+  behind Lemma A.2; the 13 face-size multisets are pairwise distinct, so the face lattices are pairwise
+  non-isomorphic. The same groups certify the three finite inputs of the cell rigidity lemma: faces of equal
+  size share an orbit on every cell but the rhombicuboctahedron (six axial and twelve belt squares); the
+  reflection in the perpendicular bisector plane of every edge is a symmetry; and the symmetry group is
+  transitive on the (edge, ordered pair of incident faces) triples of each ordered pair of roles. The
+  rhombicuboctahedron counterexample to the role-free statement is asserted explicitly.
+- `SnubCollision` / `SnubCollisionSpec` / `snub-collision.txt`: Example 6.4 witnessed — on the
+  snub-trihexagonal lift's skeleton 1, an (R1)+(R2)-consistent pattern whose two-step words 4·1 and 6·0
+  reach the same position with point parts that are not stabilizer-equivalent. The certificate prints the
+  pattern, the words, the position and both point parts.
+- `CertificatesSpec` emits eighteen certificates.
+
+### Changed
+
+- `ExactCertificates.exactGlu`: the exact ring agreement of every pattern gluing compares, per ring cell, the
+  type, the two face germs at the edge and their roles (face size; axial or belt for the squares of the
+  rhombicuboctahedron), so that by the cell rigidity lemma it is equality of placed cells. Every positive
+  certificate — the 28 classes, the 496 accepted patterns within the caps, the exhaustions — passes unchanged;
+  `exact-certificates.txt` states the strengthened condition.
+- `ExactCertificates` germ forcing gains a third verdict, EXCLUDED: a skeleton whose coset placement at some
+  tiling-vertex fails the exact ring agreement with roles holds no gluing of any honeycomb. The numeric atlas
+  admits such placements because its descriptor test carries no face sizes and no roles — at a 4-fold base
+  edge of a $P_6$, $P_8$ or $P_{12}$ prism the copy turned by 90° about the edge swaps the prism's squares and
+  bases in the four 90° wedges and passes. Of the 41 skeletons, 10 are excluded ({p6:6}#1 skeletons 0, 1, 3, 4,
+  5, 6, 7; {cube:2 p8:4}#1 skeleton 1; {p3:2 p12:4}#1 skeleton 1; {p3:12}#2 skeleton 1 — the last at a
+  horizontal edge of a triangular prism, where the 90° turn swaps its triangles and squares), 27 forced and
+  4 left open; the ten skeletons
+  the numeric audit closes by exhaustion are the four open ones and six of the excluded, so the exact
+  exhaustion now replays four skeletons (the snub square lift's first, the snub-trihexagonal lift's three) with
+  the same pattern counts as before. Section (g) of `exact-certificates.txt` reads the atlas exactly: at
+  every tiling-vertex of every surviving species, the gluings passing the exact ring agreement with roles —
+  the genuine gluings — against the atlas size. `ExactCertificatesSpec` pins all of this.
+
 ## [0.5.0] — 2026-09-20
 
 Archived as [doi:10.5281/zenodo.22862835](https://doi.org/10.5281/zenodo.22862835) — the version DOI to cite.

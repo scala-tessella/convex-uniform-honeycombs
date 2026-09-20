@@ -1,0 +1,50 @@
+The 13 core cells: face lattices and rigidity (Lemma A.2 of the paper)
+vertices from classical coordinates; faces as maximal coplanar supporting vertex sets; flags =
+incident (vertex, edge, face) triples; |Aut| = combinatorial automorphisms of the face lattice
+(flag images of a base flag whose flag-graph walk closes into a bijection); |Sym| = isometries
+carrying the vertex set onto itself, counted as flag images with their parity. |Aut| = |Sym|
+means every combinatorial automorphism is an isometry; the 13 face-size multisets are pairwise
+distinct, so the 13 face lattices are pairwise non-isomorphic.
+
+cell                     V   E   F flags  faces by size          |Aut| |Sym| rigid
+tet                      4   6   4    24  4×3-gon                   24    24 true
+cube                     8  12   6    48  6×4-gon                   48    48 true
+oct                      6  12   8    48  8×3-gon                   48    48 true
+truncTet                12  18   8    72  4×3-gon 4×6-gon           24    24 true
+co                      12  24  14    96  8×3-gon 6×4-gon           48    48 true
+truncOct                24  36  14   144  6×4-gon 8×6-gon           48    48 true
+truncCube               24  36  14   144  8×3-gon 6×8-gon           48    48 true
+rco                     24  48  26   192  8×3-gon 18×4-gon          48    48 true
+tco                     48  72  26   288  12×4-gon 8×6-gon 6×8-gon    48    48 true
+p3                       6   9   5    36  2×3-gon 3×4-gon           12    12 true
+p6                      12  18   8    72  6×4-gon 2×6-gon           24    24 true
+p8                      16  24  10    96  8×4-gon 2×8-gon           32    32 true
+p12                     24  36  14   144  12×4-gon 2×12-gon         48    48 true
+
+all rigid: true; face-size multisets pairwise distinct: true
+
+== The cell rigidity lemma: a placed core cell is determined by its type, one edge, the two face
+germs at that edge and their ROLES (orbits of faces under the symmetry group) ==
+roles = number of face orbits; by size = faces of equal size share an orbit (false only for the
+rco, whose 18 squares split into 6 axial and 12 belt); bisector = the reflection in the
+perpendicular bisector plane of every edge is a symmetry; transitive = the symmetry group is
+transitive on the (edge, ordered pair of incident faces) triples of each ordered pair of roles.
+Without the roles the lemma fails: at a 4·4 edge of the rco the reflection in the plane bisecting
+the dihedral angle swaps the axial and the belt square, preserving both germs, and is no symmetry.
+
+cell                   roles by size bisector transitive
+tet                        1    true     true       true
+cube                       1    true     true       true
+oct                        1    true     true       true
+truncTet                   2    true     true       true
+co                         2    true     true       true
+truncOct                   2    true     true       true
+truncCube                  2    true     true       true
+rco                        3   false     true       true
+tco                        3    true     true       true
+p3                         2    true     true       true
+p6                         2    true     true       true
+p8                         2    true     true       true
+p12                        2    true     true       true
+
+cell rigidity lemma certified on all 13: true

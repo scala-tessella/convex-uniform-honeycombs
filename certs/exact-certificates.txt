@@ -45,7 +45,9 @@ species                              n exact  max iv width
 exact stars: 34/34
 
 == (b) the 28 exact periodization certificates ==
-glu = every pattern gluing G3-orthogonal + back-vertex + exact ring agreement;
+glu = every pattern gluing G3-orthogonal + back-vertex + exact ring agreement (per ring cell:
+type, the two face germs at the edge and their roles — face size, axial/belt for rco squares —
+which is equality of placed cells by the cell rigidity lemma, certified in core-cells.txt);
 R1/R2 = reverse pairs and face-cycle words exact stabilizer elements (faces: zero
 translation, exactly); trans = three words with rotational part exactly the identity;
 indep = det(tau1,tau2,tau3) != 0; ball = exact development, collision-free; per =
@@ -131,26 +133,60 @@ species                            patterns  cert align transport
 exact coherence: 496/496 accepted patterns
 
 == (d) exact germ forcing (every skeleton) ==
-skeletons forced exactly: 31/41; open (closed by
-exhaustion, replayed exactly in (f)): {p6:6}#1 skeleton 0, {p6:6}#1 skeleton 1, {p6:6}#1 skeleton 3, {p6:6}#1 skeleton 4, {p6:6}#1 skeleton 6, {p6:6}#1 skeleton 7, {cube:4 p3:6}#2 skeleton 0, {p3:8 p6:2}#2 skeleton 0, {p3:8 p6:2}#2 skeleton 1, {p3:8 p6:2}#2 skeleton 2
+forced = the exact 1-shell germ determines every neighbour germ; excluded = the coset placement
+at the named tiling-vertex fails the exact ring agreement with roles, so the skeleton holds no
+gluing of any honeycomb (the numeric atlas admitted it: its descriptors carry no face sizes and
+no roles); open = neither, closed by the exact exhaustion of (f)
+
+skeletons: 41; forced exactly: 27; excluded exactly: 10; open: 4
+excluded: {cube:2 p8:4}#1 skeleton 1 (at tiling-vertex 4), {p3:2 p12:4}#1 skeleton 1 (at tiling-vertex 4), {p6:6}#1 skeleton 0 (at tiling-vertex 1), {p6:6}#1 skeleton 1 (at tiling-vertex 1), {p6:6}#1 skeleton 3 (at tiling-vertex 3), {p6:6}#1 skeleton 4 (at tiling-vertex 0), {p6:6}#1 skeleton 5 (at tiling-vertex 0), {p6:6}#1 skeleton 6 (at tiling-vertex 0), {p6:6}#1 skeleton 7 (at tiling-vertex 0), {p3:12}#2 skeleton 1 (at tiling-vertex 0)
+open: {cube:4 p3:6}#2 skeleton 0, {p3:8 p6:2}#2 skeleton 0, {p3:8 p6:2}#2 skeleton 1, {p3:8 p6:2}#2 skeleton 2
+
+== (g) the atlas, exactly: genuine gluings per tiling-vertex ==
+atlas = gluings the numeric descriptor test admits (mono-shell.txt); genuine = those passing the
+exact ring agreement with roles — placed-cell equality by the cell rigidity lemma; the difference
+is the copies turned by 90 degrees about a 4-fold base edge of a prism, which swap the prism's
+squares and bases in the four 90-degree wedges; unrecognized = images not in the field (none)
+
+species                            atlas per tiling-vertex      genuine                      unrecognized
+{cube:1 truncOct:1 tco:2}#1        2,2,2,2                      2,2,2,2                      0
+{tco:2 p8:2}#1                     2,2,2,2                      2,2,2,2                      0
+{truncOct:4}#1                     8,8,8,8                      8,8,8,8                      0
+{truncTet:1 truncCube:1 tco:2}#1   2,2,2,2                      2,2,2,2                      0
+{cube:1 truncCube:1 rco:1 p8:2}#1  2,2,2,2,2                    2,2,2,2,2                    0
+{cube:2 co:1 rco:2}#1              4,4,4,4,4,4                  4,4,4,4,4,4                  0
+{oct:1 truncCube:4}#1              8,8,8,8,8                    8,8,8,8,8                    0
+{tet:1 cube:1 rco:3}#1             6,6,6,6,6,6                  6,6,6,6,6,6                  0
+{truncTet:2 co:1 truncOct:2}#1     4,4,4,4,4                    4,4,4,4,4                    0
+{cube:2 p6:2 p12:2}#1              2,2,2,2,2                    2,2,2,2,2                    0
+{cube:2 p8:4}#1                    4,4,4,4,8                    4,4,4,4,4                    0
+{oct:2 co:4}#1                     16,16,16,16,16,16,16,16      16,16,16,16,16,16,16,16      0
+{p3:2 p12:4}#1                     4,4,4,4,8                    4,4,4,4,4                    0
+{p6:6}#1                           24,24,12,24,12               12,12,12,12,12               0
+{cube:4 p3:2 p6:2}#2               4,4,4,4,4,4                  4,4,4,4,4,4                  0
+{cube:8}#1                         48,48,48,48,48,48            48,48,48,48,48,48            0
+{p3:4 p6:4}#3                      8,8,8,8,8,8                  8,8,8,8,8,8                  0
+{tet:2 truncTet:6}#2               12,12,12,12,12,12            12,12,12,12,12,12            0
+{cube:4 p3:6}#1                    8,4,4,4,4,16,16              8,4,4,4,4,8,8                0
+{cube:4 p3:6}#2                    8,8,4,4,8,8,8                8,8,4,4,8,4,8                0
+{p3:8 p6:2}#2                      24,24,4,4,24,4,4             12,12,4,4,12,4,4             0
+{p3:12}#1                          32,32,8,8,8,8,32,32          16,16,8,8,8,8,16,16          0
+{p3:12}#2                          48,48,24,24,48,48,48,48      24,24,24,24,24,24,24,24      0
+{tet:4 oct:3 p3:6}#1               12,12,12,6,6,6,6,6,6,12      12,12,12,6,6,6,6,6,6,12      0
+{tet:8 oct:6}#1                    12,12,24,24,24,12,24,12,24,12,24,12 12,12,24,24,24,12,24,12,24,12,24,12 0
+{tet:8 oct:6}#2                    48,48,48,48,48,48,48,48,48,48,48,48 48,48,48,48,48,48,48,48,48,48,48,48 0
 
 == (f) the exhaustions replayed exactly ==
 every (R1)+(R2)-consistent pattern of an open skeleton enumerated uncapped; accepted =
 collision-free to radius 3.05; cohered = exactly cohered with its class representative
 
 species                            skeleton patterns accepted cohered capped
-{p6:6}#1                                  0        0        0       0  false
-{p6:6}#1                                  1        0        0       0  false
-{p6:6}#1                                  3        0        0       0  false
-{p6:6}#1                                  4        0        0       0  false
-{p6:6}#1                                  6        0        0       0  false
-{p6:6}#1                                  7        0        0       0  false
 {cube:4 p3:6}#2                           0        0        0       0  false
 {p3:8 p6:2}#2                             0        0        0       0  false
 {p3:8 p6:2}#2                             1      256      128     128  false
 {p3:8 p6:2}#2                             2      256      128     128  false
 
-exhaustions closed exactly: 10/10
+exhaustions closed exactly: 4/4
 
 == (e) exact class separation (the two doubled species) ==
 {cube:4 p3:6}#1: 2 classes, exact fingerprints distinct: true

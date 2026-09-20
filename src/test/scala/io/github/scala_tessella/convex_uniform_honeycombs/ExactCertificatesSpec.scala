@@ -95,7 +95,8 @@ class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
     // the exhaustions: every accepted pattern beyond the caps cohered exactly, none capped; eight of the
     // ten skeletons carry no consistent pattern at all, the snub lift's second and third carry 256 each,
     // 128 of them accepted (the third is "dead" within the cap of 40: all 128 lie beyond it)
-    c.exhaustions.size shouldBe 10
+    // (the numeric audit exhausts ten; six of those are excluded exactly in (d), so four remain open)
+    c.exhaustions.size shouldBe 4
     c.exhaustions.filterNot(_.ok) shouldBe empty
     c.exhaustions.map(e => (SpeciesCorona.label(e.idx), e.skeleton, e.patterns, e.accepted)).filter(_._3 >
       0) shouldBe
@@ -103,25 +104,56 @@ class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
     c.allOk shouldBe true
 
   "exact germ forcing" should
-    "force every skeleton the numeric audit forces, leaving its ten exhausted ones" in:
+    "force, exclude or leave open every skeleton, refining the numeric audit's ten exhaustions" in:
       r.germs should not be empty
-      r.germs.count(_.forced) should be > 0
-      // the audit closes these ten by exhaustion (only the snub lift's second and third hold patterns)
-      val open = r.germs.filterNot(_.forced)
-      open.map(g => (g.idx, g.skeleton)) shouldBe
-        CompletenessAudit.results._1.flatMap(a => a.exhaustedSkeletons.map(si => (a.idx, si)))
+      val forced      = r.germs.filter(_.forced)
+      val open        = r.germs.filter(_.open)
+      val excluded    = r.germs.filter(_.excluded)
+      forced.size should be > 0
+      (forced.size + open.size + excluded.size) shouldBe r.germs.size
+      // the numeric audit closes ten skeletons by exhaustion; exactly, six of them hold no genuine gluing
+      // at some tiling-vertex (excluded) and four remain open (only the snub lift's second and third hold
+      // patterns); four skeletons the numeric audit forces are excluded as well
+      val numericOpen = CompletenessAudit.results._1.flatMap(a => a.exhaustedSkeletons.map(si => (a.idx, si)))
+      open.map(g => (g.idx, g.skeleton)).foreach(numericOpen should contain(_))
+      numericOpen.foreach(k => (open ++ excluded).map(g => (g.idx, g.skeleton)) should contain(k))
       open.map(g => (SpeciesCorona.label(g.idx), g.skeleton)) shouldBe Vector(
-        ("{p6:6}#1", 0),
-        ("{p6:6}#1", 1),
-        ("{p6:6}#1", 3),
-        ("{p6:6}#1", 4),
-        ("{p6:6}#1", 6),
-        ("{p6:6}#1", 7),
         ("{cube:4 p3:6}#2", 0),
         ("{p3:8 p6:2}#2", 0),
         ("{p3:8 p6:2}#2", 1),
         ("{p3:8 p6:2}#2", 2)
       )
+      excluded.map(g => (SpeciesCorona.label(g.idx), g.skeleton)) shouldBe Vector(
+        ("{cube:2 p8:4}#1", 1),
+        ("{p3:2 p12:4}#1", 1),
+        ("{p6:6}#1", 0),
+        ("{p6:6}#1", 1),
+        ("{p6:6}#1", 3),
+        ("{p6:6}#1", 4),
+        ("{p6:6}#1", 5),
+        ("{p6:6}#1", 6),
+        ("{p6:6}#1", 7),
+        ("{p3:12}#2", 1)
+      )
+      (forced.size, excluded.size, open.size) shouldBe (27, 10, 4)
+      info(s"skeletons ${r.germs.size}: forced ${forced.size}, excluded ${excluded.size}, open ${open.size}")
+
+  "the exact atlas" should
+    "keep at least one genuine gluing at every tiling-vertex and recognize every image" in:
+      r.atlas.size shouldBe 26
+      r.atlas.foreach { a =>
+        withClue(SpeciesCorona.label(a.idx)) {
+          a.genuine.zip(a.atlas).foreach((gn, at) => gn should (be > 0 and be <= at))
+          a.unrecognized.sum shouldBe 0
+        }
+      }
+      // the cubic star: all 48 gluings genuine at every tiling-vertex (the octahedral group)
+      val cubic = r.atlas.find(a => SpeciesCorona.label(a.idx) == "{cube:8}#1").get
+      cubic.genuine shouldBe Vector.fill(6)(48)
+      info(r.atlas.map(a =>
+        s"${SpeciesCorona.label(a.idx)}: ${a.atlas.mkString(",")} -> ${a.genuine.mkString(",")}"
+      )
+        .mkString("; "))
 
   "the escalation" should "conclude: 28/28 exact, every positive certificate on the critical path exact" in:
     r.allOk shouldBe true

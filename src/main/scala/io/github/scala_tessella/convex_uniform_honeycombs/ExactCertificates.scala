@@ -33,7 +33,9 @@ import TransitivePatterns.{acceptedOf, developBall, fingerprintOf, Accepted, Iso
   * WHAT IS PROVEN EXACTLY, per class of the 28: (i) the exact star model — Gram recognized and
   * interval-contained, base minors positive, all n(n+1)/2 products C_xᵀG₃C_y equal to the Gram (rank-3
   * realizability); (ii) each pattern gluing is an exact isometry (MᵀG₃M = G₃) mapping the back-vertex
-  * direction to −u_x and the neighbor ring onto the star ring (germ agreement up to positive scale, exact);
+  * direction to −u_x and the neighbor ring onto the star ring — cell by cell the type, the two face germs at
+  * the edge (interior directions up to positive scale, exact) and their ROLES (face size; axial or belt for
+  * the squares of the rhombicuboctahedron), which by the cell rigidity lemma is equality of placed cells;
   * (iii) R1 and R2 hold exactly (reverse-pair products and face-cycle words are exact stabilizer elements,
   * face words with exactly zero translation); (iv) the three translation words compose to exact translations
   * (rotational part the identity matrix, exactly) with det(τ₁,τ₂,τ₃) ≠ 0; (v) the exact development of the
@@ -53,11 +55,15 @@ import TransitivePatterns.{acceptedOf, developBall, fingerprintOf, Accepted, Iso
   * ball reaching the representative's basis and determination ball, an exact element of Stab±(S) carrying the
   * representative's ball onto the pattern's at the determination radius, and the aligned representative basis
   * acting by exact symmetries on the pattern's ball — the three hypotheses of the coherence lemma. (ix) GERM
-  * FORCING on every skeleton, the audit's test replayed on exact placements and positions; it forces exactly
-  * the skeletons the numeric audit forces, and the ten it leaves are the ten the audit closes by exhaustion.
-  * (x) THE EXHAUSTIONS replayed: on each of those ten skeletons every (R1)+(R2)-consistent pattern is
-  * re-enumerated uncapped and every accepted one is cohered exactly with its class — so no honeycomb hides
-  * beyond a cap, exactly.
+  * FORCING on every skeleton, the audit's test replayed on exact placements and positions, with a third
+  * verdict the numeric audit cannot give: a skeleton whose coset placement at some tiling-vertex fails the
+  * exact ring agreement with roles is EXCLUDED — it holds no gluing of any honeycomb. Of the ten skeletons
+  * the numeric audit closes by exhaustion, six are excluded and four stay open; four skeletons the numeric
+  * audit forces are excluded as well (ten excluded, 27 forced, 4 open of 41). (x) THE EXHAUSTIONS replayed:
+  * on each open skeleton every (R1)+(R2)-consistent pattern is re-enumerated uncapped and every accepted one
+  * is cohered exactly with its class — so no honeycomb hides beyond a cap, exactly. (xi) THE ATLAS, exactly:
+  * at every tiling-vertex of every surviving species, the gluings of the numeric atlas that pass the exact
+  * ring agreement with roles are counted — the genuine gluings — against the atlas size.
   *
   * Together: every equality asserted by the periodization certificates of the 28, by the coherence of every
   * accepted pattern (within the caps and beyond them) and by the germ forcing of every forced skeleton is an
@@ -247,7 +253,7 @@ object ExactCertificates:
   private val s3d = math.sqrt(3.0)
   private val s6d = math.sqrt(6.0)
 
-  private val recogDens           = Vector(1L, 2L, 3L, 4L, 6L, 8L, 12L, 24L)
+  private val recogDens           = Vector(1L, 2L, 3L, 4L, 6L, 8L, 9L, 12L, 18L, 24L, 36L, 72L)
   private val recogBound          = 10
   private val recogTol            = 1e-8
   private val recogCache          = collection.mutable.HashMap.empty[Long, Option[Q23]]
@@ -451,23 +457,46 @@ object ExactCertificates:
   private def germEqE(star: ExactStar, p1: VQ, p2: VQ): Boolean =
     vqParallel(p1, p2) && star.inner(p1, p2).signum > 0
 
-  /** The ring descriptors at tiling-vertex v, as (cell ordinal, the two interior directions), transported by
-    * `m` (identity for the base star). The face plane is span(edge, interior), so the interior direction
-    * alone determines the germ at the shared edge.
+  /** A germ with its ROLE: the interior direction (the face plane is span(edge, interior)), the face size,
+    * and for the squares of the rhombicuboctahedron whether the square is axial — its two cyclic neighbours
+    * in the corner are squares — or a belt square. The role is the face's orbit under the cell's symmetry
+    * group (`CoreCells`: faces of equal size share an orbit on every core cell except the
+    * rhombicuboctahedron, whose squares split six/twelve), and it is what makes ring agreement a statement
+    * about placed cells: a placed core cell is determined by its type, an edge, the two face germs there and
+    * their roles (the cell rigidity lemma of the paper), whereas without the roles two distinct
+    * rhombicuboctahedra share an edge, both face planes and both interior sides.
     */
-  private def ringDescE(star: ExactStar, g: StarGeom, v: Int, m: MQ): Vector[(Int, Vector[VQ])] =
+  final case class GermE(interior: VQ, size: Int, axial: Boolean)
+
+  private def germE(star: ExactStar, g: StarGeom, ci: Int, v: Int, arc: (Int, Int), m: MQ): GermE =
+    val pl                                = g.st.corners(ci)
+    val k                                 = pl.vids.size
+    def keyOf(i: Int, j: Int): (Int, Int) =
+      val (a, b) = (pl.vids(i), pl.vids(j))
+      if a < b then (a, b) else (b, a)
+    val j                                 = (0 until k).find(i => keyOf(i, (i + 1) % k) == arc).get
+    val size                              = g.st.arcs(arc).face
+    val axial                             =
+      pl.cell == HoneycombAlphabet.CellType.Rhombicuboctahedron && size == 4 &&
+        g.st.arcs(keyOf((j + k - 1) % k, j)).face == 4 && g.st.arcs(keyOf((j + 1) % k, (j + 2) % k)).face == 4
+    val w                                 = arc._1 + arc._2 - v
+    GermE(mVec(m, interiorE(star, v, w)), size, axial)
+
+  private def germRoleEqE(star: ExactStar, p: GermE, q: GermE): Boolean =
+    p.size == q.size && p.axial == q.axial && germEqE(star, p.interior, q.interior)
+
+  /** The ring descriptors at tiling-vertex v, as (cell ordinal, the two germs with roles), transported by `m`
+    * (identity for the base star).
+    */
+  private def ringDescE(star: ExactStar, g: StarGeom, v: Int, m: MQ): Vector[(Int, Vector[GermE])] =
     g.rings(v).map { (ci, aIn, aOut) =>
-      val germs = Vector(aIn, aOut).map { arc =>
-        val w = arc._1 + arc._2 - v
-        mVec(m, interiorE(star, v, w))
-      }
-      (g.cellOrd(ci), germs)
+      (g.cellOrd(ci), Vector(aIn, aOut).map(arc => germE(star, g, ci, v, arc, m)))
     }
 
   private def descMatchE(
       star: ExactStar,
-      a: Vector[(Int, Vector[VQ])],
-      b: Vector[(Int, Vector[VQ])]
+      a: Vector[(Int, Vector[GermE])],
+      b: Vector[(Int, Vector[GermE])]
   ): Boolean =
     a.size == b.size && {
       val used = Array.fill(b.size)(false)
@@ -476,8 +505,8 @@ object ExactCertificates:
           !used(j) && b(j)._1 == ca && {
             val Vector(g1, g2) = ga
             val Vector(h1, h2) = b(j)._2
-            (germEqE(star, g1, h1) && germEqE(star, g2, h2)) ||
-            (germEqE(star, g1, h2) && germEqE(star, g2, h1))
+            (germRoleEqE(star, g1, h1) && germRoleEqE(star, g2, h2)) ||
+            (germRoleEqE(star, g1, h2) && germRoleEqE(star, g2, h1))
           }
         }
         j.foreach(used(_) = true)
@@ -487,7 +516,7 @@ object ExactCertificates:
 
   /** Build and certify the exact gluing: recognize the internal coordinates of all images rot(u_z), read M
     * off the base triple, then verify MᵀG₃M = G₃, M C_z = R_z for every z, R_y = −C_x (the back-vertex
-    * condition), and exact ring agreement around the glued edge.
+    * condition), and exact ring agreement around the glued edge, roles included.
     */
   def exactGlu(
       star: ExactStar,
@@ -965,13 +994,36 @@ object ExactCertificates:
 
   // ---------- exact germ forcing (every skeleton) ----------
 
-  final case class GermReport(idx: Int, skeleton: Int, forced: Boolean)
+  /** A skeleton under the exact germ test: FORCED (the germ determines every neighbour germ), OPEN (it does
+    * not; closed by the exact exhaustion), or EXCLUDED — the coset placement at some tiling-vertex is not a
+    * gluing at all: its ring fails the exact ring agreement with roles. The numeric atlas admits such
+    * placements because its descriptor test carries no face sizes and no roles (at a base edge of the
+    * hexagonal prismatic star, say, the copy turned by 90° about the edge swaps squares and hexagons in the
+    * four 90° wedges and passes); ring agreement is invariant under the right action of Stab±(S), so a coset
+    * is genuine or fake as a whole, and a fake coset carries no pattern of any honeycomb.
+    */
+  enum GermStatus:
+    case Forced, Open, Excluded
+
+  final case class GermReport(idx: Int, skeleton: Int, status: GermStatus, excludedAt: Option[Int] = None):
+    def forced: Boolean   = status == GermStatus.Forced
+    def open: Boolean     = status == GermStatus.Open
+    def excluded: Boolean = status == GermStatus.Excluded
+
+  /** Per tiling-vertex of a species: the size of the numeric atlas (role-free descriptor test) and how many
+    * of its gluings pass the exact ring agreement with roles — the genuine gluings — plus those the exact
+    * layer could not recognize in the field (expected none).
+    */
+  final case class AtlasReport(idx: Int, atlas: Vector[Int], genuine: Vector[Int], unrecognized: Vector[Int])
+
+  private val ringMismatch = "ring descriptors do not match"
 
   /** The germ-forcing test of the audit, exact: the 1-shell germ (the star and the coset-representative
     * placements at every tiling-vertex) forces the germ of every neighbor — for each tiling-vertex w, every
     * candidate isometry q_w·s (s over Stab±(S)) whose placements agree with the known stars at the known
-    * positions places identical stars, modulo Stab±(S), at the unknown positions. None when a placement's
-    * rotation is not recognized in the field.
+    * positions places identical stars, modulo Stab±(S), at the unknown positions. Excluded when a placement
+    * fails the exact ring agreement; None (flagged) when a placement's rotation is not recognized in the
+    * field.
     */
   private def germForcesExact(
       star: ExactStar,
@@ -982,16 +1034,16 @@ object ExactCertificates:
       idx: Int,
       si: Int,
       flags: collection.mutable.ListBuffer[String]
-  ): Option[Boolean] =
-    val n      = star.n
-    val placed = skeleton.indices.toVector.map { x =>
-      exactGlu(star, g, bridge, x, skeleton(x).head, flags).toOption.map(_.m)
-    }
-    if placed.exists(_.isEmpty) then
+  ): Option[GermReport] =
+    val n       = star.n
+    val placedE = skeleton.indices.toVector.map(x => exactGlu(star, g, bridge, x, skeleton(x).head, flags))
+    val fakeAt  = placedE.indexWhere(_.left.exists(_.endsWith(ringMismatch)))
+    if placedE.exists(e => e.isLeft && !e.left.exists(_.endsWith(ringMismatch))) then
       flags += s"species $idx skeleton $si germ: a placement rotation is not exact"
       None
+    else if fakeAt >= 0 then Some(GermReport(idx, si, GermStatus.Excluded, Some(fakeAt)))
     else
-      val starAt                       = placed.map(_.get)
+      val starAt                       = placedE.map(_.toOption.get.m)
       def knownAt(pos: VQ): Option[MQ] =
         if pos == vqZero then Some(idMQ)
         else (0 until n).find(x => star.coords(x) == pos).map(starAt)
@@ -1009,7 +1061,20 @@ object ExactCertificates:
             u.zip(unknowns.head).forall { case ((p1, r1), (p2, r2)) => p1 == p2 && conj(r1, r2) }
           }
         }
-      })
+      }).map(forced => GermReport(idx, si, if forced then GermStatus.Forced else GermStatus.Open))
+
+  /** The genuine gluings of the numeric atlas at every tiling-vertex: those passing the exact ring agreement
+    * with roles. Recognition failures go to a private buffer and are counted, not flagged.
+    */
+  private def atlasExact(star: ExactStar, g: StarGeom, bridge: Bridge, idx: Int): AtlasReport =
+    val local  = collection.mutable.ListBuffer.empty[String]
+    val nflags = MonoShell.Flags()
+    val rows   = g.u.indices.toVector.map { x =>
+      val glus = MonoShell.gluings(g, x, nflags)
+      val outs = glus.map(glu => exactGlu(star, g, bridge, x, glu, local))
+      (glus.size, outs.count(_.isRight), outs.count(_.left.exists(!_.endsWith(ringMismatch))))
+    }
+    AtlasReport(idx, rows.map(_._1), rows.map(_._2), rows.map(_._3))
 
   // ---------- exact fingerprints and class separation ----------
 
@@ -1094,8 +1159,9 @@ object ExactCertificates:
   final case class Results(
       stars: Vector[StarReport],
       classes: Vector[ClassReport],
-      germs: Vector[GermReport], // every skeleton of every surviving species
+      germs: Vector[GermReport],  // every skeleton of every surviving species
       separations: Vector[SeparationReport],
+      atlas: Vector[AtlasReport], // per surviving species: numeric atlas size vs genuine gluings, per vertex
       flags: Vector[String],
       starModels: Map[Int, ExactStar]
   ):
@@ -1104,7 +1170,8 @@ object ExactCertificates:
         separations.forall(_.distinct) && flags.isEmpty
 
   /** (a) the 34 exact star models, (b) the 28 exact class-representative certificates, (d) exact germ forcing
-    * on every skeleton, (e) the exact separation of the doubled species. About a minute.
+    * on every skeleton, (e) the exact separation of the doubled species, (g) the genuine gluings of every
+    * atlas. About a minute.
     */
   lazy val results: Results =
     val (starReports, starOf, ss, sflags) = settings
@@ -1112,14 +1179,14 @@ object ExactCertificates:
     val classReps                         = collection.mutable.ArrayBuffer.empty[ClassReport]
     val germs                             = collection.mutable.ArrayBuffer.empty[GermReport]
     val seps                              = collection.mutable.ArrayBuffer.empty[SeparationReport]
+    val atlases                           = collection.mutable.ArrayBuffer.empty[AtlasReport]
     for Setting(idx, star, acc, bridge, stabE, classes) <- ss do
       val g    = acc.g
       val reps = classes.map(_.head._2)
       val fps  = collection.mutable.ArrayBuffer.empty[Vector[Vector[Q23]]]
+      atlases += atlasExact(star, g, bridge, idx)
       for si <- acc.skeletons.indices do
-        germForcesExact(star, g, bridge, stabE, acc.skeletons(si), idx, si, flags).foreach { forced =>
-          germs += GermReport(idx, si, forced)
-        }
+        germForcesExact(star, g, bridge, stabE, acc.skeletons(si), idx, si, flags).foreach(germs += _)
       for (rep, ci) <- reps.zipWithIndex do
         classReps += certifyPattern(
           star,
@@ -1150,7 +1217,15 @@ object ExactCertificates:
         val distinct = fps.size == reps.size && fps.distinct.size == fps.size
         seps += SeparationReport(idx, reps.size, distinct)
         if !distinct then flags += s"species $idx: exact fingerprints not distinct"
-    Results(starReports, classReps.toVector, germs.toVector, seps.toVector, flags.distinct.toVector, starOf)
+    Results(
+      starReports,
+      classReps.toVector,
+      germs.toVector,
+      seps.toVector,
+      atlases.toVector,
+      flags.distinct.toVector,
+      starOf
+    )
 
   /** The exact replay of one exhaustion (Section 6.4, cap closure): every (R1)+(R2)-consistent pattern of a
     * skeleton germ forcing does not close, enumerated uncapped; the accepted ones (collision-free
@@ -1185,7 +1260,7 @@ object ExactCertificates:
     val flags              = collection.mutable.ListBuffer.from(sflags)
     val cohs               = collection.mutable.ArrayBuffer.empty[CoherenceReport]
     val exhs               = collection.mutable.ArrayBuffer.empty[ExhaustionReport]
-    val open               = results.germs.filterNot(_.forced)
+    val open               = results.germs.filter(_.open)
     val t0                 = System.nanoTime()
     for Setting(idx, star, acc, bridge, stabE, classes) <- ss do
       val g     = acc.g
@@ -1225,7 +1300,7 @@ object ExactCertificates:
           key -> (ci, cert)
         }
       }.toMap
-      for GermReport(_, si, _) <- open.filter(_.idx == idx) do
+      for GermReport(_, si, _, _) <- open.filter(_.idx == idx) do
         var total       = 0
         var accepted    = 0
         var cohered     = 0
