@@ -34,119 +34,121 @@ round 3: excluded 15: A57, A58, A59, A72, A73, A74, A75, A86, A87, A88, A89, A90
 
 == Dead edges and their nearest misses (multisets summing within 0.1° of 360°) ==
 margin = the closest miss at the interval midpoints; interval widths are ~1e-10
-round 1  icos(3·3) @ 138.18969: margin 1.346e-02°  p3(4·4)+tet(3·3)+A41(3·41) misses by 1.346e-02  p3(4·4)+truncTet(6·6)+A41(3·41) misses by 1.346e-02
-round 1  rhombicosidodec(3·4) @ 159.09484: margin 9.824e-03°  A18(3·18)+P5(4·4) misses by 9.824e-03  A36(3·36)+oct(3·3) misses by 1.051e-02
-round 1  rhombicosidodec(4·5) @ 148.28253: margin 1.643e-02°  A30(3·30)+p6(4·4) misses by 1.643e-02  p3(4·4)+p3(4·4)+A30(3·30) misses by 1.643e-02
-round 1  snubCube(3·3) @ 153.23459: margin 2.655e-04°  A259(3·259)+truncDodec(10·10) misses by 2.655e-04  A259(3·259)+dodec(5·5) misses by 2.655e-04
-round 1  snubCube(3·4) @ 142.98343: margin 1.828e-02°  A30(3·30)+co(3·4) misses by 1.828e-02  A30(3·30)+truncOct(4·6) misses by 1.828e-02
-round 1  snubDodec(3·3) @ 164.17537: margin 1.289e-02°  A26(3·26)+A4(3·4) misses by 1.289e-02  tet(3·3)+co(3·4) misses by 3.146e-02
-round 1  snubDodec(3·5) @ 152.92992: margin 5.021e-04°  A103(3·103)+dodec(5·5) misses by 5.021e-04  A103(3·103)+truncDodec(10·10) misses by 5.021e-04
-round 1  truncIcos(6·6) @ 138.18969: margin 1.346e-02°  p3(4·4)+tet(3·3)+A41(3·41) misses by 1.346e-02  p3(4·4)+truncTet(6·6)+A41(3·41) misses by 1.346e-02
-round 1  truncIcosidodec(4·6) @ 159.09484: margin 9.824e-03°  A18(3·18)+P5(4·4) misses by 9.824e-03  A36(3·36)+oct(3·3) misses by 1.051e-02
-round 1  truncIcosidodec(4·10) @ 148.28253: margin 1.643e-02°  A30(3·30)+p6(4·4) misses by 1.643e-02  p3(4·4)+p3(4·4)+A30(3·30) misses by 1.643e-02
-round 1  A4(3·3) @ 127.55160: margin 1.451e-02°  tet(3·3)+tet(3·3)+A37(3·37) misses by 1.451e-02  tet(3·3)+truncTet(6·6)+A37(3·37) misses by 1.451e-02
-round 1  A5(3·3) @ 138.18969: margin 1.346e-02°  p3(4·4)+tet(3·3)+A41(3·41) misses by 1.346e-02  p3(4·4)+truncTet(6·6)+A41(3·41) misses by 1.346e-02
-round 1  A6(3·3) @ 145.22189: margin 1.648e-02°  A11(3·11)+p6(4·4) misses by 1.648e-02  p3(4·4)+p3(4·4)+A11(3·11) misses by 1.648e-02
-round 1  A7(3·3) @ 150.22226: margin 4.714e-02°  A16(3·16)+truncDodec(10·10) misses by 4.714e-02  A16(3·16)+dodec(5·5) misses by 4.714e-02
-round 1  A8(3·3) @ 153.96238: margin 2.812e-02°  A8(3·8)+oct(3·3) misses by 2.812e-02  A8(3·8)+truncTet(3·6) misses by 2.812e-02
-round 1  A9(3·3) @ 156.86624: margin 6.728e-02°  A14(3·14)+oct(3·3) misses by 6.728e-02  A14(3·14)+truncTet(3·6) misses by 6.728e-02
-round 1  A10(3·3) @ 159.18651: margin 9.085e-03°  A39(3·39)+oct(3·3) misses by 9.085e-03  A39(3·39)+truncTet(3·6) misses by 9.085e-03
-round 1  A11(3·3) @ 161.08325: margin 4.874e-03°  A57(3·57)+P5(4·4) misses by 4.874e-03  A56(3·56)+P5(4·4) misses by 1.142e-02
-round 1  A12(3·3) @ 162.66285: margin 2.204e-02°  A15(3·15)+A4(3·4) misses by 2.204e-02  A8(3·8)+A5(3·5) misses by 6.968e-02
-round 1  A13(3·3) @ 163.99877: margin 3.604e-03°  A24(3·24)+A4(3·4) misses by 3.604e-03  A10(3·10)+A5(3·5) misses by 5.773e-02
-round 1  A14(3·3) @ 165.14339: margin 1.215e-03°  A51(3·51)+A4(3·4) misses by 1.215e-03  A50(3·50)+A4(3·4) misses by 1.918e-02
-round 1  A16(3·3) @ 167.00263: margin 1.638e-02°  A24(3·24)+A5(3·5) misses by 1.638e-02  A13(3·13)+A6(3·6) misses by 7.804e-02
-round 1  A17(3·3) @ 167.76793: margin 1.440e-02°  A37(3·37)+A5(3·5) misses by 1.440e-02  A36(3·36)+A5(3·5) misses by 2.469e-02
-round 1  A18(3·3) @ 168.44809: margin 2.859e-03°  A70(3·70)+A5(3·5) misses by 2.859e-03  A71(3·71)+A5(3·5) misses by 7.602e-03
-round 1  A20(3·3) @ 169.60412: margin 1.067e-02°  A35(3·35)+A6(3·6) misses by 1.067e-02  A34(3·34)+A6(3·6) misses by 3.310e-02
-round 1  A21(3·3) @ 170.09948: margin 1.475e-03°  A52(3·52)+A6(3·6) misses by 1.475e-03  A51(3·51)+A6(3·6) misses by 1.814e-02
-round 1  A22(3·3) @ 170.54977: margin 2.038e-03°  A94(3·94)+A6(3·6) misses by 2.038e-03  A95(3·95)+A6(3·6) misses by 3.783e-03
-round 1  A24(3·3) @ 171.33768: margin 7.079e-03°  A48(3·48)+A7(3·7) misses by 7.079e-03  A25(3·25)+A8(3·8) misses by 1.386e-02
-round 1  A25(3·3) @ 171.68433: margin 9.608e-04°  A70(3·70)+A7(3·7) misses by 9.608e-04  A17(3·17)+A10(3·10) misses by 2.274e-03
-round 1  A26(3·3) @ 172.00430: margin 9.692e-04°  A123(3·123)+A7(3·7) misses by 9.692e-04  A122(3·122)+A7(3·7) misses by 2.494e-03
-round 1  A28(3·3) @ 172.57562: margin 1.612e-03°  A17(3·17)+A12(3·12) misses by 1.612e-03  A63(3·63)+A8(3·8) misses by 4.871e-03
-round 1  A29(3·3) @ 172.83172: margin 2.687e-03°  A91(3·91)+A8(3·8) misses by 2.687e-03  A90(3·90)+A8(3·8) misses by 3.660e-03
-round 1  A30(3·3) @ 173.07074: margin 5.072e-04°  A155(3·155)+A8(3·8) misses by 5.072e-04  A24(3·24)+A11(3·11) misses by 1.045e-03
-round 1  A32(3·3) @ 173.50394: margin 5.342e-04°  A30(3·30)+A11(3·11) misses by 5.342e-04  A80(3·80)+A9(3·9) misses by 3.473e-03
-round 1  A33(3·3) @ 173.70084: margin 3.520e-04°  A114(3·114)+A9(3·9) misses by 3.520e-04  A113(3·113)+A9(3·9) misses by 3.683e-03
-round 1  A34(3·3) @ 173.88615: margin 2.344e-04°  A192(3·192)+A9(3·9) misses by 2.344e-04  A60(3·60)+A10(3·10) misses by 9.454e-04
-round 1  A36(3·3) @ 174.22589: margin 2.554e-03°  A99(3·99)+A10(3·10) misses by 2.554e-03  A98(3·98)+A10(3·10) misses by 2.803e-03
-round 1  A37(3·3) @ 174.38197: margin 2.087e-04°  A140(3·140)+A10(3·10) misses by 2.087e-04  A139(3·139)+A10(3·10) misses by 2.462e-03
-round 1  A38(3·3) @ 174.52985: margin 4.667e-04°  A232(3·232)+A10(3·10) misses by 4.667e-04  A233(3·233)+A10(3·10) misses by 4.946e-04
-round 1  A40(3·3) @ 174.80340: margin 9.344e-04°  A62(3·62)+A12(3·12) misses by 9.344e-04  A119(3·119)+A11(3·11) misses by 1.710e-03
-round 1  A41(3·3) @ 174.93017: margin 7.288e-04°  A169(3·169)+A11(3·11) misses by 7.288e-04  A168(3·168)+A11(3·11) misses by 1.102e-03
-round 1  A42(3·3) @ 175.05090: margin 1.146e-04°  A277(3·277)+A11(3·11) misses by 1.146e-04  A278(3·278)+A11(3·11) misses by 5.603e-04
-round 1  A44(3·3) @ 175.27589: margin 1.068e-03°  A142(3·142)+A12(3·12) misses by 1.068e-03  A143(3·143)+A12(3·12) misses by 1.491e-03
-round 1  A45(3·3) @ 175.38088: margin 6.713e-05°  A200(3·200)+A12(3·12) misses by 6.713e-05  A199(3·199)+A12(3·12) misses by 1.239e-03
-round 1  A48(3·3) @ 175.66962: margin 6.206e-04°  A61(3·61)+A15(3·15) misses by 6.206e-04  A167(3·167)+A13(3·13) misses by 6.768e-04
-round 1  A49(3·3) @ 175.75800: margin 3.365e-05°  A234(3·234)+A13(3·13) misses by 3.365e-05  A233(3·233)+A13(3·13) misses by 9.194e-04
-round 1  A52(3·3) @ 176.00276: margin 3.868e-05°  A30(3·30)+A23(3·23) misses by 3.868e-05  A194(3·194)+A14(3·14) misses by 4.313e-04
-round 1  A53(3·3) @ 176.07818: margin 2.489e-04°  A271(3·271)+A14(3·14) misses by 2.489e-04  A270(3·270)+A14(3·14) misses by 4.613e-04
-round 1  A56(3·3) @ 176.28830: margin 1.739e-07°  A115(3·115)+A16(3·16) misses by 1.739e-07  A223(3·223)+A15(3·15) misses by 2.735e-04
-round 1  A60(3·3) @ 176.53577: margin 1.702e-04°  A254(3·254)+A16(3·16) misses by 1.702e-04  A72(3·72)+A19(3·19) misses by 3.006e-04
-round 1  A64(3·3) @ 176.75230: margin 1.017e-04°  A287(3·287)+A17(3·17) misses by 1.017e-04  A59(3·59)+A22(3·22) misses by 1.752e-04
-round 2  dodec(5·5) @ 116.56505: margin 1.013e-04°  p3(4·4)+A75(3·75)+A19(3·19) misses by 1.013e-04  A46(3·46)+P13(4·4) misses by 2.854e-03
-round 2  icosidodec(3·5) @ 142.62263: margin 9.385e-02°  P5(4·4)+oct(3·3) misses by 9.385e-02  P5(4·4)+truncTet(3·6) misses by 9.385e-02
-round 2  truncDodec(3·10) @ 142.62263: margin 9.385e-02°  P5(4·4)+oct(3·3) misses by 9.385e-02  P5(4·4)+truncTet(3·6) misses by 9.385e-02
-round 2  truncDodec(10·10) @ 116.56505: margin 1.013e-04°  p3(4·4)+A75(3·75)+A19(3·19) misses by 1.013e-04  A46(3·46)+P13(4·4) misses by 2.854e-03
-round 2  A15(3·3) @ 166.13510: no sum within 0.1°
-round 2  A19(3·3) @ 169.05656: no sum within 0.1°
-round 2  A23(3·3) @ 170.96087: no sum within 0.1°
-round 2  A27(3·3) @ 172.30055: no sum within 0.1°
-round 2  A31(3·3) @ 173.29433: no sum within 0.1°
-round 2  A35(3·3) @ 174.06087: no sum within 0.1°
-round 2  A39(3·3) @ 174.67013: margin 6.548e-02°  p3(4·4)+co(3·4) misses by 6.548e-02  p3(4·4)+truncOct(4·6) misses by 6.548e-02
-round 2  A43(3·3) @ 175.16601: margin 2.184e-02°  A39(3·39)+A15(3·15) misses by 2.184e-02
-round 2  A46(3·3) @ 175.48131: margin 9.931e-05°  A50(3·50)+A15(3·15) misses by 9.931e-05  A23(3·23)+A23(3·23) misses by 7.922e-03
-round 2  A47(3·3) @ 175.57747: margin 1.480e-03°  A55(3·55)+A15(3·15) misses by 1.480e-03  A31(3·31)+A19(3·19) misses by 2.566e-03
-round 2  A50(3·3) @ 175.84285: margin 3.258e-03°  A77(3·77)+A15(3·15) misses by 3.258e-03  A76(3·76)+A15(3·15) misses by 5.625e-03
-round 2  A51(3·3) @ 175.92437: margin 3.290e-04°  A39(3·39)+A19(3·19) misses by 3.290e-04  A87(3·87)+A15(3·15) misses by 6.635e-04
-round 2  A54(3·3) @ 176.15082: margin 9.466e-04°  A140(3·140)+A15(3·15) misses by 9.466e-04  A47(3·47)+A19(3·19) misses by 1.026e-03
-round 2  A55(3·3) @ 176.22081: margin 1.315e-04°  A173(3·173)+A15(3·15) misses by 1.315e-04  A174(3·174)+A15(3·15) misses by 1.595e-03
-round 2  A61(3·3) @ 176.59256: margin 9.514e-04°  A78(3·78)+A19(3·19) misses by 9.514e-04  A35(3·35)+A27(3·27) misses by 5.379e-03
-round 2  A62(3·3) @ 176.64752: margin 1.029e-03°  A85(3·85)+A19(3·19) misses by 1.029e-03  A31(3·31)+A31(3·31) misses by 3.232e-03
-round 2  A63(3·3) @ 176.70074: margin 1.641e-03°  A93(3·93)+A19(3·19) misses by 1.641e-03  A50(3·50)+A23(3·23) misses by 3.676e-03
-round 2  A65(3·3) @ 176.80226: margin 2.120e-04°  A114(3·114)+A19(3·19) misses by 2.120e-04  A115(3·115)+A19(3·19) misses by 3.752e-03
-round 2  A66(3·3) @ 176.85072: margin 1.198e-03°  A128(3·128)+A19(3·19) misses by 1.198e-03  A127(3·127)+A19(3·19) misses by 1.999e-03
-round 2  A67(3·3) @ 176.89772: margin 6.726e-04°  A62(3·62)+A23(3·23) misses by 6.726e-04  A144(3·144)+A19(3·19) misses by 6.968e-04
-round 2  A68(3·3) @ 176.94335: margin 3.901e-04°  A165(3·165)+A19(3·19) misses by 3.901e-04  A46(3·46)+A27(3·27) misses by 4.984e-04
-round 2  A69(3·3) @ 176.98765: margin 4.025e-04°  A192(3·192)+A19(3·19) misses by 4.025e-04  A193(3·193)+A19(3·19) misses by 9.998e-04
-round 2  A70(3·3) @ 177.03069: margin 2.911e-04°  A229(3·229)+A19(3·19) misses by 2.911e-04  A228(3·228)+A19(3·19) misses by 7.042e-04
-round 2  A71(3·3) @ 177.07251: margin 2.012e-04°  A280(3·280)+A19(3·19) misses by 2.012e-04  A281(3·281)+A19(3·19) misses by 4.593e-04
-round 2  A76(3·3) @ 177.26512: margin 8.373e-04°  A110(3·110)+A23(3·23) misses by 8.373e-04  A111(3·111)+A23(3·23) misses by 3.419e-03
-round 2  A77(3·3) @ 177.30064: margin 6.230e-04°  A119(3·119)+A23(3·23) misses by 6.230e-04  A51(3·51)+A31(3·31) misses by 2.279e-03
-round 2  A78(3·3) @ 177.33525: margin 1.376e-03°  A129(3·129)+A23(3·23) misses by 1.376e-03  A39(3·39)+A39(3·39) misses by 1.622e-03
-round 2  A79(3·3) @ 177.36898: margin 8.225e-04°  A141(3·141)+A23(3·23) misses by 8.225e-04  A74(3·74)+A27(3·27) misses by 1.677e-03
-round 2  A80(3·3) @ 177.40187: margin 4.215e-04°  A155(3·155)+A23(3·23) misses by 4.215e-04  A156(3·156)+A23(3·23) misses by 1.728e-03
-round 2  A81(3·3) @ 177.43395: margin 6.388e-04°  A172(3·172)+A23(3·23) misses by 6.388e-04  A171(3·171)+A23(3·23) misses by 1.128e-03
-round 2  A82(3·3) @ 177.46524: margin 6.012e-04°  A191(3·191)+A23(3·23) misses by 6.012e-04  A192(3·192)+A23(3·23) misses by 8.159e-04
-round 2  A83(3·3) @ 177.49578: margin 2.374e-04°  A90(3·90)+A27(3·27) misses by 2.374e-04  A216(3·216)+A23(3·23) misses by 3.478e-04
-round 2  A84(3·3) @ 177.52559: margin 1.270e-04°  A246(3·246)+A23(3·23) misses by 1.270e-04  A95(3·95)+A27(3·27) misses by 3.464e-04
-round 2  A85(3·3) @ 177.55471: margin 3.045e-04°  A286(3·286)+A23(3·23) misses by 3.045e-04  A285(3·285)+A23(3·23) misses by 3.331e-04
-round 2  A92(3·3) @ 177.74077: margin 9.049e-04°  A156(3·156)+A27(3·27) misses by 9.049e-04  A46(3·46)+A46(3·46) misses by 9.885e-04
-round 2  A93(3·3) @ 177.76506: margin 4.263e-04°  A169(3·169)+A27(3·27) misses by 4.263e-04  A47(3·47)+A46(3·46) misses by 1.216e-03
-round 2  A94(3·3) @ 177.78884: margin 1.738e-04°  A183(3·183)+A27(3·27) misses by 1.738e-04  A47(3·47)+A47(3·47) misses by 9.267e-04
-round 2  A95(3·3) @ 177.81211: margin 1.980e-04°  A74(3·74)+A35(3·35) misses by 1.980e-04  A199(3·199)+A27(3·27) misses by 2.711e-04
-round 2  A96(3·3) @ 177.83490: margin 3.031e-04°  A218(3·218)+A27(3·27) misses by 3.031e-04  A219(3·219)+A27(3·27) misses by 7.853e-04
-round 2  A97(3·3) @ 177.85723: margin 1.246e-04°  A241(3·241)+A27(3·27) misses by 1.246e-04  A240(3·240)+A27(3·27) misses by 7.739e-04
-round 2  A98(3·3) @ 177.87909: margin 1.278e-06°  A57(3·57)+A43(3·43) misses by 1.278e-06  A268(3·268)+A27(3·27) misses by 1.852e-05
-round 3  A57(3·3) @ 176.35342: no sum within 0.1°
-round 3  A58(3·3) @ 176.41630: no sum within 0.1°
-round 3  A59(3·3) @ 176.47705: no sum within 0.1°
-round 3  A72(3·3) @ 177.11317: no sum within 0.1°
-round 3  A73(3·3) @ 177.15272: no sum within 0.1°
-round 3  A74(3·3) @ 177.19120: no sum within 0.1°
-round 3  A75(3·3) @ 177.22865: no sum within 0.1°
-round 3  A86(3·3) @ 177.58314: no sum within 0.1°
-round 3  A87(3·3) @ 177.61092: no sum within 0.1°
-round 3  A88(3·3) @ 177.63807: no sum within 0.1°
-round 3  A89(3·3) @ 177.66461: no sum within 0.1°
-round 3  A90(3·3) @ 177.69056: no sum within 0.1°
-round 3  A91(3·3) @ 177.71594: no sum within 0.1°
-round 3  A99(3·3) @ 177.90052: no sum within 0.1°
-round 3  A100(3·3) @ 177.92151: no sum within 0.1°
+round 1  icos(3·3) @ 138.18969: margin 1.346e-02°; face-compatible margin 4.859e-02°  p3(4·4)+tet(3·3)+A41(3·41) misses by 1.346e-02  p3(4·4)+truncTet(6·6)+A41(3·41) misses by 1.346e-02  face-compatible: A8(3·8)+truncCube(3·8) misses by 4.859e-02
+round 1  rhombicosidodec(3·4) @ 159.09484: margin 9.824e-03°; no face-compatible sum within 0.1°  A18(3·18)+P5(4·4) misses by 9.824e-03  A36(3·36)+oct(3·3) misses by 1.051e-02
+round 1  rhombicosidodec(4·5) @ 148.28253: margin 1.643e-02°; no face-compatible sum within 0.1°  A30(3·30)+p6(4·4) misses by 1.643e-02  p3(4·4)+p3(4·4)+A30(3·30) misses by 1.643e-02
+round 1  snubCube(3·3) @ 153.23459: margin 2.655e-04°; no face-compatible sum within 0.1°  A259(3·259)+truncDodec(10·10) misses by 2.655e-04  A259(3·259)+dodec(5·5) misses by 2.655e-04
+round 1  snubCube(3·4) @ 142.98343: margin 1.828e-02°; no face-compatible sum within 0.1°  A30(3·30)+co(3·4) misses by 1.828e-02  A30(3·30)+truncOct(4·6) misses by 1.828e-02
+round 1  snubDodec(3·3) @ 164.17537: margin 1.289e-02°; no face-compatible sum within 0.1°  A26(3·26)+A4(3·4) misses by 1.289e-02  tet(3·3)+co(3·4) misses by 3.146e-02
+round 1  snubDodec(3·5) @ 152.92992: margin 5.021e-04°; no face-compatible sum within 0.1°  A103(3·103)+dodec(5·5) misses by 5.021e-04  A103(3·103)+truncDodec(10·10) misses by 5.021e-04
+round 1  truncIcos(6·6) @ 138.18969: margin 1.346e-02°; no face-compatible sum within 0.1°  p3(4·4)+tet(3·3)+A41(3·41) misses by 1.346e-02  p3(4·4)+truncTet(6·6)+A41(3·41) misses by 1.346e-02
+round 1  truncIcosidodec(4·6) @ 159.09484: margin 9.824e-03°; no face-compatible sum within 0.1°  A18(3·18)+P5(4·4) misses by 9.824e-03  A36(3·36)+oct(3·3) misses by 1.051e-02
+round 1  truncIcosidodec(4·10) @ 148.28253: margin 1.643e-02°; no face-compatible sum within 0.1°  A30(3·30)+p6(4·4) misses by 1.643e-02  p3(4·4)+p3(4·4)+A30(3·30) misses by 1.643e-02
+round 1  A4(3·3) @ 127.55160: margin 1.451e-02°; no face-compatible sum within 0.1°  tet(3·3)+tet(3·3)+A37(3·37) misses by 1.451e-02  tet(3·3)+truncTet(6·6)+A37(3·37) misses by 1.451e-02
+round 1  A5(3·3) @ 138.18969: margin 1.346e-02°; face-compatible margin 4.859e-02°  p3(4·4)+tet(3·3)+A41(3·41) misses by 1.346e-02  p3(4·4)+truncTet(6·6)+A41(3·41) misses by 1.346e-02  face-compatible: A8(3·8)+truncCube(3·8) misses by 4.859e-02
+round 1  A6(3·3) @ 145.22189: margin 1.648e-02°; no face-compatible sum within 0.1°  A11(3·11)+p6(4·4) misses by 1.648e-02  p3(4·4)+p3(4·4)+A11(3·11) misses by 1.648e-02
+round 1  A7(3·3) @ 150.22226: margin 4.714e-02°; no face-compatible sum within 0.1°  A16(3·16)+truncDodec(10·10) misses by 4.714e-02  A16(3·16)+dodec(5·5) misses by 4.714e-02
+round 1  A8(3·3) @ 153.96238: margin 2.812e-02°; no face-compatible sum within 0.1°  A8(3·8)+oct(3·3) misses by 2.812e-02  A8(3·8)+truncTet(3·6) misses by 2.812e-02
+round 1  A9(3·3) @ 156.86624: margin 6.728e-02°; no face-compatible sum within 0.1°  A14(3·14)+oct(3·3) misses by 6.728e-02  A14(3·14)+truncTet(3·6) misses by 6.728e-02
+round 1  A10(3·3) @ 159.18651: margin 9.085e-03°; no face-compatible sum within 0.1°  A39(3·39)+oct(3·3) misses by 9.085e-03  A39(3·39)+truncTet(3·6) misses by 9.085e-03
+round 1  A11(3·3) @ 161.08325: margin 4.874e-03°; no face-compatible sum within 0.1°  A57(3·57)+P5(4·4) misses by 4.874e-03  A56(3·56)+P5(4·4) misses by 1.142e-02
+round 1  A12(3·3) @ 162.66285: margin 2.204e-02°; no face-compatible sum within 0.1°  A15(3·15)+A4(3·4) misses by 2.204e-02  A8(3·8)+A5(3·5) misses by 6.968e-02
+round 1  A13(3·3) @ 163.99877: margin 3.604e-03°; no face-compatible sum within 0.1°  A24(3·24)+A4(3·4) misses by 3.604e-03  A10(3·10)+A5(3·5) misses by 5.773e-02
+round 1  A14(3·3) @ 165.14339: margin 1.215e-03°; no face-compatible sum within 0.1°  A51(3·51)+A4(3·4) misses by 1.215e-03  A50(3·50)+A4(3·4) misses by 1.918e-02
+round 1  A16(3·3) @ 167.00263: margin 1.638e-02°; no face-compatible sum within 0.1°  A24(3·24)+A5(3·5) misses by 1.638e-02  A13(3·13)+A6(3·6) misses by 7.804e-02
+round 1  A17(3·3) @ 167.76793: margin 1.440e-02°; no face-compatible sum within 0.1°  A37(3·37)+A5(3·5) misses by 1.440e-02  A36(3·36)+A5(3·5) misses by 2.469e-02
+round 1  A18(3·3) @ 168.44809: margin 2.859e-03°; no face-compatible sum within 0.1°  A70(3·70)+A5(3·5) misses by 2.859e-03  A71(3·71)+A5(3·5) misses by 7.602e-03
+round 1  A20(3·3) @ 169.60412: margin 1.067e-02°; face-compatible margin 9.741e-02°  A35(3·35)+A6(3·6) misses by 1.067e-02  A34(3·34)+A6(3·6) misses by 3.310e-02  face-compatible: A10(3·10)+A10(3·10) misses by 9.741e-02 (Lemma E's family)
+round 1  A21(3·3) @ 170.09948: margin 1.475e-03°; no face-compatible sum within 0.1°  A52(3·52)+A6(3·6) misses by 1.475e-03  A51(3·51)+A6(3·6) misses by 1.814e-02
+round 1  A22(3·3) @ 170.54977: margin 2.038e-03°; face-compatible margin 7.302e-02°  A94(3·94)+A6(3·6) misses by 2.038e-03  A95(3·95)+A6(3·6) misses by 3.783e-03  face-compatible: A11(3·11)+A11(3·11) misses by 7.302e-02 (Lemma E's family)
+round 1  A24(3·3) @ 171.33768: margin 7.079e-03°; face-compatible margin 5.615e-02°  A48(3·48)+A7(3·7) misses by 7.079e-03  A25(3·25)+A8(3·8) misses by 1.386e-02  face-compatible: A12(3·12)+A12(3·12) misses by 5.615e-02 (Lemma E's family)
+round 1  A25(3·3) @ 171.68433: margin 9.608e-04°; no face-compatible sum within 0.1°  A70(3·70)+A7(3·7) misses by 9.608e-04  A17(3·17)+A10(3·10) misses by 2.274e-03
+round 1  A26(3·3) @ 172.00430: margin 9.692e-04°; face-compatible margin 4.410e-02°  A123(3·123)+A7(3·7) misses by 9.692e-04  A122(3·122)+A7(3·7) misses by 2.494e-03  face-compatible: A13(3·13)+A13(3·13) misses by 4.410e-02 (Lemma E's family)
+round 1  A28(3·3) @ 172.57562: margin 1.612e-03°; face-compatible margin 3.527e-02°  A17(3·17)+A12(3·12) misses by 1.612e-03  A63(3·63)+A8(3·8) misses by 4.871e-03  face-compatible: A14(3·14)+A14(3·14) misses by 3.527e-02 (Lemma E's family)
+round 1  A29(3·3) @ 172.83172: margin 2.687e-03°; no face-compatible sum within 0.1°  A91(3·91)+A8(3·8) misses by 2.687e-03  A90(3·90)+A8(3·8) misses by 3.660e-03
+round 1  A30(3·3) @ 173.07074: margin 5.072e-04°; face-compatible margin 2.865e-02°  A155(3·155)+A8(3·8) misses by 5.072e-04  A24(3·24)+A11(3·11) misses by 1.045e-03  face-compatible: A15(3·15)+A15(3·15) misses by 2.865e-02 (Lemma E's family)
+round 1  A32(3·3) @ 173.50394: margin 5.342e-04°; face-compatible margin 2.359e-02°  A30(3·30)+A11(3·11) misses by 5.342e-04  A80(3·80)+A9(3·9) misses by 3.473e-03  face-compatible: A16(3·16)+A16(3·16) misses by 2.359e-02 (Lemma E's family)
+round 1  A33(3·3) @ 173.70084: margin 3.520e-04°; no face-compatible sum within 0.1°  A114(3·114)+A9(3·9) misses by 3.520e-04  A113(3·113)+A9(3·9) misses by 3.683e-03
+round 1  A34(3·3) @ 173.88615: margin 2.344e-04°; face-compatible margin 1.966e-02°  A192(3·192)+A9(3·9) misses by 2.344e-04  A60(3·60)+A10(3·10) misses by 9.454e-04  face-compatible: A17(3·17)+A17(3·17) misses by 1.966e-02 (Lemma E's family)
+round 1  A36(3·3) @ 174.22589: margin 2.554e-03°; face-compatible margin 1.655e-02°  A99(3·99)+A10(3·10) misses by 2.554e-03  A98(3·98)+A10(3·10) misses by 2.803e-03  face-compatible: A18(3·18)+A18(3·18) misses by 1.655e-02 (Lemma E's family)
+round 1  A37(3·3) @ 174.38197: margin 2.087e-04°; no face-compatible sum within 0.1°  A140(3·140)+A10(3·10) misses by 2.087e-04  A139(3·139)+A10(3·10) misses by 2.462e-03
+round 1  A38(3·3) @ 174.52985: margin 4.667e-04°; face-compatible margin 1.407e-02°  A232(3·232)+A10(3·10) misses by 4.667e-04  A233(3·233)+A10(3·10) misses by 4.946e-04  face-compatible: A19(3·19)+A19(3·19) misses by 1.407e-02 (Lemma E's family)
+round 1  A40(3·3) @ 174.80340: margin 9.344e-04°; face-compatible margin 1.206e-02°  A62(3·62)+A12(3·12) misses by 9.344e-04  A119(3·119)+A11(3·11) misses by 1.710e-03  face-compatible: A20(3·20)+A20(3·20) misses by 1.206e-02 (Lemma E's family)
+round 1  A41(3·3) @ 174.93017: margin 7.288e-04°; no face-compatible sum within 0.1°  A169(3·169)+A11(3·11) misses by 7.288e-04  A168(3·168)+A11(3·11) misses by 1.102e-03
+round 1  A42(3·3) @ 175.05090: margin 1.146e-04°; face-compatible margin 1.041e-02°  A277(3·277)+A11(3·11) misses by 1.146e-04  A278(3·278)+A11(3·11) misses by 5.603e-04  face-compatible: A21(3·21)+A21(3·21) misses by 1.041e-02 (Lemma E's family)
+round 1  A44(3·3) @ 175.27589: margin 1.068e-03°; face-compatible margin 9.055e-03°  A142(3·142)+A12(3·12) misses by 1.068e-03  A143(3·143)+A12(3·12) misses by 1.491e-03  face-compatible: A22(3·22)+A22(3·22) misses by 9.055e-03 (Lemma E's family)
+round 1  A45(3·3) @ 175.38088: margin 6.713e-05°; face-compatible margin 9.251e-02°  A200(3·200)+A12(3·12) misses by 6.713e-05  A199(3·199)+A12(3·12) misses by 1.239e-03  face-compatible: A23(3·23)+A23(3·23) misses by 9.251e-02 (Lemma E's family)
+round 1  A48(3·3) @ 175.66962: margin 6.206e-04°; face-compatible margin 6.971e-03°  A61(3·61)+A15(3·15) misses by 6.206e-04  A167(3·167)+A13(3·13) misses by 6.768e-04  face-compatible: A24(3·24)+A24(3·24) misses by 6.971e-03 (Lemma E's family)
+round 1  A49(3·3) @ 175.75800: margin 3.365e-05°; face-compatible margin 7.868e-02°  A234(3·234)+A13(3·13) misses by 3.365e-05  A233(3·233)+A13(3·13) misses by 9.194e-04  face-compatible: A25(3·25)+A25(3·25) misses by 7.868e-02 (Lemma E's family)
+round 1  A52(3·3) @ 176.00276: margin 3.868e-05°; face-compatible margin 5.481e-03°  A30(3·30)+A23(3·23) misses by 3.868e-05  A194(3·194)+A14(3·14) misses by 4.313e-04  face-compatible: A26(3·26)+A26(3·26) misses by 5.481e-03 (Lemma E's family)
+round 1  A53(3·3) @ 176.07818: margin 2.489e-04°; face-compatible margin 6.774e-02°  A271(3·271)+A14(3·14) misses by 2.489e-04  A270(3·270)+A14(3·14) misses by 4.613e-04  face-compatible: A27(3·27)+A27(3·27) misses by 6.774e-02 (Lemma E's family)
+round 1  A56(3·3) @ 176.28830: margin 1.739e-07°; face-compatible margin 4.388e-03°  A115(3·115)+A16(3·16) misses by 1.739e-07  A223(3·223)+A15(3·15) misses by 2.735e-04  face-compatible: A28(3·28)+A28(3·28) misses by 4.388e-03 (Lemma E's family)
+round 1  A60(3·3) @ 176.53577: margin 1.702e-04°; face-compatible margin 3.566e-03°  A254(3·254)+A16(3·16) misses by 1.702e-04  A72(3·72)+A19(3·19) misses by 3.006e-04  face-compatible: A30(3·30)+A30(3·30) misses by 3.566e-03 (Lemma E's family)
+round 1  A64(3·3) @ 176.75230: margin 1.017e-04°; face-compatible margin 2.938e-03°  A287(3·287)+A17(3·17) misses by 1.017e-04  A59(3·59)+A22(3·22) misses by 1.752e-04  face-compatible: A32(3·32)+A32(3·32) misses by 2.938e-03 (Lemma E's family)
+round 2  dodec(5·5) @ 116.56505: margin 1.013e-04°; no face-compatible sum within 0.1°  p3(4·4)+A75(3·75)+A19(3·19) misses by 1.013e-04  A46(3·46)+P13(4·4) misses by 2.854e-03
+round 2  icosidodec(3·5) @ 142.62263: margin 9.385e-02°; no face-compatible sum within 0.1°  P5(4·4)+oct(3·3) misses by 9.385e-02  P5(4·4)+truncTet(3·6) misses by 9.385e-02
+round 2  truncDodec(3·10) @ 142.62263: margin 9.385e-02°; no face-compatible sum within 0.1°  P5(4·4)+oct(3·3) misses by 9.385e-02  P5(4·4)+truncTet(3·6) misses by 9.385e-02
+round 2  truncDodec(10·10) @ 116.56505: margin 1.013e-04°; no face-compatible sum within 0.1°  p3(4·4)+A75(3·75)+A19(3·19) misses by 1.013e-04  A46(3·46)+P13(4·4) misses by 2.854e-03
+round 2  A15(3·3) @ 166.13510: no sum within 0.1°; no face-compatible sum within 0.1°
+round 2  A19(3·3) @ 169.05656: no sum within 0.1°; no face-compatible sum within 0.1°
+round 2  A23(3·3) @ 170.96087: no sum within 0.1°; no face-compatible sum within 0.1°
+round 2  A27(3·3) @ 172.30055: no sum within 0.1°; no face-compatible sum within 0.1°
+round 2  A31(3·3) @ 173.29433: no sum within 0.1°; no face-compatible sum within 0.1°
+round 2  A35(3·3) @ 174.06087: no sum within 0.1°; no face-compatible sum within 0.1°
+round 2  A39(3·3) @ 174.67013: margin 6.548e-02°; no face-compatible sum within 0.1°  p3(4·4)+co(3·4) misses by 6.548e-02  p3(4·4)+truncOct(4·6) misses by 6.548e-02
+round 2  A43(3·3) @ 175.16601: margin 2.184e-02°; no face-compatible sum within 0.1°  A39(3·39)+A15(3·15) misses by 2.184e-02
+round 2  A46(3·3) @ 175.48131: margin 9.931e-05°; face-compatible margin 7.922e-03°  A50(3·50)+A15(3·15) misses by 9.931e-05  A23(3·23)+A23(3·23) misses by 7.922e-03  face-compatible: A23(3·23)+A23(3·23) misses by 7.922e-03 (Lemma E's family)
+round 2  A47(3·3) @ 175.57747: margin 1.480e-03°; no face-compatible sum within 0.1°  A55(3·55)+A15(3·15) misses by 1.480e-03  A31(3·31)+A19(3·19) misses by 2.566e-03
+round 2  A50(3·3) @ 175.84285: margin 3.258e-03°; no face-compatible sum within 0.1°  A77(3·77)+A15(3·15) misses by 3.258e-03  A76(3·76)+A15(3·15) misses by 5.625e-03
+round 2  A51(3·3) @ 175.92437: margin 3.290e-04°; no face-compatible sum within 0.1°  A39(3·39)+A19(3·19) misses by 3.290e-04  A87(3·87)+A15(3·15) misses by 6.635e-04
+round 2  A54(3·3) @ 176.15082: margin 9.466e-04°; face-compatible margin 4.894e-03°  A140(3·140)+A15(3·15) misses by 9.466e-04  A47(3·47)+A19(3·19) misses by 1.026e-03  face-compatible: A27(3·27)+A27(3·27) misses by 4.894e-03 (Lemma E's family)
+round 2  A55(3·3) @ 176.22081: margin 1.315e-04°; face-compatible margin 7.489e-02°  A173(3·173)+A15(3·15) misses by 1.315e-04  A174(3·174)+A15(3·15) misses by 1.595e-03  face-compatible: A27(3·27)+A27(3·27) misses by 7.489e-02 (Lemma E's family)
+round 2  A61(3·3) @ 176.59256: margin 9.514e-04°; face-compatible margin 5.173e-02°  A78(3·78)+A19(3·19) misses by 9.514e-04  A35(3·35)+A27(3·27) misses by 5.379e-03  face-compatible: A31(3·31)+A31(3·31) misses by 5.173e-02 (Lemma E's family)
+round 2  A62(3·3) @ 176.64752: margin 1.029e-03°; face-compatible margin 3.232e-03°  A85(3·85)+A19(3·19) misses by 1.029e-03  A31(3·31)+A31(3·31) misses by 3.232e-03  face-compatible: A31(3·31)+A31(3·31) misses by 3.232e-03 (Lemma E's family)
+round 2  A63(3·3) @ 176.70074: margin 1.641e-03°; face-compatible margin 5.645e-02°  A93(3·93)+A19(3·19) misses by 1.641e-03  A50(3·50)+A23(3·23) misses by 3.676e-03  face-compatible: A31(3·31)+A31(3·31) misses by 5.645e-02 (Lemma E's family)
+round 2  A65(3·3) @ 176.80226: margin 2.120e-04°; no face-compatible sum within 0.1°  A114(3·114)+A19(3·19) misses by 2.120e-04  A115(3·115)+A19(3·19) misses by 3.752e-03
+round 2  A66(3·3) @ 176.85072: margin 1.198e-03°; no face-compatible sum within 0.1°  A128(3·128)+A19(3·19) misses by 1.198e-03  A127(3·127)+A19(3·19) misses by 1.999e-03
+round 2  A67(3·3) @ 176.89772: margin 6.726e-04°; no face-compatible sum within 0.1°  A62(3·62)+A23(3·23) misses by 6.726e-04  A144(3·144)+A19(3·19) misses by 6.968e-04
+round 2  A68(3·3) @ 176.94335: margin 3.901e-04°; face-compatible margin 8.509e-02°  A165(3·165)+A19(3·19) misses by 3.901e-04  A46(3·46)+A27(3·27) misses by 4.984e-04  face-compatible: A35(3·35)+A35(3·35) misses by 8.509e-02 (Lemma E's family)
+round 2  A69(3·3) @ 176.98765: margin 4.025e-04°; face-compatible margin 4.079e-02°  A192(3·192)+A19(3·19) misses by 4.025e-04  A193(3·193)+A19(3·19) misses by 9.998e-04  face-compatible: A35(3·35)+A35(3·35) misses by 4.079e-02 (Lemma E's family)
+round 2  A70(3·3) @ 177.03069: margin 2.911e-04°; face-compatible margin 2.245e-03°  A229(3·229)+A19(3·19) misses by 2.911e-04  A228(3·228)+A19(3·19) misses by 7.042e-04  face-compatible: A35(3·35)+A35(3·35) misses by 2.245e-03 (Lemma E's family)
+round 2  A71(3·3) @ 177.07251: margin 2.012e-04°; face-compatible margin 4.407e-02°  A280(3·280)+A19(3·19) misses by 2.012e-04  A281(3·281)+A19(3·19) misses by 4.593e-04  face-compatible: A35(3·35)+A35(3·35) misses by 4.407e-02 (Lemma E's family)
+round 2  A76(3·3) @ 177.26512: margin 8.373e-04°; face-compatible margin 6.851e-02°  A110(3·110)+A23(3·23) misses by 8.373e-04  A111(3·111)+A23(3·23) misses by 3.419e-03  face-compatible: A39(3·39)+A39(3·39) misses by 6.851e-02 (Lemma E's family)
+round 2  A77(3·3) @ 177.30064: margin 6.230e-04°; face-compatible margin 3.299e-02°  A119(3·119)+A23(3·23) misses by 6.230e-04  A51(3·51)+A31(3·31) misses by 2.279e-03  face-compatible: A39(3·39)+A39(3·39) misses by 3.299e-02 (Lemma E's family)
+round 2  A78(3·3) @ 177.33525: margin 1.376e-03°; face-compatible margin 1.622e-03°  A129(3·129)+A23(3·23) misses by 1.376e-03  A39(3·39)+A39(3·39) misses by 1.622e-03  face-compatible: A39(3·39)+A39(3·39) misses by 1.622e-03 (Lemma E's family)
+round 2  A79(3·3) @ 177.36898: margin 8.225e-04°; face-compatible margin 3.535e-02°  A141(3·141)+A23(3·23) misses by 8.225e-04  A74(3·74)+A27(3·27) misses by 1.677e-03  face-compatible: A39(3·39)+A39(3·39) misses by 3.535e-02 (Lemma E's family)
+round 2  A80(3·3) @ 177.40187: margin 4.215e-04°; face-compatible margin 6.824e-02°  A155(3·155)+A23(3·23) misses by 4.215e-04  A156(3·156)+A23(3·23) misses by 1.728e-03  face-compatible: A39(3·39)+A39(3·39) misses by 6.824e-02 (Lemma E's family)
+round 2  A81(3·3) @ 177.43395: margin 6.388e-04°; no face-compatible sum within 0.1°  A172(3·172)+A23(3·23) misses by 6.388e-04  A171(3·171)+A23(3·23) misses by 1.128e-03
+round 2  A82(3·3) @ 177.46524: margin 6.012e-04°; no face-compatible sum within 0.1°  A191(3·191)+A23(3·23) misses by 6.012e-04  A192(3·192)+A23(3·23) misses by 8.159e-04
+round 2  A83(3·3) @ 177.49578: margin 2.374e-04°; face-compatible margin 8.615e-02°  A90(3·90)+A27(3·27) misses by 2.374e-04  A216(3·216)+A23(3·23) misses by 3.478e-04  face-compatible: A43(3·43)+A43(3·43) misses by 8.615e-02 (Lemma E's family)
+round 2  A84(3·3) @ 177.52559: margin 1.270e-04°; face-compatible margin 5.634e-02°  A246(3·246)+A23(3·23) misses by 1.270e-04  A95(3·95)+A27(3·27) misses by 3.464e-04  face-compatible: A43(3·43)+A43(3·43) misses by 5.634e-02 (Lemma E's family)
+round 2  A85(3·3) @ 177.55471: margin 3.045e-04°; face-compatible margin 2.722e-02°  A286(3·286)+A23(3·23) misses by 3.045e-04  A285(3·285)+A23(3·23) misses by 3.331e-04  face-compatible: A43(3·43)+A43(3·43) misses by 2.722e-02 (Lemma E's family)
+round 2  A92(3·3) @ 177.74077: margin 9.049e-04°; face-compatible margin 9.885e-04°  A156(3·156)+A27(3·27) misses by 9.049e-04  A46(3·46)+A46(3·46) misses by 9.885e-04  face-compatible: A46(3·46)+A46(3·46) misses by 9.885e-04 (Lemma E's family)
+round 2  A93(3·3) @ 177.76506: margin 4.263e-04°; face-compatible margin 2.285e-02°  A169(3·169)+A27(3·27) misses by 4.263e-04  A47(3·47)+A46(3·46) misses by 1.216e-03  face-compatible: A47(3·47)+A47(3·47) misses by 2.285e-02 (Lemma E's family)
+round 2  A94(3·3) @ 177.78884: margin 1.738e-04°; face-compatible margin 9.267e-04°  A183(3·183)+A27(3·27) misses by 1.738e-04  A47(3·47)+A47(3·47) misses by 9.267e-04  face-compatible: A47(3·47)+A47(3·47) misses by 9.267e-04 (Lemma E's family)
+round 2  A95(3·3) @ 177.81211: margin 1.980e-04°; face-compatible margin 2.420e-02°  A74(3·74)+A35(3·35) misses by 1.980e-04  A199(3·199)+A27(3·27) misses by 2.711e-04  face-compatible: A47(3·47)+A47(3·47) misses by 2.420e-02 (Lemma E's family)
+round 2  A96(3·3) @ 177.83490: margin 3.031e-04°; face-compatible margin 4.699e-02°  A218(3·218)+A27(3·27) misses by 3.031e-04  A219(3·219)+A27(3·27) misses by 7.853e-04  face-compatible: A47(3·47)+A47(3·47) misses by 4.699e-02 (Lemma E's family)
+round 2  A97(3·3) @ 177.85723: margin 1.246e-04°; face-compatible margin 6.352e-02°  A241(3·241)+A27(3·27) misses by 1.246e-04  A240(3·240)+A27(3·27) misses by 7.739e-04  face-compatible: A50(3·50)+A50(3·50) misses by 6.352e-02 (Lemma E's family)
+round 2  A98(3·3) @ 177.87909: margin 1.278e-06°; face-compatible margin 4.165e-02°  A57(3·57)+A43(3·43) misses by 1.278e-06  A268(3·268)+A27(3·27) misses by 1.852e-05  face-compatible: A50(3·50)+A50(3·50) misses by 4.165e-02 (Lemma E's family)
+round 3  A57(3·3) @ 176.35342: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A58(3·3) @ 176.41630: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A59(3·3) @ 176.47705: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A72(3·3) @ 177.11317: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A73(3·3) @ 177.15272: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A74(3·3) @ 177.19120: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A75(3·3) @ 177.22865: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A86(3·3) @ 177.58314: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A87(3·3) @ 177.61092: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A88(3·3) @ 177.63807: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A89(3·3) @ 177.66461: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A90(3·3) @ 177.69056: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A91(3·3) @ 177.71594: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A99(3·3) @ 177.90052: no sum within 0.1°; no face-compatible sum within 0.1°
+round 3  A100(3·3) @ 177.92151: no sum within 0.1°; no face-compatible sum within 0.1°
 
 minimum margin over all dead edges: 1.739e-07°
+minimum face-compatible margin over all dead edges: 9.267e-04°
+minimum face-compatible margin beyond Lemma E's family: 4.859e-02°
 
 == Survivors (0) and their completions ==
 

@@ -67,6 +67,8 @@ class ExactCertificatesSpec extends AnyFlatSpec with Matchers:
         c.latInv shouldBe true
         c.coverage shouldBe true
         c.genEquiv shouldBe true
+        c.boxPeriodic shouldBe true
+        c.closed shouldBe true
         c.ok shouldBe true
         c.ballVerts should be > 0
       }

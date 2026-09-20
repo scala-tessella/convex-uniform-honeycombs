@@ -36,13 +36,17 @@ object ExactCertificatesCertificate:
     sb ++= "cov = R_per >= ub(covBound) + ub(max|tau|) + 3/2 with exact rational upper bounds;\n"
     sb ++= "gen = every generator is an exact symmetry of the ball within R_per (the entry at the\n"
     sb ++= "image position carries the image star up to Stab(S)) — checked, not derived from the\n"
-    sb ++= "collision-free development, which expands only the first word reaching a position\n\n"
+    sb ++= "collision-free development, which expands only the first word reaching a position;\n"
+    sb ++= "box = every entry within R_per is the exact Lambda-translate of the entry at its box\n"
+    sb ++= "representative (rounded lattice coordinates, verified in the field); closed = every\n"
+    sb ++= "generator image of an entry within the slack radius is an entry (the development\n"
+    sb ++= "terminated before its depth cap)\n\n"
     sb ++= f"${"species"}%-34s ${"cl"}%2s ${"glu"}%5s ${"R1"}%5s ${"R2"}%5s ${"trans"}%5s " +
-      f"${"indep"}%5s ${"ball"}%5s ${"per"}%5s ${"lat"}%5s ${"cov"}%5s ${"gen"}%5s\n"
+      f"${"indep"}%5s ${"ball"}%5s ${"per"}%5s ${"lat"}%5s ${"cov"}%5s ${"gen"}%5s ${"box"}%6s ${"closed"}%6s\n"
     r.classes.foreach { c =>
       sb ++= f"${SpeciesCorona.label(c.idx)}%-34s ${c.classIdx}%2d ${c.gluOk}%5s ${c.r1Ok}%5s " +
         f"${c.r2Ok}%5s ${c.transOk}%5s ${c.indepOk}%5s ${c.ballVerts}%5d ${c.periodic}%5s " +
-        f"${c.latInv}%5s ${c.coverage}%5s ${c.genEquiv}%5s\n"
+        f"${c.latInv}%5s ${c.coverage}%5s ${c.genEquiv}%5s ${c.boxPeriodic}%6s ${c.closed}%6s\n"
     }
     sb ++= f"\nexact certificates: ${r.classes.count(_.ok)}/${r.classes.size}\n\n"
     sb ++= "== (c) exact class coherence (every accepted pattern within the caps) ==\n"

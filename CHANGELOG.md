@@ -7,6 +7,34 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 a paper, entries state what a re-check would find different from the previous release — a referee who checked
 an earlier version should be able to tell from here whether the claims, the specs, or only the packaging moved.
 
+## [Unreleased]
+
+**Box periodicity checked, not walked.** One step of 0.3.0's periodization certificate was argued rather
+than checked: the identification of the periodized honeycomb with the developed field on the whole ball,
+which the proof reached by walking from the box along ±τᵢ-steps "inside the ball" — true for two points of
+the closed box, not for a general point of the R_per-ball, which can be many lattice steps from the box
+along a chain that leaves the ball. A referee who re-checks will find it closed twice over: the pinned
+`research-core` 0.11.0 checks condition (v), box periodicity — every ball entry within R_per is the
+Λ-translate of the entry at its box representative — and a closure line (the breadth-first development
+terminated before its depth cap), and the exact layer replays both. The species table, the pattern
+classes, the fixpoint's rounds and the 28 are unchanged.
+
+### Changed
+
+- `research-core` pinned to **0.11.0** (from 0.10.0): `CompletenessAudit.Certificate` gains `boxPeriodic`
+  and `closed`, both required by `ok`.
+- `ExactCertificates`: `ClassReport` gains `boxPeriodic` (the rounding of the lattice coordinates guided by
+  doubles and verified in the field, |cᵢ − nᵢ| ≤ 1/2, the entry at p − λ looked up exactly) and `closed`;
+  `ok` requires both. `ExactCertificatesSpec` asserts them on all 28; `exact-certificates.txt` gains the
+  `box` and `closed` columns; `completeness-audit.txt`'s legend names all six conditions.
+- `OutsiderExclusion`: every participant class carries its face pair, and each dead edge reads its near misses
+  for **face compatibility** (some cyclic order closing faces around the edge; a tail class's big polygon
+  compatible with every other big polygon, a superset). The three tightest misses of 0.3.0 are all
+  face-incompatible; the closest face-compatible miss is Lemma E's own family, A47 + A47 against A94's
+  lateral edge at 9.3·10⁻⁴°, refuted exactly for every q, r; beyond that family the closest is the
+  icosahedral edge against A8(3·8) + truncCube(3·8), 0.049° past 360°. `OutsiderExclusionSpec` pins both;
+  `outsider-exclusion.txt` reports both per dead edge and their minima.
+
 ## [0.3.0] — 2026-09-20
 
 Archived as [doi:10.5281/zenodo.22857000](https://doi.org/10.5281/zenodo.22857000) — the version DOI to cite.

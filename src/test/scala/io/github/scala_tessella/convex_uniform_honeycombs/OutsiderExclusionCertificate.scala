@@ -38,6 +38,8 @@ object OutsiderExclusionCertificate:
     sb ++= "margin = the closest miss at the interval midpoints; interval widths are ~1e-10\n"
     fp.kills.foreach(k => sb ++= k.show + "\n")
     sb ++= f"\nminimum margin over all dead edges: ${fp.minMargin}%.3e°\n"
+    sb ++= f"minimum face-compatible margin over all dead edges: ${fp.minMarginCompatible}%.3e°\n"
+    sb ++= f"minimum face-compatible margin beyond Lemma E's family: ${fp.minMarginCompatibleBeyondE}%.3e°\n"
     sb ++= s"\n== Survivors (${fp.survivors.size}) and their completions ==\n"
     fp.survivors.foreach((_, ts) => ts.foreach(t => sb ++= t.show + "\n"))
     sb ++= s"\ntotal excluded: ${fp.excluded.size}; survivors: ${

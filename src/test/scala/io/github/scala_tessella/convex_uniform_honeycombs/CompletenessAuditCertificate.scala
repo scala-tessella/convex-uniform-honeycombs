@@ -14,7 +14,8 @@ object CompletenessAuditCertificate:
     val sb              = new StringBuilder
     sb ++= "The completeness audit for the 28\n"
     sb ++= "per class: PERIODIZATION CERTIFICATE (three independent translation words; ball periodicity;\n"
-    sb ++= "lattice invariance under all generator point-parts; coverage radius over a fundamental domain);\n"
+    sb ++= "lattice invariance under all generator point-parts; coverage radius over a fundamental domain;\n"
+    sb ++= "generator equivariance; box periodicity; closure of the development before its depth cap);\n"
     sb ++= "per pattern: CLASS COHERENCE (the pattern's own periodization certificate, reaching the\n"
     sb ++= "representative's basis; alignment of the representative's ball onto the pattern's by an element\n"
     sb ++=

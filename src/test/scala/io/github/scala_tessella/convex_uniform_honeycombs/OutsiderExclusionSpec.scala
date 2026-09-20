@@ -80,4 +80,28 @@ class OutsiderExclusionSpec extends AnyFlatSpec with Matchers:
     fp.kills.foreach(k => withClue(k.show)(k.margin should be > 1e-7))
     fp.minMargin should be > 1.7e-7
     fp.minMargin should be < 1.8e-7
+
+  it should "give a second, coarser margin on the face-compatible near misses" in:
+    val fp = fixpoint
+    // the value-level fixpoint ignores faces; the three tightest misses are all rings an antiprism base
+    // cannot close (an r-gon with no r-gon partner), so they are face-incompatible
+    fp.kills.sortBy(_.margin).take(3).foreach(k =>
+      k.nearCompatible.headOption.map(_._2).getOrElse(1.0) should be > 1e-3
+    )
+    fp.kills.sortBy(_.marginCompatible).take(3).foreach(k => info(k.show))
+    info(f"minimum face-compatible margin: ${fp.minMarginCompatible}%.3e°")
+    // measured: 9.27e-4 degrees, Lemma E's family at q = 47, r = 94
+    fp.minMarginCompatible should be > 9e-4
+    fp.minMarginCompatible should be < 1e-3
+    // the closest face-compatible miss is Lemma E's own family (A47 + A47 against A94's lateral edge),
+    // refuted exactly for every q, r; beyond that family the interval alone decides, with the margin below
+    fp.kills.sortBy(_.marginCompatibleBeyondE).take(3).foreach(k =>
+      info(k.nearCompatibleBeyondE.headOption.map((c, d) =>
+        s"${k.cell}(${k.edgeType._1}·${k.edgeType._2}) beyond E: ${c.map(_.label).mkString("+")} misses by $d"
+      ).getOrElse("none"))
+    )
+    info(f"minimum face-compatible margin beyond Lemma E: ${fp.minMarginCompatibleBeyondE}%.3e°")
+    // measured: 4.86e-2 degrees — the icosahedral edge against A8(3·8) + truncCube(3·8)
+    fp.minMarginCompatibleBeyondE should be > 4e-2
+    fp.minMarginCompatibleBeyondE should be < 5e-2
     info(f"minimum margin over ${fp.kills.size} dead edges: ${fp.minMargin}%.3e°")

@@ -53,37 +53,41 @@ Lambda-periodicity exact; lat = generator point parts fix Lambda (integer coords
 cov = R_per >= ub(covBound) + ub(max|tau|) + 3/2 with exact rational upper bounds;
 gen = every generator is an exact symmetry of the ball within R_per (the entry at the
 image position carries the image star up to Stab(S)) — checked, not derived from the
-collision-free development, which expands only the first word reaching a position
+collision-free development, which expands only the first word reaching a position;
+box = every entry within R_per is the exact Lambda-translate of the entry at its box
+representative (rounded lattice coordinates, verified in the field); closed = every
+generator image of an entry within the slack radius is an entry (the development
+terminated before its depth cap)
 
-species                            cl   glu    R1    R2 trans indep  ball   per   lat   cov   gen
-{cube:1 truncOct:1 tco:2}#1         0  true  true  true  true  true  1979  true  true  true  true
-{tco:2 p8:2}#1                      0  true  true  true  true  true  2637  true  true  true  true
-{truncOct:4}#1                      0  true  true  true  true  true  1701  true  true  true  true
-{truncTet:1 truncCube:1 tco:2}#1    0  true  true  true  true  true  3610  true  true  true  true
-{cube:1 truncCube:1 rco:1 p8:2}#1   0  true  true  true  true  true  2199  true  true  true  true
-{cube:2 co:1 rco:2}#1               0  true  true  true  true  true  1659  true  true  true  true
-{oct:1 truncCube:4}#1               0  true  true  true  true  true   833  true  true  true  true
-{tet:1 cube:1 rco:3}#1              0  true  true  true  true  true  1929  true  true  true  true
-{truncTet:2 co:1 truncOct:2}#1      0  true  true  true  true  true  2535  true  true  true  true
-{cube:2 p6:2 p12:2}#1               0  true  true  true  true  true  4521  true  true  true  true
-{cube:2 p8:4}#1                     0  true  true  true  true  true  1159  true  true  true  true
-{oct:2 co:4}#1                      0  true  true  true  true  true   905  true  true  true  true
-{p3:2 p12:4}#1                      0  true  true  true  true  true  2216  true  true  true  true
-{p6:6}#1                            0  true  true  true  true  true   877  true  true  true  true
-{cube:4 p3:2 p6:2}#2                0  true  true  true  true  true  2279  true  true  true  true
-{cube:8}#1                          0  true  true  true  true  true   515  true  true  true  true
-{p3:4 p6:4}#3                       0  true  true  true  true  true  1253  true  true  true  true
-{tet:2 truncTet:6}#2                0  true  true  true  true  true  1257  true  true  true  true
-{cube:4 p3:6}#1                     0  true  true  true  true  true  1198  true  true  true  true
-{cube:4 p3:6}#1                     1  true  true  true  true  true  3434  true  true  true  true
-{cube:4 p3:6}#2                     0  true  true  true  true  true  1276  true  true  true  true
-{p3:8 p6:2}#2                       0  true  true  true  true  true  2311  true  true  true  true
-{p3:12}#1                           0  true  true  true  true  true  1311  true  true  true  true
-{p3:12}#2                           0  true  true  true  true  true   659  true  true  true  true
-{tet:4 oct:3 p3:6}#1                0  true  true  true  true  true  1449  true  true  true  true
-{tet:4 oct:3 p3:6}#1                1  true  true  true  true  true  3694  true  true  true  true
-{tet:8 oct:6}#1                     0  true  true  true  true  true  1261  true  true  true  true
-{tet:8 oct:6}#2                     0  true  true  true  true  true   935  true  true  true  true
+species                            cl   glu    R1    R2 trans indep  ball   per   lat   cov   gen    box closed
+{cube:1 truncOct:1 tco:2}#1         0  true  true  true  true  true  1979  true  true  true  true   true   true
+{tco:2 p8:2}#1                      0  true  true  true  true  true  2637  true  true  true  true   true   true
+{truncOct:4}#1                      0  true  true  true  true  true  1701  true  true  true  true   true   true
+{truncTet:1 truncCube:1 tco:2}#1    0  true  true  true  true  true  3610  true  true  true  true   true   true
+{cube:1 truncCube:1 rco:1 p8:2}#1   0  true  true  true  true  true  2199  true  true  true  true   true   true
+{cube:2 co:1 rco:2}#1               0  true  true  true  true  true  1659  true  true  true  true   true   true
+{oct:1 truncCube:4}#1               0  true  true  true  true  true   833  true  true  true  true   true   true
+{tet:1 cube:1 rco:3}#1              0  true  true  true  true  true  1929  true  true  true  true   true   true
+{truncTet:2 co:1 truncOct:2}#1      0  true  true  true  true  true  2535  true  true  true  true   true   true
+{cube:2 p6:2 p12:2}#1               0  true  true  true  true  true  4521  true  true  true  true   true   true
+{cube:2 p8:4}#1                     0  true  true  true  true  true  1159  true  true  true  true   true   true
+{oct:2 co:4}#1                      0  true  true  true  true  true   905  true  true  true  true   true   true
+{p3:2 p12:4}#1                      0  true  true  true  true  true  2216  true  true  true  true   true   true
+{p6:6}#1                            0  true  true  true  true  true   877  true  true  true  true   true   true
+{cube:4 p3:2 p6:2}#2                0  true  true  true  true  true  2279  true  true  true  true   true   true
+{cube:8}#1                          0  true  true  true  true  true   515  true  true  true  true   true   true
+{p3:4 p6:4}#3                       0  true  true  true  true  true  1253  true  true  true  true   true   true
+{tet:2 truncTet:6}#2                0  true  true  true  true  true  1257  true  true  true  true   true   true
+{cube:4 p3:6}#1                     0  true  true  true  true  true  1198  true  true  true  true   true   true
+{cube:4 p3:6}#1                     1  true  true  true  true  true  3434  true  true  true  true   true   true
+{cube:4 p3:6}#2                     0  true  true  true  true  true  1276  true  true  true  true   true   true
+{p3:8 p6:2}#2                       0  true  true  true  true  true  2311  true  true  true  true   true   true
+{p3:12}#1                           0  true  true  true  true  true  1311  true  true  true  true   true   true
+{p3:12}#2                           0  true  true  true  true  true   659  true  true  true  true   true   true
+{tet:4 oct:3 p3:6}#1                0  true  true  true  true  true  1449  true  true  true  true   true   true
+{tet:4 oct:3 p3:6}#1                1  true  true  true  true  true  3694  true  true  true  true   true   true
+{tet:8 oct:6}#1                     0  true  true  true  true  true  1261  true  true  true  true   true   true
+{tet:8 oct:6}#2                     0  true  true  true  true  true   935  true  true  true  true   true   true
 
 exact certificates: 28/28
 

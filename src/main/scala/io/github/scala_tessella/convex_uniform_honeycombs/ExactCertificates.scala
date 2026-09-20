@@ -676,11 +676,14 @@ object ExactCertificates:
       latInv: Boolean,
       coverage: Boolean,
       genEquiv: Boolean = false,      // every generator is an exact symmetry of the ball within R_per
+      boxPeriodic: Boolean =
+        false,                        // every entry within R_per is the exact Λ-translate of its box representative
+      closed: Boolean = false,        // every entry's generator images within the slack radius are entries
       taus: Vector[VQ] = Vector.empty // the exact certified lattice basis (internal coordinates)
   ):
     def ok: Boolean =
       gluOk && r1Ok && r2Ok && transOk && indepOk && collisionFree && periodic && latInv && coverage &&
-        genEquiv
+        genEquiv && boxPeriodic && closed
 
   /** A certified pattern with the exact ball its certificate was verified on, the radius R_per within which
     * the developed field is the honeycomb, and the rational bound ub(covBound) of its lattice.
@@ -796,9 +799,40 @@ object ExactCertificates:
                     }
                   }
                   val genEquiv = isos.forall(iso => isometrySymmetryExact(star, stabE, ball, rPer2, iso))
+                  // (v) box periodicity, exact: every entry within R_per is the Λ-translate of the entry at
+                  // its box representative p − λ, λ the lattice vector with the rounded coordinates of p —
+                  // the rounding is guided by doubles and verified exactly (|cᵢ − nᵢ| ≤ 1/2 in the field)
+                  val half     = Q23.ofRat(Rat.frac(1, 2))
+                  val boxPer   = ball.values.forall { e =>
+                    if (rPer2 - star.norm2(e.iso.t)).signum < 0 then true
+                    else
+                      val coords = solve3(tmat, e.iso.t)
+                      val ns     = coords.map(c => math.round(c.toDouble))
+                      val inBox  = coords.zip(ns).forall { (c, n) =>
+                        val d = c - Q23.ofInt(n)
+                        (d - half).signum <= 0 && (d + half).signum >= 0
+                      }
+                      val lambda = vqAdd(
+                        vqAdd(vqScale(tv(0), Q23.ofInt(ns(0))), vqScale(tv(1), Q23.ofInt(ns(1)))),
+                        vqScale(tv(2), Q23.ofInt(ns(2)))
+                      )
+                      inBox && (ball.get(vqSub(e.iso.t, lambda)) match
+                        case None     => false
+                        case Some(e0) => inStabE(mMul(e0.inv, e.iso.m), stabE))
+                  }
+                  // closure: every generator image of an entry within the slack radius is an entry — the
+                  // breadth-first development terminated before its depth cap
+                  val closed   = ball.values.forall { e =>
+                    isos.forall { iso =>
+                      val img = e.iso.compose(iso)
+                      (slack2 - star.norm2(img.t)).signum < 0 || ball.contains(img.t)
+                    }
+                  }
                   if !periodic then flags += s"$what: ball not periodic (exact)"
                   if !latInv then flags += s"$what: lattice not generator-invariant (exact)"
                   if !genEquiv then flags += s"$what: a generator is not a symmetry of the ball (exact)"
+                  if !boxPer then flags += s"$what: ball not box-periodic (exact)"
+                  if !closed then flags += s"$what: ball not closed under the generators (exact)"
                   val report   = ClassReport(
                     idx,
                     classIdx,
@@ -813,6 +847,8 @@ object ExactCertificates:
                     latInv,
                     coverage,
                     genEquiv,
+                    boxPer,
+                    closed,
                     tv
                   )
                   (report, Option.when(report.ok)(Certified(report, ball, rPer2, covUB)))

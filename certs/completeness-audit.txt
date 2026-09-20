@@ -1,6 +1,7 @@
 The completeness audit for the 28
 per class: PERIODIZATION CERTIFICATE (three independent translation words; ball periodicity;
-lattice invariance under all generator point-parts; coverage radius over a fundamental domain);
+lattice invariance under all generator point-parts; coverage radius over a fundamental domain;
+generator equivariance; box periodicity; closure of the development before its depth cap);
 per pattern: CLASS COHERENCE (the pattern's own periodization certificate, reaching the
 representative's basis; alignment of the representative's ball onto the pattern's by an element
 of Stab(S) at the determination radius; the aligned representative basis acting by symmetries on

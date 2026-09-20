@@ -27,7 +27,15 @@ import CertifiedDihedrals.*
   */
 object OutsiderExclusion:
 
-  final case class Value(label: String, iv: Iv)
+  /** A participant class: a cell with a designated face pair and its certified dihedral interval. The face
+    * pair is not used by the value-level fixpoint; it serves the face-compatibility reading of the near
+    * misses. A face of size [[Big]] stands for the polygon of a tail cell (p > 500 or q > 300), compatible
+    * with every other big face — a superset, hence sound.
+    */
+  final case class Value(label: String, iv: Iv, faces: (Int, Int))
+
+  /** The face size standing for every polygon of a tail cell. */
+  val Big: Int = -1
 
   private val MinAngle = 60.0 // P3 vertical, the global minimum dihedral
   private val MaxAngle = 180.0
@@ -41,20 +49,22 @@ object OutsiderExclusion:
   private lazy val coreValues: Vector[Value] =
     HoneycombAlphabet.edgeTypes.map { et =>
       val iv = Iv.point(et.angle.r.toDouble) + alphaDeg * Iv.point(et.angle.n.toDouble)
-      Value(s"${et.cell.label}(${et.faces._1}·${et.faces._2})", iv)
+      Value(s"${et.cell.label}(${et.faces._1}·${et.faces._2})", iv, et.faces)
     } ++
       (5 to maxPoolPrism).filterNot(Set(6, 8, 12).contains).map { p =>
-        Value(s"P$p(4·4)", Iv.widen(180.0 - 360.0 / p, 180.0 - 360.0 / p))
+        Value(s"P$p(4·4)", Iv.widen(180.0 - 360.0 / p, 180.0 - 360.0 / p), (4, 4))
       }
 
   private lazy val namedValues: Map[String, Vector[Value]] =
     outsiderConfigs.map { (name, cfg) =>
-      name -> edgeTypesOf(cfg).toVector.map((pair, iv) => Value(s"$name(${pair._1}·${pair._2})", iv))
+      name -> edgeTypesOf(cfg).toVector.map((pair, iv) =>
+        Value(s"$name(${pair._1}·${pair._2})", iv, pair)
+      )
     }
 
   private lazy val antiValues: Map[Int, Vector[Value]] = (4 to maxPoolAntiprism).map { q =>
     q -> edgeTypesOf(antiprismConfig(q)).toVector.map((pair, iv) =>
-      Value(s"A$q(${pair._1}·${pair._2})", iv)
+      Value(s"A$q(${pair._1}·${pair._2})", iv, pair)
     )
   }.toMap
 
@@ -63,11 +73,30 @@ object OutsiderExclusion:
     * always participants.
     */
   lazy val tailValues: Vector[Value] = Vector(
-    Value(s"P>$maxPoolPrism(4·4)", Iv(180.0 - 360.0 / (maxPoolPrism + 1), 180.0)),
-    Value(s"P>$maxPoolPrism(4·big)", Iv.point(90.0)),
-    Value(s"A>$maxPoolAntiprism(3·big)", TailExclusion.a3qTail(maxPoolAntiprism + 1)),
-    Value(s"A>$maxPoolAntiprism(3·3)", TailExclusion.a33Tail(maxPoolAntiprism + 1))
+    Value(s"P>$maxPoolPrism(4·4)", Iv(180.0 - 360.0 / (maxPoolPrism + 1), 180.0), (4, 4)),
+    Value(s"P>$maxPoolPrism(4·big)", Iv.point(90.0), (4, Big)),
+    Value(s"A>$maxPoolAntiprism(3·big)", TailExclusion.a3qTail(maxPoolAntiprism + 1), (3, Big)),
+    Value(s"A>$maxPoolAntiprism(3·3)", TailExclusion.a33Tail(maxPoolAntiprism + 1), (3, 3))
   )
+
+  /** Can the target edge type and the multiset close faces around an edge in some cyclic order? Each class
+    * presents its two faces to its two ring neighbours, in either orientation; a big face matches only a big
+    * face. Exhaustive over orders and orientations (at most five partners).
+    */
+  def faceCompatible(target: (Int, Int), ring: List[Value]): Boolean =
+    val faces = ring.map(_.faces)
+    faces.permutations.exists { perm =>
+      val n = perm.size
+      (0 until (1 << n)).exists { mask =>
+        val oriented = perm.zipWithIndex.map((f, i) => if ((mask >> i) & 1) == 1 then f.swap else f)
+        val chain    = target :: oriented
+        chain.indices.forall { i =>
+          val (_, right) = chain(i)
+          val (left, _)  = chain((i + 1) % chain.size)
+          right == left
+        }
+      }
+    }
 
   /** Completions of a target dihedral over the given pool (sorted by lo): multisets of 2..5 values whose sum
     * with the target intersects 360. Capped per target.
@@ -121,7 +150,10 @@ object OutsiderExclusion:
       .map(c => (c, math.abs(c.foldLeft(target)((s, v) => s + v.iv).mid - 360.0)))
       .sortBy(_._2)
 
-  /** A dead edge: the round it died in, its cell and edge type, and its nearest misses. */
+  /** A dead edge: the round it died in, its cell and edge type, its nearest misses at value level, and among
+    * them the face-compatible ones — the multisets that could close faces around the edge in some cyclic
+    * order, a second, coarser margin.
+    */
   final case class Kill(
       round: Int,
       cell: String,
@@ -129,23 +161,50 @@ object OutsiderExclusion:
       angle: Iv,
       near: Vector[(List[Value], Double)]
   ):
-    def margin: Double = near.headOption.map(_._2).getOrElse(Double.PositiveInfinity)
-    def show: String   =
+    lazy val nearCompatible: Vector[(List[Value], Double)] =
+      near.filter((c, _) => faceCompatible(edgeType, c))
+
+    /** Is this the ring of Lemma E — an antiprism lateral 3·3 edge closed by the two base edges of one
+      * antiprism A_q, the two-parameter family refuted exactly for every q, r ≥ 4?
+      */
+    private def lemmaEFamily(ring: List[Value]): Boolean =
+      cell.startsWith("A") && edgeType == (3, 3) &&
+        (ring match
+          case List(a, b) =>
+            a.label == b.label && a.label.startsWith("A") && a.faces._1 == 3 && a.faces._2 != 3
+          case _          => false)
+
+    /** The face-compatible near misses outside Lemma E's family: decided by the interval alone. */
+    lazy val nearCompatibleBeyondE: Vector[(List[Value], Double)] =
+      nearCompatible.filterNot((c, _) => lemmaEFamily(c))
+
+    def margin: Double                  = near.headOption.map(_._2).getOrElse(Double.PositiveInfinity)
+    def marginCompatible: Double        =
+      nearCompatible.headOption.map(_._2).getOrElse(Double.PositiveInfinity)
+    def marginCompatibleBeyondE: Double =
+      nearCompatibleBeyondE.headOption.map(_._2).getOrElse(Double.PositiveInfinity)
+    private def fmt(d: Double)          = String.format(java.util.Locale.ROOT, "%.3e", d)
+    def show: String                    =
       val a = String.format(java.util.Locale.ROOT, "%.5f", angle.mid)
-      val m = if near.isEmpty then "no sum within 0.1°"
-      else String.format(java.util.Locale.ROOT, "margin %.3e°", margin)
-      s"round $round  $cell(${edgeType._1}·${edgeType._2}) @ $a: $m" +
-        near.take(2).map((c, d) =>
-          s"  ${c.map(_.label).mkString("+")} misses by " + String.format(java.util.Locale.ROOT, "%.3e", d)
-        ).mkString
+      val m = if near.isEmpty then "no sum within 0.1°" else s"margin ${fmt(margin)}°"
+      val f = if nearCompatible.isEmpty then "no face-compatible sum within 0.1°"
+      else s"face-compatible margin ${fmt(marginCompatible)}°"
+      s"round $round  $cell(${edgeType._1}·${edgeType._2}) @ $a: $m; $f" +
+        near.take(2).map((c, d) => s"  ${c.map(_.label).mkString("+")} misses by ${fmt(d)}").mkString +
+        nearCompatible.headOption.map((c, d) =>
+          s"  face-compatible: ${c.map(_.label).mkString("+")} misses by ${fmt(d)}" +
+            (if lemmaEFamily(c) then " (Lemma E's family)" else "")
+        ).getOrElse("")
 
   final case class FixpointResult(
       rounds: Vector[Vector[String]],               // cells newly excluded per round
       survivors: Vector[(String, Vector[Verdict])], // final verdicts of surviving targets
       kills: Vector[Kill]                           // every dead edge with its nearest misses
   ):
-    def excluded: Vector[String] = rounds.flatten
-    def minMargin: Double        = kills.map(_.margin).min
+    def excluded: Vector[String]           = rounds.flatten
+    def minMargin: Double                  = kills.map(_.margin).min
+    def minMarginCompatible: Double        = kills.map(_.marginCompatible).min
+    def minMarginCompatibleBeyondE: Double = kills.map(_.marginCompatibleBeyondE).min
 
   /** The corona fixpoint: iterate exclusion with excluded cells removed from the pool. */
   lazy val fixpoint: FixpointResult =
