@@ -7,7 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 a paper, entries state what a re-check would find different from the previous release — a referee who checked
 an earlier version should be able to tell from here whether the claims, the specs, or only the packaging moved.
 
-## [Unreleased]
+## [0.3.0] — 2026-09-20
 
 **Generator equivariance checked, and the corona fixpoint uncapped.** Two steps of 0.2.0 were asserted
 rather than checked. The periodization certificate took every gluing to be a symmetry of the periodized
@@ -171,6 +171,7 @@ the critical path. There is no long tier to opt into; the single opt-in run writ
   symbols is certified by matching against the 28 already classified. `SymbolGateSpec` consumes the
   certified patterns and balls, and the README says so in the same words as the paper.
 
-[Unreleased]: https://github.com/scala-tessella/convex-uniform-honeycombs/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/scala-tessella/convex-uniform-honeycombs/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.3.0
 [0.2.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.2.0
 [0.1.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.1.0

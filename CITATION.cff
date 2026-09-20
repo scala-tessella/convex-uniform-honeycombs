@@ -35,12 +35,12 @@ authors:
 license: Apache-2.0
 repository-code: https://github.com/scala-tessella/convex-uniform-honeycombs
 url: https://github.com/scala-tessella/convex-uniform-honeycombs
-version: 0.2.0
-date-released: '2026-09-19'
+version: 0.3.0
+date-released: '2026-09-20'
 # Version DOI of this release — the one to cite. Zenodo mints it when the release is published, so
 # it cannot be present in the tree that release archives; the copy in a deposit carries the concept
 # DOI, and the version DOI is recorded here in the first commit after the tag.
-doi: 10.5281/zenodo.22849635
+doi: 10.5281/zenodo.21762728
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21762728
