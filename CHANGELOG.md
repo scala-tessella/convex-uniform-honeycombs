@@ -7,7 +7,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 a paper, entries state what a re-check would find different from the previous release — a referee who checked
 an earlier version should be able to tell from here whether the claims, the specs, or only the packaging moved.
 
-## [Unreleased]
+## [0.5.0] — 2026-09-20
 
 **Box periodicity in both directions.** Condition (v) of 0.4.0 checked that every ball entry within R_per is
 the Λ-translate of the entry at its box representative — one direction of the identification of the
@@ -224,7 +224,8 @@ the critical path. There is no long tier to opt into; the single opt-in run writ
   symbols is certified by matching against the 28 already classified. `SymbolGateSpec` consumes the
   certified patterns and balls, and the README says so in the same words as the paper.
 
-[Unreleased]: https://github.com/scala-tessella/convex-uniform-honeycombs/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/scala-tessella/convex-uniform-honeycombs/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.5.0
 [0.4.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.4.0
 [0.3.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.3.0
 [0.2.0]: https://github.com/scala-tessella/convex-uniform-honeycombs/releases/tag/v0.2.0
