@@ -4,8 +4,8 @@ import io.github.scala_tessella.research_core.*
 
 import CertifiedDihedrals.Iv
 
-/** The tails: prisms and antiprisms beyond the corona fixpoint's pool caps are excluded — over the FULL
-  * pool (core ∪ ALL prisms ∪ ALL antiprisms ∪ pentagon/decagon family ∪ snubs), with no cap left anywhere.
+/** The tails: prisms and antiprisms beyond the corona fixpoint's pool caps are excluded — over the FULL pool
+  * (core ∪ ALL prisms ∪ ALL antiprisms ∪ pentagon/decagon family ∪ snubs), with no cap left anywhere.
   *
   * ANTIPRISM CLOSED FORMS (derived from the scaled coordinate model B1=(1,0,0), B2=(cos2θ,sin2θ,0),
   * T=(cosθ,sinθ,η), T2=(cos3θ,sin3θ,η) with θ = π/q, η² = 4s²(4c²−1), c = cos(π/2q), s = sin(π/2q); the
@@ -14,8 +14,8 @@ import CertifiedDihedrals.Iv
   * cos a3q(q) = −tan(π/2q)/√3 (base·lateral 3·q dihedral) cos a33(q) = (1 − 4cos(π/q))/3 (lateral·lateral 3·3
   * dihedral)
   *
-  * validated against the interval reconstruction for q = 4, 5, 6, 10, 50 and — at q = 5 — against the
-  * exact ℚ(√5) certification (tan²18° = (5−2√5)/5 gives cos² = (5−2√5)/15, and (1−4cos36°)/3 = −√5/3, the
+  * validated against the interval reconstruction for q = 4, 5, 6, 10, 50 and — at q = 5 — against the exact
+  * ℚ(√5) certification (tan²18° = (5−2√5)/5 gives cos² = (5−2√5)/15, and (1−4cos36°)/3 = −√5/3, the
   * icosahedron of [[IcosahedralIdentities]]). Immediate exact lemmas:
   *
   *   - LEMMA A (strict): a3q(q) > 90° for every q ≥ 4, since tan(π/2q) > 0.
@@ -28,23 +28,24 @@ import CertifiedDihedrals.Iv
   *     π/(4q−2): (i) 2y − x = π/(2q(2q−1)) ≥ x²/π since (2q)(2q−1) ≤ 4q²; (ii) y ≤ 4x/7 ⟺ q ≥ 4; (iii) sin y
   *     ≥ y − y³/6 (alternating series); (iv) tan x ≤ x/(1 − x²/2) = x + x³/(2 − x²) for 0 < x < √2 (sin x ≤ x
   *     and cos x ≥ 1 − x²/2 > 0). Then 2 sin y − tan x ≥ (2y − x) − y³/3 − x³/(2 − x²) ≥ x²/π − ((4/7)³/3 +
-  *     0.5418)·x³ ≥ x²(1/π − 0.6041·x) > 0 for x ≤ π/8, as 0.6041·π/8 < 0.2373 < 1/π.
-  *     The constant chain is re-verified by interval arithmetic in [[lemmaEConstants]], and the interleaving
-  *     itself on a q-grid in the spec.
+  *     0.5418)·x³ ≥ x²(1/π − 0.6041·x) > 0 for x ≤ π/8, as 0.6041·π/8 < 0.2373 < 1/π. The constant chain is
+  *     re-verified by interval arithmetic in [[lemmaEConstants]], and the interleaving itself on a q-grid in
+  *     the spec.
   *
   * With Lemma E the value-level analysis closes:
   *
   *   - T1 (prisms p > 500): the lateral (4·4) edge needs partners summing to 180 + 360/p ∈ (180, 180.72];
   *     partner chains 4→…→4 either sum to EXACTLY 180 (refuted: 360/p > 0) or miss the window by certified
   *     intervals; α-charged sums are irrational (Niven) and cannot equal the rational target.
-  *   - T2 (antiprisms q > 300, and the sweep 101 ≤ q ≤ 300 above the fixpoint's target cap): the base (3·q) edge's
-  *     q-gon face glues only P_q or A_q. With P_q: the rest is a 4→3 chain in (269−a3q)−90 < 90 + … — dead by
-  *     intervals. With A_q: the rest is a 3→3 chain summing to 360 − 2·a3q(q) < 180 STRICTLY (Lemma A): the
-  *     exact-180 completions (tet+oct, P3+P3) die by strictness, a lone A_r(3·3) is Lemma E, and an
+  *   - T2 (antiprisms q > 300, and the sweep 101 ≤ q ≤ 300 above the fixpoint's target cap): the base (3·q)
+  *     edge's q-gon face glues only P_q or A_q. With P_q: the rest is a 4→3 chain in (269−a3q)−90 < 90 + … —
+  *     dead by intervals. With A_q: the rest is a 3→3 chain summing to 360 − 2·a3q(q) < 180 STRICTLY (Lemma
+  *     A): the exact-180 completions (tet+oct, P3+P3) die by strictness, a lone A_r(3·3) is Lemma E, and an
   *     A_r(3·r)+A_r(r·3) pair sums > 180 strictly (Lemma A) — everything else misses by intervals.
-  *   - The finite prism sweep 5 ≤ p ≤ 500 over the full pool re-finds EXACTLY the six prism-grid exotic families
-  *     (surviving p = {5,7,9,10,15,18,20,24,42}) and excludes every other p — so the alphabet question is
-  *     reduced, with no cap anywhere, to the six planar-species lifts (the remaining exclusion work).
+  *   - The finite prism sweep 5 ≤ p ≤ 500 over the full pool re-finds EXACTLY the six prism-grid exotic
+  *     families (surviving p = {5,7,9,10,15,18,20,24,42}) and excludes every other p — so the alphabet
+  *     question is reduced, with no cap anywhere, to the six planar-species lifts (the remaining exclusion
+  *     work).
   */
 object TailExclusion:
 

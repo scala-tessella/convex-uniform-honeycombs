@@ -6,10 +6,10 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import CompletenessAudit.*
 
-/** The completeness audit closes every gap — all 28 classes carry periodization
-  * certificates, every accepted pattern coheres with its class representative, and every skeleton is closed
-  * by germ forcing or exhaustion. With the Alphabet Theorem, the species table, the shell filter and the
-  * pattern enumeration this is the completeness theorem for the 28.
+/** The completeness audit closes every gap — all 28 classes carry periodization certificates, every accepted
+  * pattern coheres with its class representative, and every skeleton is closed by germ forcing or exhaustion.
+  * With the Alphabet Theorem, the species table, the shell filter and the pattern enumeration this is the
+  * completeness theorem for the 28.
   */
 class CompletenessAuditSpec extends AnyFlatSpec with Matchers:
 

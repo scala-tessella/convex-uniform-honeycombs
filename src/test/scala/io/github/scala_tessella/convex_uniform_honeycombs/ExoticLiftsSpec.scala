@@ -6,9 +6,9 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import ExoticLifts.*
 
-/** The exotic lifts: the rco flank-propagation lemma verifies exactly, the ring realizations match
-  * the six prism-grid shadows, the walk machinery has teeth, and the campaign kills all nine exotic families with
-  * the pinned mechanisms — closing the Alphabet Theorem.
+/** The exotic lifts: the rco flank-propagation lemma verifies exactly, the ring realizations match the six
+  * prism-grid shadows, the walk machinery has teeth, and the campaign kills all nine exotic families with the
+  * pinned mechanisms — closing the Alphabet Theorem.
   */
 class ExoticLiftsSpec extends AnyFlatSpec with Matchers:
 

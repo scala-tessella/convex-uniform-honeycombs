@@ -3,7 +3,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import TransitivePatterns.*
 
-/** Certificate `transitive-patterns.txt`. The transitive enumeration table: per species, cosets, forcing, skeletons, patterns and honeycomb count.
+/** Certificate `transitive-patterns.txt`. The transitive enumeration table: per species, cosets, forcing,
+  * skeletons, patterns and honeycomb count.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

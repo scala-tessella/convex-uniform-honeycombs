@@ -4,9 +4,9 @@ import io.github.scala_tessella.research_core.*
 
 import ExactCertificates.{ExactStar, Q23, Rat, VQ}
 
-/** The classical cross-check: the per-honeycomb identification of the 28 — our
-  * (species, class) pairs against the classical names (Grünbaum 1994 / Johnson; Deza–Shtogrin
-  * arXiv:math/9906034 review the same 28) and the classical vertex-figure compositions.
+/** The classical cross-check: the per-honeycomb identification of the 28 — our (species, class) pairs against
+  * the classical names (Grünbaum 1994 / Johnson; Deza–Shtogrin arXiv:math/9906034 review the same 28) and the
+  * classical vertex-figure compositions.
   *
   * 24 species carry exactly one honeycomb, so their identification is a static table keyed by the species
   * label; the vertex cell counts equal the species support by construction and are pinned against the

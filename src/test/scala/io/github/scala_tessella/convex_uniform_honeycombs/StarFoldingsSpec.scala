@@ -7,12 +7,12 @@ import org.scalatest.matchers.should.Matchers
 import SpeciesEnumerator.species
 import StarFoldings.*
 
-/** The folding layer. The chamber action must be a faithful group of
-  * flag-complex automorphisms for every species; the subgroup enumeration must agree with brute force on the
-  * small stabilizers; every fold must be a well-defined chamber complex with constant m-data on orbits; and
-  * the classical pins must land — the full folding of the cubic star is the 1-chamber regular {4,3,4} symbol
-  * (m01 = 4, m23 = 4, all σ self-paired) and of the octet-c star the 2-chamber quasiregular tet-oct symbol
-  * (σ1, σ2 self-paired, σ3 swapping the tet- and oct-side chambers, all faces triangles, rings of size 4).
+/** The folding layer. The chamber action must be a faithful group of flag-complex automorphisms for every
+  * species; the subgroup enumeration must agree with brute force on the small stabilizers; every fold must be
+  * a well-defined chamber complex with constant m-data on orbits; and the classical pins must land — the full
+  * folding of the cubic star is the 1-chamber regular {4,3,4} symbol (m01 = 4, m23 = 4, all σ self-paired)
+  * and of the octet-c star the 2-chamber quasiregular tet-oct symbol (σ1, σ2 self-paired, σ3 swapping the
+  * tet- and oct-side chambers, all faces triangles, rings of size 4).
   */
 class StarFoldingsSpec extends AnyFlatSpec with Matchers:
 

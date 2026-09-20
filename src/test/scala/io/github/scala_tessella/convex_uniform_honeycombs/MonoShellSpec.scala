@@ -6,10 +6,10 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import MonoShell.*
 
-/** The mono-species shell filter — 26 of the 34 species admit a consistent
-  * same-species first shell and 8 are excluded from k = 1; the excluded set mirrors the 2D classification
-  * (the four lifts of extendable-but-nonuniform 2D species die) and every star of a known uniform honeycomb
-  * survives; no geometric decision was close (flags empty).
+/** The mono-species shell filter — 26 of the 34 species admit a consistent same-species first shell and 8 are
+  * excluded from k = 1; the excluded set mirrors the 2D classification (the four lifts of
+  * extendable-but-nonuniform 2D species die) and every star of a known uniform honeycomb survives; no
+  * geometric decision was close (flags empty).
   */
 class MonoShellSpec extends AnyFlatSpec with Matchers:
 

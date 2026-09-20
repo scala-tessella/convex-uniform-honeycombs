@@ -3,7 +3,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import SpeciesSupports.*
 
-/** Certificate `species-supports.txt`. Corner excesses and the complete catalogue of cell multisets admitted by the area equation.
+/** Certificate `species-supports.txt`. Corner excesses and the complete catalogue of cell multisets admitted
+  * by the area equation.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

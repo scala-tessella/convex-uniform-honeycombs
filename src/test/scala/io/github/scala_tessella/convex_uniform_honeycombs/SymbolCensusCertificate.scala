@@ -5,8 +5,8 @@ import SpeciesEnumerator.species
 import StarFoldings.{subgroupsOfSpecies, symmetryOf}
 import SymbolCatalog.*
 
-/** Certificate `symbols-k1.txt`. The k = 1 combinatorial symbol census of the appendix: every folding of every star swept through the
-  * sigma0 enumerator, minimal symbols deduplicated by canonical key.
+/** Certificate `symbols-k1.txt`. The k = 1 combinatorial symbol census of the appendix: every folding of
+  * every star swept through the sigma0 enumerator, minimal symbols deduplicated by canonical key.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

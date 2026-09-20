@@ -9,13 +9,13 @@ import StarFoldings.{fold, symmetryOf}
 import Sigma0Assembly.{enumerateSigma0, unionOf}
 import SymbolCatalog.*
 
-/** The symbol catalog. Canonical keys must be invariant under chamber
-  * relabeling (seeded random conjugations) and separate non-isomorphic symbols; minimality is pinned on hand
-  * fixtures (the 1-chamber symbol is minimal, its hand-built double is not) and on an assembled instance (a
-  * cubic index-2 folding admits the σ₀ induced from the 1-chamber symbol, which must be flagged non-minimal);
-  * the k = 1 driver canaries must contain the classical keys — the cubic sweep the regular {4,3,4} symbol,
-  * the octet-c sweep the quasiregular tet-oct symbol — with every kept symbol valid and minimal. The full k =
-  * 1 sweeps (trivial foldings included) are the guarded battery and the probe's census.
+/** The symbol catalog. Canonical keys must be invariant under chamber relabeling (seeded random conjugations)
+  * and separate non-isomorphic symbols; minimality is pinned on hand fixtures (the 1-chamber symbol is
+  * minimal, its hand-built double is not) and on an assembled instance (a cubic index-2 folding admits the σ₀
+  * induced from the 1-chamber symbol, which must be flagged non-minimal); the k = 1 driver canaries must
+  * contain the classical keys — the cubic sweep the regular {4,3,4} symbol, the octet-c sweep the
+  * quasiregular tet-oct symbol — with every kept symbol valid and minimal. The full k = 1 sweeps (trivial
+  * foldings included) are the guarded battery and the probe's census.
   */
 class SymbolCatalogSpec extends AnyFlatSpec with Matchers:
 

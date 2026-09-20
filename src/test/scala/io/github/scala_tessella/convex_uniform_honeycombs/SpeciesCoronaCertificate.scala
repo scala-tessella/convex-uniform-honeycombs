@@ -4,7 +4,8 @@ import io.github.scala_tessella.research_core.*
 import HoneycombAlphabet.catalogue
 import SpeciesCorona.*
 
-/** Certificate `species-corona.txt`. Corona structure over the vertex species: figure hosting, the dead letters, and the face-cycle filter.
+/** Certificate `species-corona.txt`. Corona structure over the vertex species: figure hosting, the dead
+  * letters, and the face-cycle filter.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

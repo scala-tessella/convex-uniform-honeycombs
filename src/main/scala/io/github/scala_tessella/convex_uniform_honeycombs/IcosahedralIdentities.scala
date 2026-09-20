@@ -2,8 +2,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 
 import io.github.scala_tessella.research_core.*
 
-/** The two icosahedral identities that the corona fixpoint observed at interval
-  * precision, now proven EXACTLY over ℚ(√5).
+/** The two icosahedral identities that the corona fixpoint observed at interval precision, now proven EXACTLY
+  * over ℚ(√5).
   *
   * (I1) The lateral 3·3 dihedral of the unit pentagonal antiprism A5 IS the icosahedral dihedral
   * arccos(−√5/3): the unit-edge icosahedron minus two antipodal caps is a unit pentagonal antiprism whose

@@ -6,10 +6,10 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import TailExclusion.*
 
-/** The tails: the antiprism closed forms agree with the interval reconstruction and the exact ℚ(√5)
-  * values, Lemma E's machinery has its constants and interleaving certified, the finite prism sweep over the
-  * FULL pool re-finds exactly the six prism-grid exotic families, and every tail target is excluded with all threats
-  * refuted by named lemmas — no exact follow-up left.
+/** The tails: the antiprism closed forms agree with the interval reconstruction and the exact ℚ(√5) values,
+  * Lemma E's machinery has its constants and interleaving certified, the finite prism sweep over the FULL
+  * pool re-finds exactly the six prism-grid exotic families, and every tail target is excluded with all
+  * threats refuted by named lemmas — no exact follow-up left.
   */
 class TailExclusionSpec extends AnyFlatSpec with Matchers:
 

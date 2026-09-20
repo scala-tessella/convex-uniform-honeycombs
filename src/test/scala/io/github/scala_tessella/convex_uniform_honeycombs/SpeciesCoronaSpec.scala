@@ -7,10 +7,9 @@ import org.scalatest.matchers.should.Matchers
 import HoneycombAlphabet.CellType.*
 import SpeciesCorona.*
 
-/** The corona analysis — the face-cycle fixpoint keeps all 34 (with a teeth check on
-  * the path machinery), the live sub-catalogue is 58 of 69, the self-hosting lemma is witnessed, and the
-  * adjacency graph has the pinned structure (9 self-only species = the classical unique stars, components 23
-  * + 2 + 9x1).
+/** The corona analysis — the face-cycle fixpoint keeps all 34 (with a teeth check on the path machinery), the
+  * live sub-catalogue is 58 of 69, the self-hosting lemma is witnessed, and the adjacency graph has the
+  * pinned structure (9 self-only species = the classical unique stars, components 23 + 2 + 9x1).
   */
 class SpeciesCoronaSpec extends AnyFlatSpec with Matchers:
 

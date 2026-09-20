@@ -6,10 +6,10 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import TransitivePatterns.*
 
-/** The transitive enumeration lands exactly on 28 honeycombs over the 26 species, with
-  * the two classical doublings; 16 species are resolved by the forcing theorem alone; no pattern cap was hit,
-  * fingerprints are radius-stable, and the snub species exhibits the developability gap (patterns passing the
-  * local conditions but failing collision-free development) that the acceptance criterion closes.
+/** The transitive enumeration lands exactly on 28 honeycombs over the 26 species, with the two classical
+  * doublings; 16 species are resolved by the forcing theorem alone; no pattern cap was hit, fingerprints are
+  * radius-stable, and the snub species exhibits the developability gap (patterns passing the local conditions
+  * but failing collision-free development) that the acceptance criterion closes.
   */
 class TransitivePatternsSpec extends AnyFlatSpec with Matchers:
 

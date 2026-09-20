@@ -6,9 +6,9 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import The28.*
 
-/** The classical cross-check: the 28 certified classes are exactly the classical 28 —
-  * names, families and vertex compositions pinned, the two doubled species resolved by exact lattice
-  * invariants on the certified translation bases.
+/** The classical cross-check: the 28 certified classes are exactly the classical 28 — names, families and
+  * vertex compositions pinned, the two doubled species resolved by exact lattice invariants on the certified
+  * translation bases.
   */
 class The28IdentifiedSpec extends AnyFlatSpec with Matchers:
 

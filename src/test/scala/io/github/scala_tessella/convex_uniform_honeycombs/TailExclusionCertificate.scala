@@ -3,8 +3,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import TailExclusion.*
 
-/** Certificate `tail-exclusion.txt`. The antiprism closed forms, Lemmas A, B and E, and the prism and antiprism tails excluded over the full
-  * pool with no cap left anywhere.
+/** Certificate `tail-exclusion.txt`. The antiprism closed forms, Lemmas A, B and E, and the prism and
+  * antiprism tails excluded over the full pool with no cap left anywhere.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

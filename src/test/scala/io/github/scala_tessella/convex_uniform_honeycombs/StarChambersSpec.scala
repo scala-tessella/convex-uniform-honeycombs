@@ -6,11 +6,10 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import SpeciesEnumerator.species
 
-/** The chamber complex of every species star must satisfy the flag laws —
-  * fixed-point-free involutions, σ₁σ₃ commuting, (σ₁σ₂)-orbits the corner polygons, (σ₂σ₃)-orbits the edge
-  * rings, chamber count 4·#arcs, invariant data preserved by the right involutions, and connectivity — all
-  * checked against independent species and corona data (corner sizes, ring sizes), with the octet and cubic counts
-  * pinned by hand.
+/** The chamber complex of every species star must satisfy the flag laws — fixed-point-free involutions, σ₁σ₃
+  * commuting, (σ₁σ₂)-orbits the corner polygons, (σ₂σ₃)-orbits the edge rings, chamber count 4·#arcs,
+  * invariant data preserved by the right involutions, and connectivity — all checked against independent
+  * species and corona data (corner sizes, ring sizes), with the octet and cubic counts pinned by hand.
   */
 class StarChambersSpec extends AnyFlatSpec with Matchers:
 

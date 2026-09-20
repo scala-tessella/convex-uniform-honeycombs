@@ -3,8 +3,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import HoneycombAlphabet.*
 
-/** Certificate `edge-figures.txt`. The exact dihedral table, the face-compatibility lists and the complete edge-figure catalogue of the
-  * 13-cell core alphabet.
+/** Certificate `edge-figures.txt`. The exact dihedral table, the face-compatibility lists and the complete
+  * edge-figure catalogue of the 13-cell core alphabet.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

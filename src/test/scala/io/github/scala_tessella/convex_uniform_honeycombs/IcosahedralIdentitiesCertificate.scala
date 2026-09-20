@@ -3,7 +3,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import IcosahedralIdentities.*
 
-/** Certificate `icosahedral-identities.txt`. The two icosahedral identities, proved exactly over Q(sqrt 5) on intrinsic models.
+/** Certificate `icosahedral-identities.txt`. The two icosahedral identities, proved exactly over Q(sqrt 5) on
+  * intrinsic models.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

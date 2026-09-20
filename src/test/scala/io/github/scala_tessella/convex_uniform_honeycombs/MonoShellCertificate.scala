@@ -23,7 +23,8 @@ object MonoShellCertificate:
     sb ++= "\n== The eight k=1 exclusions ==\n"
     sb ++= "the four lifts of extendable-but-nonuniform 2D species (3.3.4.12, 3.4.3.12, 3.4.4.6, 3.3.6.6)\n"
     sb ++= "die in the shell exactly as their shadows die in the plane; the four other exclusions are novel\n"
-    sb ++= "species of the species table — none of them can be the species of ANY mono-species honeycomb, uniform or not.\n"
+    sb ++=
+      "species of the species table — none of them can be the species of ANY mono-species honeycomb, uniform or not.\n"
     sb ++= s"\n== Ambiguity flags: ${flags.size} ==\n"
     flags.foreach(f => sb ++= f + "\n")
     java.nio.file.Files.writeString(dir.resolve("mono-shell.txt"), sb.toString)

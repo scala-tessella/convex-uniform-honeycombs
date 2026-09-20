@@ -5,15 +5,15 @@ import io.github.scala_tessella.research_core.*
 import TailExclusion.Cls
 import CertifiedDihedrals.Iv
 
-/** The six planar-species lifts — the nine exotic prism families p ∈
-  * {5,7,9,10,15,18,20,24,42} are excluded, completing the ALPHABET THEOREM: every face-to-face unit-edge
-  * honeycomb by convex uniform cells uses only the 13 core cells.
+/** The six planar-species lifts — the nine exotic prism families p ∈ {5,7,9,10,15,18,20,24,42} are excluded,
+  * completing the ALPHABET THEOREM: every face-to-face unit-edge honeycomb by convex uniform cells uses only
+  * the 13 core cells.
   *
-  * Standing hypotheses (the exclusion chain): by the corona fixpoint and the tails, the only cells that can appear in a honeycomb
-  * are the 13 core cells and the nine exotic prisms — every antiprism, every pentagon/decagon-family cell,
-  * both snubs, and every other prism is excluded. So ring enumerations below run over pools of core classes
-  * plus the still-alive exotic laterals AND horizontals (a class = a cell with a specific edge type, so
-  * upright/sideways attitudes are distinguished by construction).
+  * Standing hypotheses (the exclusion chain): by the corona fixpoint and the tails, the only cells that can
+  * appear in a honeycomb are the 13 core cells and the nine exotic prisms — every antiprism, every
+  * pentagon/decagon-family cell, both snubs, and every other prism is excluded. So ring enumerations below
+  * run over pools of core classes plus the still-alive exotic laterals AND horizontals (a class = a cell with
+  * a specific edge type, so upright/sideways attitudes are distinguished by construction).
   *
   * Structural lemmas used by the walks:
   *   - RING FORCING: around any lateral (4·4) edge of a prism, the ring is a face-closing chain of classes

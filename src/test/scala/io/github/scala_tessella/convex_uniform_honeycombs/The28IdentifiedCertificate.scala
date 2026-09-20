@@ -3,8 +3,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import The28.*
 
-/** Certificate `the-28-identified.txt`. The certified classes against the classical list: names, families and vertex compositions, with the two
-  * doubled species resolved by exact lattice invariants.
+/** Certificate `the-28-identified.txt`. The certified classes against the classical list: names, families and
+  * vertex compositions, with the two doubled species resolved by exact lattice invariants.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */

@@ -3,7 +3,8 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 import io.github.scala_tessella.research_core.*
 import CompletenessAudit.*
 
-/** Certificate `completeness-audit.txt`. The four audit certificates: periodization, class coherence, fingerprint separation and cap closure.
+/** Certificate `completeness-audit.txt`. The four audit certificates: periodization, class coherence,
+  * fingerprint separation and cap closure.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */
@@ -16,7 +17,8 @@ object CompletenessAuditCertificate:
     sb ++= "lattice invariance under all generator point-parts; coverage radius over a fundamental domain);\n"
     sb ++= "per pattern: CLASS COHERENCE (the pattern's own periodization certificate, reaching the\n"
     sb ++= "representative's basis; alignment of the representative's ball onto the pattern's by an element\n"
-    sb ++= "of Stab(S) at the determination radius; the aligned representative basis acting by symmetries on\n"
+    sb ++=
+      "of Stab(S) at the determination radius; the aligned representative basis acting by symmetries on\n"
     sb ++= "the pattern's certified ball); per skeleton: GERM FORCING or\n"
     sb ++=
       "EXHAUSTION (all R1+R2-passing patterns developed; accepted ones fingerprint into known classes)\n\n"
@@ -31,7 +33,8 @@ object CompletenessAuditCertificate:
     sb ++= f"\nALL AUDITS PASS: ${audits.forall(_.ok)};  TOTAL CLASSES: ${audits.map(_.classes).sum};  " +
       s"flags: ${flags.size}\n\n"
     sb ++= "== THE COMPLETENESS THEOREM ==\n"
-    sb ++= "chain: the Alphabet Theorem (only the 13 core cells) -> the species table (exactly 34 species) ->\n"
+    sb ++=
+      "chain: the Alphabet Theorem (only the 13 core cells) -> the species table (exactly 34 species) ->\n"
     sb ++= "the shell filter (26 admit a mono-species shell) -> the pattern enumeration (28 classes) ->\n"
     sb ++= "this audit (: every class is a certified periodic transitive honeycomb, every accepted\n"
     sb ++= "pattern develops one of them, every skeleton closed)\n"

@@ -2,11 +2,11 @@ package io.github.scala_tessella.convex_uniform_honeycombs
 
 import io.github.scala_tessella.research_core.*
 
-/** The prism grid. Every prism P_p has vertical (square·square) edges of dihedral 180 −
-  * 360/p, so a honeycomb containing P_p realizes an edge figure at that angle. At value level the
-  * participants available from the core alphabet + all prisms are: the rational lattice {60, 90, 120, 135,
-  * 150}, the four α-charged values (whose charges must cancel), and other prism verticals 180 − 360/q. The
-  * edge equation then reduces to an exact Egyptian-fraction Diophantine problem — SOLVED COMPLETELY here.
+/** The prism grid. Every prism P_p has vertical (square·square) edges of dihedral 180 − 360/p, so a honeycomb
+  * containing P_p realizes an edge figure at that angle. At value level the participants available from the
+  * core alphabet + all prisms are: the rational lattice {60, 90, 120, 135, 150}, the four α-charged values
+  * (whose charges must cancel), and other prism verticals 180 − 360/q. The edge equation then reduces to an
+  * exact Egyptian-fraction Diophantine problem — SOLVED COMPLETELY here.
   *
   * Scope: participants from core cells and prisms only; antiprism and pentagon-family participants carry
   * irrationalities outside the (15°, α)-lattice and are handled by the corona fixpoint's independence lemmas.

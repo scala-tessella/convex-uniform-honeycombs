@@ -8,14 +8,14 @@ import SpeciesEnumerator.species
 import SymbolCatalog.{canonicalKey, k1Of}
 import SymbolRealization.derivedSymbolsOf
 
-/** THE k = 1 SYMBOL GATE. For every shell-passing species, the minimal
-  * symbols DERIVED from the certified honeycombs (vertex stabilizer from the certified development ball,
-  * σ₀ read off the certified pattern through descriptor-rigidity pullback) must equal, key for key, the
-  * minimal symbols of the combinatorial census. With the census total pinned at 28 and the derived side built
-  * from the certified 28, key-set equality certifies both directions at once: every census symbol is realized
-  * by a certified honeycomb, and every certified honeycomb's minimal symbol is in the census. The canary tier
-  * gates three species shapes (forced regular, forced quasiregular, and a doubled multi-coset species); the
-  * full 26-species gate is the complete theorem-grade check.
+/** THE k = 1 SYMBOL GATE. For every shell-passing species, the minimal symbols DERIVED from the certified
+  * honeycombs (vertex stabilizer from the certified development ball, σ₀ read off the certified pattern
+  * through descriptor-rigidity pullback) must equal, key for key, the minimal symbols of the combinatorial
+  * census. With the census total pinned at 28 and the derived side built from the certified 28, key-set
+  * equality certifies both directions at once: every census symbol is realized by a certified honeycomb, and
+  * every certified honeycomb's minimal symbol is in the census. The canary tier gates three species shapes
+  * (forced regular, forced quasiregular, and a doubled multi-coset species); the full 26-species gate is the
+  * complete theorem-grade check.
   */
 class SymbolGateSpec extends AnyFlatSpec with Matchers:
 

@@ -6,9 +6,9 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import IcosahedralIdentities.*
 
-/** The exactness upgrades: the exact ℚ(√5) models are combinatorially right, the certified
-  * radicands match the classical values AND the certified intervals, the A5 embedding proves (I1), and the exact
-  * ledger proves the 360° edge identity (I2).
+/** The exactness upgrades: the exact ℚ(√5) models are combinatorially right, the certified radicands match
+  * the classical values AND the certified intervals, the A5 embedding proves (I1), and the exact ledger
+  * proves the 360° edge identity (I2).
   */
 class IcosahedralIdentitiesSpec extends AnyFlatSpec with Matchers:
 

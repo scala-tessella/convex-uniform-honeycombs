@@ -8,14 +8,14 @@ import SpeciesEnumerator.species
 import StarFoldings.{fold, subgroupsOf, symmetryOf}
 import Sigma0Assembly.*
 
-/** The σ₀ assembly. The centerpiece is an INDEPENDENT brute-force oracle
-  * — every involution-with-fixed-points on the chamber union, filtered by directly-written axiom formulas
-  * (matching equalities, both commutations, face-closure divisibility on every full cycle, connectivity) —
-  * which the propagating enumerator must reproduce exactly on small foldings of several shapes. Classical
-  * pins: the cubic star's full folding admits EXACTLY σ₀ = id (the regular {4,3,4} symbol closes); octet-c's
-  * full folding exactly σ₀ = id (the quasiregular tet-oct symbol — cell-type matching alone forbids the
-  * swap); and a two-orbit union of those two full foldings admits NO σ₀ at all (cell types forbid every cross
-  * pair, so connectivity kills the assembly) — the connectivity teeth.
+/** The σ₀ assembly. The centerpiece is an INDEPENDENT brute-force oracle — every involution-with-fixed-points
+  * on the chamber union, filtered by directly-written axiom formulas (matching equalities, both commutations,
+  * face-closure divisibility on every full cycle, connectivity) — which the propagating enumerator must
+  * reproduce exactly on small foldings of several shapes. Classical pins: the cubic star's full folding
+  * admits EXACTLY σ₀ = id (the regular {4,3,4} symbol closes); octet-c's full folding exactly σ₀ = id (the
+  * quasiregular tet-oct symbol — cell-type matching alone forbids the swap); and a two-orbit union of those
+  * two full foldings admits NO σ₀ at all (cell types forbid every cross pair, so connectivity kills the
+  * assembly) — the connectivity teeth.
   */
 class Sigma0AssemblySpec extends AnyFlatSpec with Matchers:
 

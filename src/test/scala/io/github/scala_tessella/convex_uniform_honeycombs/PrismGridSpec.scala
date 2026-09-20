@@ -6,8 +6,8 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import PrismGrid.*
 
-/** The prism grid: the exotic-prism vertical-edge equation over the core + prism world is solved
-  * completely and its solutions are exactly the lifts of the six non-extendable 2D vertex species.
+/** The prism grid: the exotic-prism vertical-edge equation over the core + prism world is solved completely
+  * and its solutions are exactly the lifts of the six non-extendable 2D vertex species.
   */
 class PrismGridSpec extends AnyFlatSpec with Matchers:
 

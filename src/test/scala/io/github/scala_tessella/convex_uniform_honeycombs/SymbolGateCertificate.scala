@@ -5,8 +5,9 @@ import SpeciesEnumerator.species
 import SymbolCatalog.{canonicalKey, k1Of}
 import SymbolRealization.derivedSymbolsOf
 
-/** Certificate `symbol-gate.txt`. The identification of the appendix: per species, the canonical keys derived from the certified honeycombs
-  * against the keys of the combinatorial census, with the key-set equality verdict.
+/** Certificate `symbol-gate.txt`. The identification of the appendix: per species, the canonical keys derived
+  * from the certified honeycombs against the keys of the combinatorial census, with the key-set equality
+  * verdict.
   *
   * Emitted by `CertificatesSpec` under `-Dcerts`; the paper cites it by that file name.
   */
