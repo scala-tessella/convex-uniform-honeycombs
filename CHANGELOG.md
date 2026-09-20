@@ -9,6 +9,8 @@ an earlier version should be able to tell from here whether the claims, the spec
 
 ## [0.4.0] — 2026-09-20
 
+Archived as [doi:10.5281/zenodo.22859902](https://doi.org/10.5281/zenodo.22859902) — the version DOI to cite.
+
 **Box periodicity checked, not walked.** One step of 0.3.0's periodization certificate was argued rather
 than checked: the identification of the periodized honeycomb with the developed field on the whole ball,
 which the proof reached by walking from the box along ±τᵢ-steps "inside the ball" — true for two points of
