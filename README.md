@@ -100,6 +100,7 @@ checked**, not the all-versions concept DOI — the latter always resolves to wh
 
 | Version | DOI |
 |---|---|
+| 0.6.0 | [10.5281/zenodo.22868141](https://doi.org/10.5281/zenodo.22868141) |
 | 0.5.0 | [10.5281/zenodo.22862835](https://doi.org/10.5281/zenodo.22862835) |
 | 0.4.0 | [10.5281/zenodo.22859902](https://doi.org/10.5281/zenodo.22859902) |
 | 0.3.0 | [10.5281/zenodo.22857000](https://doi.org/10.5281/zenodo.22857000) |

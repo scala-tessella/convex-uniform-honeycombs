@@ -9,6 +9,8 @@ an earlier version should be able to tell from here whether the claims, the spec
 
 ## [0.6.0] — 2026-09-21
 
+Archived as [doi:10.5281/zenodo.22868141](https://doi.org/10.5281/zenodo.22868141) — the version DOI to cite.
+
 **Three finite facts the paper had asserted, now certified — one of them corrected.** The rigidity lemma of
 the appendix rests on every combinatorial automorphism of a core cell being an isometry; the developability
 gap of the pattern section on a collision the text described but did not display; and the descriptor lemma
